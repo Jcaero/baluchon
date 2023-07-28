@@ -43,7 +43,7 @@
 		477221AD2A73F7230023CA57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		477221AF2A73F7230023CA57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		477221B22A73F7230023CA57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		477221B42A73F7230023CA57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		477221B42A73F7230023CA57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = baluchon/Ressources/Info.plist; sourceTree = SOURCE_ROOT; };
 		477221B92A73F7240023CA57 /* baluchonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = baluchonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		477221BD2A73F7240023CA57 /* baluchonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baluchonTests.swift; sourceTree = "<group>"; };
 		477221C32A73F7240023CA57 /* baluchonUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = baluchonUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,11 +101,10 @@
 			children = (
 				477221A62A73F7230023CA57 /* AppDelegate.swift */,
 				477221A82A73F7230023CA57 /* SceneDelegate.swift */,
-				477221AA2A73F7230023CA57 /* ViewController.swift */,
-				477221AC2A73F7230023CA57 /* Main.storyboard */,
-				477221AF2A73F7230023CA57 /* Assets.xcassets */,
-				477221B12A73F7230023CA57 /* LaunchScreen.storyboard */,
-				477221B42A73F7230023CA57 /* Info.plist */,
+				477221D92A73FAD60023CA57 /* Model */,
+				477221D82A73FA7B0023CA57 /* Controller */,
+				477221D72A73FA750023CA57 /* View */,
+				477221DA2A73FAE20023CA57 /* Ressources */,
 			);
 			path = baluchon;
 			sourceTree = "<group>";
@@ -125,6 +124,39 @@
 				477221C92A73F7240023CA57 /* baluchonUITestsLaunchTests.swift */,
 			);
 			path = baluchonUITests;
+			sourceTree = "<group>";
+		};
+		477221D72A73FA750023CA57 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		477221D82A73FA7B0023CA57 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				477221AA2A73F7230023CA57 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		477221D92A73FAD60023CA57 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		477221DA2A73FAE20023CA57 /* Ressources */ = {
+			isa = PBXGroup;
+			children = (
+				477221AF2A73F7230023CA57 /* Assets.xcassets */,
+				477221B42A73F7230023CA57 /* Info.plist */,
+				477221B12A73F7230023CA57 /* LaunchScreen.storyboard */,
+				477221AC2A73F7230023CA57 /* Main.storyboard */,
+			);
+			path = Ressources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -388,6 +420,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = baluchon/Ressources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -442,6 +475,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = baluchon/Ressources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -460,7 +494,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = baluchon/Info.plist;
+				INFOPLIST_FILE = baluchon/Ressources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -492,7 +526,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = baluchon/Info.plist;
+				INFOPLIST_FILE = baluchon/Ressources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
