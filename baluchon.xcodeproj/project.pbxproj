@@ -16,6 +16,7 @@
 		477221BE2A73F7240023CA57 /* baluchonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477221BD2A73F7240023CA57 /* baluchonTests.swift */; };
 		477221C82A73F7240023CA57 /* baluchonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477221C72A73F7240023CA57 /* baluchonUITests.swift */; };
 		477221CA2A73F7240023CA57 /* baluchonUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477221C92A73F7240023CA57 /* baluchonUITestsLaunchTests.swift */; };
+		479331282A759EF700952447 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479331272A759EF700952447 /* UIColor+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		477221C32A73F7240023CA57 /* baluchonUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = baluchonUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		477221C72A73F7240023CA57 /* baluchonUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baluchonUITests.swift; sourceTree = "<group>"; };
 		477221C92A73F7240023CA57 /* baluchonUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baluchonUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		479331272A759EF700952447 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				477221D92A73FAD60023CA57 /* Model */,
 				477221D82A73FA7B0023CA57 /* Controller */,
 				477221D72A73FA750023CA57 /* View */,
+				479331262A759ED600952447 /* Common */,
 				477221DA2A73FAE20023CA57 /* Ressources */,
 			);
 			path = baluchon;
@@ -157,6 +160,14 @@
 				477221AC2A73F7230023CA57 /* Main.storyboard */,
 			);
 			path = Ressources;
+			sourceTree = "<group>";
+		};
+		479331262A759ED600952447 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				479331272A759EF700952447 /* UIColor+.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				477221AB2A73F7230023CA57 /* ViewController.swift in Sources */,
+				479331282A759EF700952447 /* UIColor+.swift in Sources */,
 				477221A72A73F7230023CA57 /* AppDelegate.swift in Sources */,
 				477221A92A73F7230023CA57 /* SceneDelegate.swift in Sources */,
 			);
