@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "7CD7A084-2ABB-4CD2-A9E3-9F14E882795A",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:baluchon.xcodeproj",
+      "identifier" : "477221A22A73F7230023CA57",
+      "name" : "baluchon"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:baluchon.xcodeproj",
+        "identifier" : "477221B82A73F7240023CA57",
+        "name" : "baluchonTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:baluchon.xcodeproj",
+        "identifier" : "477221C22A73F7240023CA57",
+        "name" : "baluchonUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

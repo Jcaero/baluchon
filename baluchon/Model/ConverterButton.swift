@@ -9,6 +9,9 @@ import UIKit
 
 final class ConverterButton: UIButton {
 
+    let titleColor: UIColor = .navy
+    let backColor: UIColor = .pearlGrey
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -20,19 +23,19 @@ final class ConverterButton: UIButton {
     init(name: String) {
         super.init(frame: .zero)
         self.setTitle(name, for: .normal)
-        self.setTitleColor(.navy, for: .normal)
+        self.setTitleColor(titleColor, for: .normal)
         self.titleLabel?.font = UIFont.systemFont(ofSize: 30)
-        self.backgroundColor = .pearlGrey
+        self.backgroundColor = backColor
     }
 
     init(imageName: String) {
         super.init(frame: .zero)
         self.setImage(UIImage(systemName: imageName), for: .normal)
-        self.setTitleColor(.navy, for: .normal)
-        self.backgroundColor = .pearlGrey
+        self.setTitleColor(titleColor, for: .normal)
+        self.backgroundColor = backColor
     }
 
-    let numberButton = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."]
-    let returnButton = "delete.left"
+    let number = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."]
+    let symbole = ["delete.left", "arrow.up.arrow.down.circle"]
 
 }

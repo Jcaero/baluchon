@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		470C233F2A7A02540044A393 /* ExchangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C233E2A7A02540044A393 /* ExchangeController.swift */; };
+		470C23412A7A05750044A393 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C23402A7A05750044A393 /* Calculator.swift */; };
+		470C23432A7A09350044A393 /* CalculatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C23422A7A09350044A393 /* CalculatorTest.swift */; };
+		470C23462A7A11900044A393 /* baluchonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C23452A7A11900044A393 /* baluchonUITests.swift */; };
 		477221A72A73F7230023CA57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477221A62A73F7230023CA57 /* AppDelegate.swift */; };
 		477221A92A73F7230023CA57 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477221A82A73F7230023CA57 /* SceneDelegate.swift */; };
-		477221AB2A73F7230023CA57 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477221AA2A73F7230023CA57 /* ViewController.swift */; };
 		477221AE2A73F7230023CA57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 477221AC2A73F7230023CA57 /* Main.storyboard */; };
 		477221B02A73F7230023CA57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 477221AF2A73F7230023CA57 /* Assets.xcassets */; };
 		477221B32A73F7230023CA57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 477221B12A73F7230023CA57 /* LaunchScreen.storyboard */; };
-		477221BE2A73F7240023CA57 /* baluchonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477221BD2A73F7240023CA57 /* baluchonTests.swift */; };
-		477221C82A73F7240023CA57 /* baluchonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477221C72A73F7240023CA57 /* baluchonUITests.swift */; };
-		477221CA2A73F7240023CA57 /* baluchonUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477221C92A73F7240023CA57 /* baluchonUITestsLaunchTests.swift */; };
 		479331282A759EF700952447 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479331272A759EF700952447 /* UIColor+.swift */; };
 		4793312A2A75A48A00952447 /* ConverterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479331292A75A48A00952447 /* ConverterButton.swift */; };
 /* End PBXBuildFile section */
@@ -38,19 +38,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		470C233E2A7A02540044A393 /* ExchangeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeController.swift; sourceTree = "<group>"; };
+		470C23402A7A05750044A393 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
+		470C23422A7A09350044A393 /* CalculatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTest.swift; sourceTree = "<group>"; };
+		470C23442A7A107A0044A393 /* baluchon.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = baluchon.xctestplan; sourceTree = "<group>"; };
+		470C23452A7A11900044A393 /* baluchonUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baluchonUITests.swift; sourceTree = "<group>"; };
 		477221A32A73F7230023CA57 /* baluchon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = baluchon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		477221A62A73F7230023CA57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		477221A82A73F7230023CA57 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		477221AA2A73F7230023CA57 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		477221AD2A73F7230023CA57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		477221AF2A73F7230023CA57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		477221B22A73F7230023CA57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		477221B42A73F7230023CA57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = baluchon/Ressources/Info.plist; sourceTree = SOURCE_ROOT; };
 		477221B92A73F7240023CA57 /* baluchonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = baluchonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		477221BD2A73F7240023CA57 /* baluchonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baluchonTests.swift; sourceTree = "<group>"; };
 		477221C32A73F7240023CA57 /* baluchonUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = baluchonUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		477221C72A73F7240023CA57 /* baluchonUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baluchonUITests.swift; sourceTree = "<group>"; };
-		477221C92A73F7240023CA57 /* baluchonUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baluchonUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		479331272A759EF700952447 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		479331292A75A48A00952447 /* ConverterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,6 +84,7 @@
 		4772219A2A73F7230023CA57 = {
 			isa = PBXGroup;
 			children = (
+				470C23442A7A107A0044A393 /* baluchon.xctestplan */,
 				477221A52A73F7230023CA57 /* baluchon */,
 				477221BC2A73F7240023CA57 /* baluchonTests */,
 				477221C62A73F7240023CA57 /* baluchonUITests */,
@@ -117,7 +119,7 @@
 		477221BC2A73F7240023CA57 /* baluchonTests */ = {
 			isa = PBXGroup;
 			children = (
-				477221BD2A73F7240023CA57 /* baluchonTests.swift */,
+				470C23422A7A09350044A393 /* CalculatorTest.swift */,
 			);
 			path = baluchonTests;
 			sourceTree = "<group>";
@@ -125,8 +127,7 @@
 		477221C62A73F7240023CA57 /* baluchonUITests */ = {
 			isa = PBXGroup;
 			children = (
-				477221C72A73F7240023CA57 /* baluchonUITests.swift */,
-				477221C92A73F7240023CA57 /* baluchonUITestsLaunchTests.swift */,
+				470C23452A7A11900044A393 /* baluchonUITests.swift */,
 			);
 			path = baluchonUITests;
 			sourceTree = "<group>";
@@ -141,7 +142,7 @@
 		477221D82A73FA7B0023CA57 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				477221AA2A73F7230023CA57 /* ViewController.swift */,
+				470C233E2A7A02540044A393 /* ExchangeController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -150,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				479331292A75A48A00952447 /* ConverterButton.swift */,
+				470C23402A7A05750044A393 /* Calculator.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -249,6 +251,7 @@
 					};
 					477221C22A73F7240023CA57 = {
 						CreatedOnToolsVersion = 14.3.1;
+						LastSwiftMigration = 1430;
 						TestTargetID = 477221A22A73F7230023CA57;
 					};
 				};
@@ -326,11 +329,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				477221AB2A73F7230023CA57 /* ViewController.swift in Sources */,
 				479331282A759EF700952447 /* UIColor+.swift in Sources */,
+				470C233F2A7A02540044A393 /* ExchangeController.swift in Sources */,
 				477221A72A73F7230023CA57 /* AppDelegate.swift in Sources */,
 				477221A92A73F7230023CA57 /* SceneDelegate.swift in Sources */,
 				4793312A2A75A48A00952447 /* ConverterButton.swift in Sources */,
+				470C23412A7A05750044A393 /* Calculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,7 +342,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				477221BE2A73F7240023CA57 /* baluchonTests.swift in Sources */,
+				470C23432A7A09350044A393 /* CalculatorTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,8 +350,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				477221CA2A73F7240023CA57 /* baluchonUITestsLaunchTests.swift in Sources */,
-				477221C82A73F7240023CA57 /* baluchonUITests.swift in Sources */,
+				470C23462A7A11900044A393 /* baluchonUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,6 +611,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -615,6 +619,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = pierrick.baluchonUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = baluchon;
@@ -625,6 +630,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
