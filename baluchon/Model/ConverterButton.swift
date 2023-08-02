@@ -35,7 +35,5 @@ final class ConverterButton: UIButton {
         self.backgroundColor = backColor
     }
 
-    let number = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."]
-    let symbole = ["delete.left", "arrow.up.arrow.down.circle"]
-
+    let buttonsName = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."]
 }

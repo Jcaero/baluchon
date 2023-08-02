@@ -26,6 +26,10 @@ final class CalculatorTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+        /*****************************
+        *     TEST numberHasBeenTapped        *
+        *******************************
+        */
     func testExpressionIsZero_WhenTapFive_ResultIsFive() {
         calculate.numberHasBeenTapped("5")
 
@@ -75,6 +79,43 @@ final class CalculatorTest: XCTestCase {
         XCTAssertEqual(display, "5")
         XCTAssertEqual(alerteTitle, "Erreur")
         XCTAssertEqual(alerteDescription, "chiffre non reconnu")
+    }
+
+    /*****************************
+    *     TEST pointHasBeenTapped()        *
+    *******************************
+    */
+
+    func testExpressionIsFive_WhenPointHasBeenTapped_ResultIsFivePoint() {
+        calculate.numberHasBeenTapped("5")
+
+        calculate.pointHasBeenTapped()
+
+        XCTAssertEqual(display, "5.")
+    }
+
+    func testExpressionIsFivePoint_WhenPointHasBeenTapped_ResultIsFivePointAndShowAlerte() {
+        calculate.numberHasBeenTapped("5")
+        calculate.pointHasBeenTapped()
+
+        calculate.pointHasBeenTapped()
+
+        XCTAssertEqual(display, "5.")
+        XCTAssertEqual(alerteTitle, "Erreur")
+        XCTAssertEqual(alerteDescription, "Un point est deja présent")
+
+    }
+
+    func testExpressionIsFivePointTwo_WhenPointHasBeenTapped_ResultIsFivePointAndShowAlerte() {
+        calculate.numberHasBeenTapped("5")
+        calculate.pointHasBeenTapped()
+        calculate.numberHasBeenTapped("2")
+
+        calculate.pointHasBeenTapped()
+
+        XCTAssertEqual(display, "5.2")
+        XCTAssertEqual(alerteTitle, "Erreur")
+        XCTAssertEqual(alerteDescription, "Un point est deja présent")
     }
 }
 

@@ -23,14 +23,11 @@ class Calculator {
 
     // expression
      var expression: String
-    private var elements: [String] {
-        return expression.split(separator: " ").map { "\($0)" }
-    }
 
     private  var newExpression: Bool {
-        return elements.count == 1 && elements.last == "0"
+        return expression == "0"
     }
-    
+
     private let numberAvailable: Set = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
     // configuration
@@ -41,7 +38,7 @@ class Calculator {
             delegate?.showAlert(title: "Erreur", desciption: "chiffre non reconnu")
             return
         }
-        
+
         // check size on number
         guard expression.count < numberMaxLenght else {
             delegate?.showAlert(title: "Erreur", desciption: "vous ne pouvez pas dépaser 10 chiffres")
@@ -53,6 +50,20 @@ class Calculator {
         }
 
         expression.append(selection)
+        delegate?.updateDisplay(expression)
+    }
+
+    private var hasPoint: Bool {
+        return !expression.contains(".")
+    }
+
+    func pointHasBeenTapped() {
+
+        guard hasPoint else {
+            delegate?.showAlert(title: "Erreur", desciption: "Un point est deja présent")
+            return
+        }
+        expression.append(".")
         delegate?.updateDisplay(expression)
     }
 }
