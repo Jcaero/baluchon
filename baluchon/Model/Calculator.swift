@@ -10,6 +10,7 @@ import Foundation
 protocol CalculatorDelegate: AnyObject {
     func showAlert(title: String, desciption: String)
     func updateDisplay(_ expression: String)
+    func updateClearButton(_ buttonName: String)
 }
 
 class Calculator {
@@ -64,6 +65,16 @@ class Calculator {
             return
         }
         expression.append(".")
+        delegate?.updateDisplay(expression)
+    }
+
+    func clearExpression(_ selection: String) {
+        if selection == "AC" {
+            expression = "0"
+        } else if selection == "C" {
+            expression.removeLast()
+            delegate?.updateClearButton("AC")
+        }
         delegate?.updateDisplay(expression)
     }
 }

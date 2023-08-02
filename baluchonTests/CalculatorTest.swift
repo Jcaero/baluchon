@@ -16,6 +16,7 @@ final class CalculatorTest: XCTestCase {
     private var alerteTitle: String?
     private var alerteDescription: String?
     private var display: String?
+    private var clearButton: String?
 
     override func setUp() {
         super.setUp()
@@ -117,6 +118,38 @@ final class CalculatorTest: XCTestCase {
         XCTAssertEqual(alerteTitle, "Erreur")
         XCTAssertEqual(alerteDescription, "Un point est deja présent")
     }
+
+    /*****************************
+    *     TEST clearExpression()        *
+    *******************************
+    */
+
+    func testExpressionIsFive_WhenClearExpressionAC_ResultIsZero() {
+        calculate.numberHasBeenTapped("5")
+
+        calculate.clearExpression("AC")
+
+        XCTAssertEqual(display, "0")
+    }
+
+    func testExpressionIsFiftyTwo_WhenClearExpressionC_ResultIsFive() {
+        calculate.numberHasBeenTapped("5")
+        calculate.numberHasBeenTapped("2")
+
+        calculate.clearExpression("C")
+
+        XCTAssertEqual(display, "5")
+        XCTAssertEqual(clearButton, "AC")
+    }
+
+    func testExpressionIsFiftyTwo_WhenClearExpressionIsNotCorrect_ResultNotChnage() {
+        calculate.numberHasBeenTapped("5")
+        calculate.numberHasBeenTapped("2")
+
+        calculate.clearExpression("D")
+
+        XCTAssertEqual(display, "52")
+    }
 }
 
 extension CalculatorTest: CalculatorDelegate {
@@ -127,5 +160,9 @@ extension CalculatorTest: CalculatorDelegate {
 
     func updateDisplay(_ expression: String) {
         display = expression
+    }
+    
+    func updateClearButton(_ buttonName: String) {
+        clearButton = buttonName
     }
 }
