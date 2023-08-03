@@ -34,6 +34,4 @@ final class ConverterButton: UIButton {
         self.setTitleColor(titleColor, for: .normal)
         self.backgroundColor = backColor
     }
-
-    let buttonsName = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."]
 }

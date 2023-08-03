@@ -161,7 +161,7 @@ extension CalculatorTest: CalculatorDelegate {
     func updateDisplay(_ expression: String) {
         display = expression
     }
-    
+
     func updateClearButton(_ buttonName: String) {
         clearButton = buttonName
     }
