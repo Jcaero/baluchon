@@ -52,6 +52,7 @@ class Calculator {
 
         expression.append(selection)
         delegate?.updateDisplay(expression)
+        delegate?.updateClearButton("C")
     }
 
     private var hasPoint: Bool {
