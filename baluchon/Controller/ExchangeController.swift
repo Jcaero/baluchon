@@ -16,7 +16,7 @@ class ExchangeController: UIViewController {
 
     let localCurrencyLbl = UILabel()
     let convertedCurrencyLbl = UILabel()
-    
+
     let localCurrencyView = UIView()
     let convertedCurrencyView = UIView()
 
@@ -47,6 +47,12 @@ class ExchangeController: UIViewController {
         for ( _, button ) in buttonsListe {
             button.layer.cornerRadius = button.frame.height / 2
         }
+
+        let halfWidthView = view.frame.width / 2
+        let widthBoutton = buttonsListe["8"]!.frame.width
+        let halfWidthButton = widthBoutton / 2
+        let spacing = (halfWidthView - widthBoutton - halfWidthButton ) / 2
+        stackViewMain.spacing = spacing
     }
 
     private func setupButtons() {
@@ -77,6 +83,8 @@ class ExchangeController: UIViewController {
             buttonsListe["8"]!.widthAnchor.constraint(equalTo: buttonsListe["8"]!.heightAnchor),
             stackViewMain.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -spacingBetweenButton),
             stackViewMain.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            //stackViewMain.leftAnchor.constraint(greaterThanOrEqualTo: view.leftAnchor, constant: 10),
+            //stackViewMain.rightAnchor.constraint(greaterThanOrEqualTo: view.rightAnchor, constant: -10),
             stackViewMain.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.bounds.height / 2 )
         ])
     }
@@ -123,7 +131,7 @@ class ExchangeController: UIViewController {
         convertedCurrencyView.backgroundColor = .red
 
         let YReferenceLigne = view.frame.height / 8
-
+        
         // localCurrencyLayout
         view.addSubview(localCurrencyView)
         NSLayoutConstraint.activate([
