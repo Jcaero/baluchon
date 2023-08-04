@@ -44,13 +44,8 @@ class ExchangeController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         for ( _, button ) in buttonsListe {
-            button.layer.cornerRadius = button.frame.height / 2
+            button.layer.cornerRadius = button.frame.height*0.45
         }
-
-        let halfWidthView = view.frame.width / 2
-        let widthBoutton = buttonsListe["8"]!.frame.width / 2
-        let spacing = (halfWidthView - ( widthBoutton * 3 ) ) / 2
-        stackViewMain.spacing = spacing
     }
 
     private func setupButtons() {
@@ -78,11 +73,17 @@ class ExchangeController: UIViewController {
 
         view.addSubview(stackViewMain)
         NSLayoutConstraint.activate([
+            stackViewMain.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            stackViewMain.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackViewMain.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.45),
+            stackViewMain.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.90)
+        ])/*
+        NSLayoutConstraint.activate([
             buttonsListe["8"]!.widthAnchor.constraint(equalTo: buttonsListe["8"]!.heightAnchor),
             stackViewMain.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             stackViewMain.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackViewMain.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.bounds.height / 2 )
-        ])
+        ])*/
     }
 
     private func setupDisplay() {
@@ -173,7 +174,7 @@ class ExchangeController: UIViewController {
 
     private func setupStackView(_ stackView: UIStackView, axis: NSLayoutConstraint.Axis) {
         stackView.axis = axis
-        stackView.spacing = 10
+        stackView.spacing = 16
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
