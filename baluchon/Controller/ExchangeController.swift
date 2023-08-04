@@ -29,7 +29,6 @@ class ExchangeController: UIViewController {
     let stackViewVertical1 = UIStackView()
     let stackViewVertical2 = UIStackView()
     let stackViewVertical3 = UIStackView()
-    let spacingBetweenButton: CGFloat = 10
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,9 +48,8 @@ class ExchangeController: UIViewController {
         }
 
         let halfWidthView = view.frame.width / 2
-        let widthBoutton = buttonsListe["8"]!.frame.width
-        let halfWidthButton = widthBoutton / 2
-        let spacing = (halfWidthView - widthBoutton - halfWidthButton ) / 2
+        let widthBoutton = buttonsListe["8"]!.frame.width / 2
+        let spacing = (halfWidthView - ( widthBoutton * 3 ) ) / 2
         stackViewMain.spacing = spacing
     }
 
@@ -81,10 +79,8 @@ class ExchangeController: UIViewController {
         view.addSubview(stackViewMain)
         NSLayoutConstraint.activate([
             buttonsListe["8"]!.widthAnchor.constraint(equalTo: buttonsListe["8"]!.heightAnchor),
-            stackViewMain.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -spacingBetweenButton),
+            stackViewMain.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             stackViewMain.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            //stackViewMain.leftAnchor.constraint(greaterThanOrEqualTo: view.leftAnchor, constant: 10),
-            //stackViewMain.rightAnchor.constraint(greaterThanOrEqualTo: view.rightAnchor, constant: -10),
             stackViewMain.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.bounds.height / 2 )
         ])
     }
@@ -103,16 +99,16 @@ class ExchangeController: UIViewController {
         switchConverterBtn.backgroundColor = .green
         switchConverterBtn.tintColor = .black
 
-        localCurrencyLbl.text = "0"
-        localCurrencyLbl.textAlignment = .right
-        localCurrencyLbl.numberOfLines = 0
-        localCurrencyLbl.adjustsFontSizeToFitWidth = true
-        localCurrencyLbl.font = UIFont.systemFont(ofSize: 60)
-        convertedCurrencyLbl.text = "0"
-        convertedCurrencyLbl.textAlignment = .right
-        convertedCurrencyLbl.numberOfLines = 0
-        convertedCurrencyLbl.adjustsFontSizeToFitWidth = true
-        convertedCurrencyLbl.font = UIFont.systemFont(ofSize: 60)
+        setupCurrencyLabelName(localCurrencyLbl)
+        setupCurrencyLabelName(convertedCurrencyLbl)
+    }
+
+    private func setupCurrencyLabelName(_ name: UILabel) {
+        name.text = "0"
+        name.textAlignment = .right
+        name.numberOfLines = 0
+        name.adjustsFontSizeToFitWidth = true
+        name.font = UIFont.systemFont(ofSize: 60)
     }
 
     private func setupDisplayLayout() {
@@ -131,45 +127,17 @@ class ExchangeController: UIViewController {
         convertedCurrencyView.backgroundColor = .red
 
         let YReferenceLigne = view.frame.height / 8
-        
+
         // localCurrencyLayout
-        view.addSubview(localCurrencyView)
-        NSLayoutConstraint.activate([
-            localCurrencyBtn.leftAnchor.constraint(equalTo: localCurrencyView.leftAnchor),
-            localCurrencyBtn.bottomAnchor.constraint(equalTo: localCurrencyView.bottomAnchor),
-            localCurrencyBtn.topAnchor.constraint(equalTo: localCurrencyView.topAnchor),
-            localCurrencyBtn.heightAnchor.constraint(equalTo: localCurrencyBtn.widthAnchor)
-        ])
-
-        NSLayoutConstraint.activate([
-            localCurrencyLbl.leftAnchor.constraint(equalTo: localCurrencyBtn.rightAnchor, constant: 30),
-            localCurrencyLbl.bottomAnchor.constraint(equalTo: localCurrencyView.bottomAnchor),
-            localCurrencyLbl.topAnchor.constraint(equalTo: localCurrencyView.topAnchor),
-            localCurrencyLbl.rightAnchor.constraint(equalTo: localCurrencyView.rightAnchor)
-        ])
-
+        setupViewNamed(localCurrencyView, with: localCurrencyBtn, and: localCurrencyLbl)
         NSLayoutConstraint.activate([
             localCurrencyView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10),
             localCurrencyView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10),
             localCurrencyView.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: YReferenceLigne)
         ])
 
-        // convertedCurrencyBtn
-        view.addSubview(convertedCurrencyView)
-        NSLayoutConstraint.activate([
-            convertedCurrencyBtn.leftAnchor.constraint(equalTo: convertedCurrencyView.leftAnchor),
-            convertedCurrencyBtn.bottomAnchor.constraint(equalTo: convertedCurrencyView.bottomAnchor),
-            convertedCurrencyBtn.topAnchor.constraint(equalTo: convertedCurrencyView.topAnchor),
-            convertedCurrencyBtn.heightAnchor.constraint(equalTo: convertedCurrencyBtn.widthAnchor)
-        ])
-
-        NSLayoutConstraint.activate([
-            convertedCurrencyLbl.leftAnchor.constraint(equalTo: convertedCurrencyBtn.rightAnchor, constant: 30),
-            convertedCurrencyLbl.bottomAnchor.constraint(equalTo: convertedCurrencyView.bottomAnchor),
-            convertedCurrencyLbl.topAnchor.constraint(equalTo: convertedCurrencyView.topAnchor),
-            convertedCurrencyLbl.rightAnchor.constraint(equalTo: convertedCurrencyView.rightAnchor)
-        ])
-
+        // cnvertedCurrencyView
+        setupViewNamed(convertedCurrencyView, with: convertedCurrencyBtn, and: convertedCurrencyLbl)
         NSLayoutConstraint.activate([
             convertedCurrencyView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10),
             convertedCurrencyView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10),
@@ -186,9 +154,26 @@ class ExchangeController: UIViewController {
         ])
     }
 
+    private func setupViewNamed(_ nameView: UIView, with nameButton: UIButton, and nameLabel: UILabel) {
+        view.addSubview(nameView)
+        NSLayoutConstraint.activate([
+            nameButton.leftAnchor.constraint(equalTo: nameView.leftAnchor),
+            nameButton.bottomAnchor.constraint(equalTo: nameView.bottomAnchor),
+            nameButton.topAnchor.constraint(equalTo: nameView.topAnchor),
+            nameButton.heightAnchor.constraint(equalTo: nameButton.widthAnchor)
+        ])
+
+        NSLayoutConstraint.activate([
+            nameLabel.leftAnchor.constraint(equalTo: nameButton.rightAnchor, constant: 30),
+            nameLabel.bottomAnchor.constraint(equalTo: nameView.bottomAnchor),
+            nameLabel.topAnchor.constraint(equalTo: nameView.topAnchor),
+            nameLabel.rightAnchor.constraint(equalTo: nameView.rightAnchor)
+        ])
+    }
+
     private func setupStackView(_ stackView: UIStackView, axis: NSLayoutConstraint.Axis) {
         stackView.axis = axis
-        stackView.spacing = spacingBetweenButton
+        stackView.spacing = 10
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
