@@ -9,9 +9,10 @@ import UIKit
 
 class ExchangeController: UIViewController {
 
+    // MARK: - Properties
     private var calculate: Calculator!
 
-    var buttonsListe = [String: ConverterButton]()
+    var buttonsListe = [String: UIButton]()
     let buttonsName = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "AC"]
 
     let localCurrencyLbl = UILabel()
@@ -30,6 +31,7 @@ class ExchangeController: UIViewController {
     let stackViewVertical2 = UIStackView()
     let stackViewVertical3 = UIStackView()
 
+    // MARK: - lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         calculate = Calculator(delegate: self)
@@ -42,18 +44,25 @@ class ExchangeController: UIViewController {
        setupDisplay()
        setupDisplayLayout()
     }
+
     override func viewDidAppear(_ animated: Bool) {
         for ( _, button ) in buttonsListe {
-            button.layer.cornerRadius = button.frame.height*0.45
+            button.layer.cornerRadius = button.frame.height*0.4
+            #warning("pourquoi fonctionne ici et pas dans class boutton ????")
+
+            button.layer.shadowOffset = CGSize(width: 0, height: 5)
+            button.layer.shadowColor = UIColor.black.cgColor
+            button.layer.shadowOpacity = 0.5
+            button.layer.shadowRadius = 2
+            button.layer.masksToBounds = false
         }
     }
 
     private func setupButtons() {
         // pad Button
         buttonsName.forEach { name in
-            let button = ConverterButton(name: name)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            button.layer.masksToBounds = true
+            let button = UIButton()
+            button.setupExchangeButton(name)
             button.addTarget(self, action: #selector(tappedButton(_:)), for: .touchUpInside)
             self.buttonsListe[name] = button
         }
@@ -77,13 +86,7 @@ class ExchangeController: UIViewController {
             stackViewMain.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackViewMain.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.45),
             stackViewMain.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.90)
-        ])/*
-        NSLayoutConstraint.activate([
-            buttonsListe["8"]!.widthAnchor.constraint(equalTo: buttonsListe["8"]!.heightAnchor),
-            stackViewMain.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-            stackViewMain.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackViewMain.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.bounds.height / 2 )
-        ])*/
+        ])
     }
 
     private func setupDisplay() {
@@ -97,7 +100,6 @@ class ExchangeController: UIViewController {
 
         let blackImage = UIImage(systemName: "arrow.up.arrow.down", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
         switchConverterBtn.setImage(blackImage, for: .normal)
-        switchConverterBtn.backgroundColor = .green
         switchConverterBtn.tintColor = .black
 
         setupCurrencyLabelName(localCurrencyLbl)
@@ -110,6 +112,12 @@ class ExchangeController: UIViewController {
         name.numberOfLines = 0
         name.adjustsFontSizeToFitWidth = true
         name.font = UIFont.systemFont(ofSize: 60)
+    }
+    
+    private func setupCurrencyBoutton(name: String) {
+        localCurrencyBtn.setTitle("EUR", for: .normal)
+        localCurrencyBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        localCurrencyBtn.setTitleColor(.navy, for: .normal)
     }
 
     private func setupDisplayLayout() {

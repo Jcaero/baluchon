@@ -11,12 +11,12 @@
 		470C23412A7A05750044A393 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C23402A7A05750044A393 /* Calculator.swift */; };
 		470C23432A7A09350044A393 /* CalculatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C23422A7A09350044A393 /* CalculatorTest.swift */; };
 		470C23462A7A11900044A393 /* baluchonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C23452A7A11900044A393 /* baluchonUITests.swift */; };
+		4768BF152A7ED69D005190DC /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4768BF142A7ED69D005190DC /* Button.swift */; };
 		477221A72A73F7230023CA57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477221A62A73F7230023CA57 /* AppDelegate.swift */; };
 		477221A92A73F7230023CA57 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477221A82A73F7230023CA57 /* SceneDelegate.swift */; };
 		477221B02A73F7230023CA57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 477221AF2A73F7230023CA57 /* Assets.xcassets */; };
 		477221B32A73F7230023CA57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 477221B12A73F7230023CA57 /* LaunchScreen.storyboard */; };
 		479331282A759EF700952447 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479331272A759EF700952447 /* UIColor+.swift */; };
-		4793312A2A75A48A00952447 /* ConverterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479331292A75A48A00952447 /* ConverterButton.swift */; };
 		47F3CB052A7B594D000545A6 /* Alerte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F3CB042A7B594D000545A6 /* Alerte.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +43,7 @@
 		470C23422A7A09350044A393 /* CalculatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTest.swift; sourceTree = "<group>"; };
 		470C23442A7A107A0044A393 /* baluchon.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = baluchon.xctestplan; sourceTree = "<group>"; };
 		470C23452A7A11900044A393 /* baluchonUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baluchonUITests.swift; sourceTree = "<group>"; };
+		4768BF142A7ED69D005190DC /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		477221A32A73F7230023CA57 /* baluchon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = baluchon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		477221A62A73F7230023CA57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		477221A82A73F7230023CA57 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,7 +53,6 @@
 		477221B92A73F7240023CA57 /* baluchonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = baluchonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		477221C32A73F7240023CA57 /* baluchonUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = baluchonUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		479331272A759EF700952447 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
-		479331292A75A48A00952447 /* ConverterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterButton.swift; sourceTree = "<group>"; };
 		47F3CB042A7B594D000545A6 /* Alerte.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerte.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,7 +150,7 @@
 		477221D92A73FAD60023CA57 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				479331292A75A48A00952447 /* ConverterButton.swift */,
+				4768BF142A7ED69D005190DC /* Button.swift */,
 				470C23402A7A05750044A393 /* Calculator.swift */,
 				47F3CB042A7B594D000545A6 /* Alerte.swift */,
 			);
@@ -331,8 +331,8 @@
 				479331282A759EF700952447 /* UIColor+.swift in Sources */,
 				470C233F2A7A02540044A393 /* ExchangeController.swift in Sources */,
 				477221A72A73F7230023CA57 /* AppDelegate.swift in Sources */,
+				4768BF152A7ED69D005190DC /* Button.swift in Sources */,
 				477221A92A73F7230023CA57 /* SceneDelegate.swift in Sources */,
-				4793312A2A75A48A00952447 /* ConverterButton.swift in Sources */,
 				47F3CB052A7B594D000545A6 /* Alerte.swift in Sources */,
 				470C23412A7A05750044A393 /* Calculator.swift in Sources */,
 			);
