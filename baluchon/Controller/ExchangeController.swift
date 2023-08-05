@@ -176,7 +176,7 @@ class ExchangeController: UIViewController {
 
         setupViewNamed(localCurrencyView, with: localCurrencyBtn, and: localCurrencyLbl)
         setupViewNamed(convertedCurrencyView, with: convertedCurrencyBtn, and: convertedCurrencyLbl)
-        
+
         // switch BTN
         display.addSubview(switchConverterBtn)
         NSLayoutConstraint.activate([
@@ -195,7 +195,7 @@ class ExchangeController: UIViewController {
         NSLayoutConstraint.activate([
             convertedCurrencyView.leftAnchor.constraint(equalTo: display.leftAnchor),
             convertedCurrencyView.rightAnchor.constraint(equalTo: display.rightAnchor),
-            convertedCurrencyView.topAnchor.constraint(equalTo: switchConverterBtn.bottomAnchor, constant: 35)
+            convertedCurrencyView.topAnchor.constraint(equalTo: switchConverterBtn.bottomAnchor, constant: 25)
         ])
     }
 
