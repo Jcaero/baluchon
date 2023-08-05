@@ -58,6 +58,23 @@ class ExchangeController: UIViewController {
             button.layer.shadowOpacity = 0.5
             button.layer.shadowRadius = 2
             button.layer.masksToBounds = false
+
+            [localCurrencyView, convertedCurrencyView].forEach {
+
+                let size: CGFloat = -10
+                let distance: CGFloat = 20
+                let rect = CGRect(
+                    x: -size,
+                    y: $0.frame.height - (size * 0.4) + distance,
+                    width: $0.frame.width + size * 2,
+                    height: size
+                )
+
+                $0.layer.shadowColor = UIColor.black.cgColor
+                $0.layer.shadowRadius = 10
+                $0.layer.shadowOpacity = 0.5
+                $0.layer.shadowPath = UIBezierPath(ovalIn: rect).cgPath
+            }
         }
     }
 
@@ -181,10 +198,14 @@ class ExchangeController: UIViewController {
     private func setupViewNamed(_ nameView: UIView, with nameButton: UIButton, and nameLabel: UILabel) {
         nameView.addSubview(nameButton)
         nameView.addSubview(nameLabel)
+        nameView.backgroundColor = .pearlGrey
+        nameView.layer.cornerRadius = 30
+
+        nameView.layer.masksToBounds = false
 
         view.addSubview(nameView)
         NSLayoutConstraint.activate([
-            nameButton.leftAnchor.constraint(equalTo: nameView.leftAnchor),
+            nameButton.leftAnchor.constraint(equalTo: nameView.leftAnchor, constant: 5),
             nameButton.bottomAnchor.constraint(equalTo: nameView.bottomAnchor),
             nameButton.topAnchor.constraint(equalTo: nameView.topAnchor),
             nameButton.heightAnchor.constraint(equalTo: nameButton.widthAnchor)
@@ -194,7 +215,7 @@ class ExchangeController: UIViewController {
             nameLabel.leftAnchor.constraint(equalTo: nameButton.rightAnchor, constant: 30),
             nameLabel.bottomAnchor.constraint(equalTo: nameView.bottomAnchor),
             nameLabel.topAnchor.constraint(equalTo: nameView.topAnchor),
-            nameLabel.rightAnchor.constraint(equalTo: nameView.rightAnchor)
+            nameLabel.rightAnchor.constraint(equalTo: nameView.rightAnchor, constant: -10)
         ])
     }
 
