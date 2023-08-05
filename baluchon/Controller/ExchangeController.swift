@@ -15,21 +15,24 @@ class ExchangeController: UIViewController {
     var buttonsListe = [String: UIButton]()
     let buttonsName = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "AC"]
 
-    let localCurrencyLbl = UILabel()
-    let convertedCurrencyLbl = UILabel()
+    let stackViewMain = UIStackView()
+    let stackViewVertical1 = UIStackView()
+    let stackViewVertical2 = UIStackView()
+    let stackViewVertical3 = UIStackView()
 
+    let display = UIView()
     let localCurrencyView = UIView()
     let convertedCurrencyView = UIView()
+
+    let localCurrencyLbl = UILabel()
+    let convertedCurrencyLbl = UILabel()
 
     let localCurrencyBtn = UIButton()
     let convertedCurrencyBtn = UIButton()
 
     let switchConverterBtn = UIButton()
 
-    let stackViewMain = UIStackView()
-    let stackViewVertical1 = UIStackView()
-    let stackViewVertical2 = UIStackView()
-    let stackViewVertical3 = UIStackView()
+
 
     // MARK: - lifeCycle
     override func viewDidLoad() {
@@ -62,7 +65,7 @@ class ExchangeController: UIViewController {
         // pad Button
         buttonsName.forEach { name in
             let button = UIButton()
-            button.setupExchangeButton(name)
+            button.setupExchangeNumberButton(name)
             button.addTarget(self, action: #selector(tappedButton(_:)), for: .touchUpInside)
             self.buttonsListe[name] = button
         }
@@ -86,97 +89,6 @@ class ExchangeController: UIViewController {
             stackViewMain.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackViewMain.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.45),
             stackViewMain.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.90)
-        ])
-    }
-
-    private func setupDisplay() {
-        convertedCurrencyBtn.setTitle("USD", for: .normal)
-        convertedCurrencyBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        convertedCurrencyBtn.setTitleColor(.navy, for: .normal)
-
-        localCurrencyBtn.setTitle("EUR", for: .normal)
-        localCurrencyBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        localCurrencyBtn.setTitleColor(.navy, for: .normal)
-
-        let blackImage = UIImage(systemName: "arrow.up.arrow.down", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
-        switchConverterBtn.setImage(blackImage, for: .normal)
-        switchConverterBtn.tintColor = .black
-
-        setupCurrencyLabelName(localCurrencyLbl)
-        setupCurrencyLabelName(convertedCurrencyLbl)
-    }
-
-    private func setupCurrencyLabelName(_ name: UILabel) {
-        name.text = "0"
-        name.textAlignment = .right
-        name.numberOfLines = 0
-        name.adjustsFontSizeToFitWidth = true
-        name.font = UIFont.systemFont(ofSize: 60)
-    }
-    
-    private func setupCurrencyBoutton(name: String) {
-        localCurrencyBtn.setTitle("EUR", for: .normal)
-        localCurrencyBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        localCurrencyBtn.setTitleColor(.navy, for: .normal)
-    }
-
-    private func setupDisplayLayout() {
-        [localCurrencyBtn, localCurrencyLbl, switchConverterBtn, convertedCurrencyBtn, convertedCurrencyLbl, localCurrencyView, convertedCurrencyView].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-
-        // local currency setup
-        localCurrencyView.addSubview(localCurrencyBtn)
-        localCurrencyView.addSubview(localCurrencyLbl)
-        localCurrencyView.backgroundColor = .red
-
-        // converted currency setup
-        convertedCurrencyView.addSubview(convertedCurrencyBtn)
-        convertedCurrencyView.addSubview(convertedCurrencyLbl)
-        convertedCurrencyView.backgroundColor = .red
-
-        let YReferenceLigne = view.frame.height / 8
-
-        // localCurrencyLayout
-        setupViewNamed(localCurrencyView, with: localCurrencyBtn, and: localCurrencyLbl)
-        NSLayoutConstraint.activate([
-            localCurrencyView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10),
-            localCurrencyView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10),
-            localCurrencyView.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: YReferenceLigne)
-        ])
-
-        // cnvertedCurrencyView
-        setupViewNamed(convertedCurrencyView, with: convertedCurrencyBtn, and: convertedCurrencyLbl)
-        NSLayoutConstraint.activate([
-            convertedCurrencyView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10),
-            convertedCurrencyView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10),
-            convertedCurrencyView.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: YReferenceLigne * 3)
-        ])
-
-        // switch BTN
-        view.addSubview(switchConverterBtn)
-        NSLayoutConstraint.activate([
-            switchConverterBtn.heightAnchor.constraint(equalTo: switchConverterBtn.widthAnchor),
-            switchConverterBtn.widthAnchor.constraint(equalTo: localCurrencyView.heightAnchor),
-            switchConverterBtn.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: YReferenceLigne * 2),
-            switchConverterBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-    }
-
-    private func setupViewNamed(_ nameView: UIView, with nameButton: UIButton, and nameLabel: UILabel) {
-        view.addSubview(nameView)
-        NSLayoutConstraint.activate([
-            nameButton.leftAnchor.constraint(equalTo: nameView.leftAnchor),
-            nameButton.bottomAnchor.constraint(equalTo: nameView.bottomAnchor),
-            nameButton.topAnchor.constraint(equalTo: nameView.topAnchor),
-            nameButton.heightAnchor.constraint(equalTo: nameButton.widthAnchor)
-        ])
-
-        NSLayoutConstraint.activate([
-            nameLabel.leftAnchor.constraint(equalTo: nameButton.rightAnchor, constant: 30),
-            nameLabel.bottomAnchor.constraint(equalTo: nameView.bottomAnchor),
-            nameLabel.topAnchor.constraint(equalTo: nameView.topAnchor),
-            nameLabel.rightAnchor.constraint(equalTo: nameView.rightAnchor)
         ])
     }
 
@@ -210,6 +122,82 @@ class ExchangeController: UIViewController {
             print("chiffre non reconnu")
         }
     }
+
+    // MARK: - DISPLAY
+    private func setupDisplay() {
+        convertedCurrencyBtn.setupCurrencyBoutton(name: "USD")
+        localCurrencyBtn.setupCurrencyBoutton(name: "EUR")
+
+        let configurationImage = UIImage.SymbolConfiguration(pointSize: 30)
+        let blackImage = UIImage(systemName: "arrow.up.arrow.down", withConfiguration: configurationImage)
+        switchConverterBtn.setImage(blackImage, for: .normal)
+        switchConverterBtn.tintColor = .black
+
+        setupCurrencyLabelName(localCurrencyLbl)
+        setupCurrencyLabelName(convertedCurrencyLbl)
+    }
+
+    private func setupCurrencyLabelName(_ name: UILabel) {
+        name.text = "0"
+        name.textAlignment = .right
+        name.numberOfLines = 0
+        name.adjustsFontSizeToFitWidth = true
+        name.font = UIFont.systemFont(ofSize: 60)
+    }
+
+    private func setupDisplayLayout() {
+        [localCurrencyBtn, localCurrencyLbl, switchConverterBtn, convertedCurrencyBtn, convertedCurrencyLbl, localCurrencyView, convertedCurrencyView].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+
+        let YReferenceLigne = view.frame.height / 8
+
+        // localCurrencyLayout
+        setupViewNamed(localCurrencyView, with: localCurrencyBtn, and: localCurrencyLbl)
+        NSLayoutConstraint.activate([
+            localCurrencyView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10),
+            localCurrencyView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10),
+            localCurrencyView.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: YReferenceLigne)
+        ])
+
+        // cnvertedCurrencyView
+        setupViewNamed(convertedCurrencyView, with: convertedCurrencyBtn, and: convertedCurrencyLbl)
+        NSLayoutConstraint.activate([
+            convertedCurrencyView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10),
+            convertedCurrencyView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10),
+            convertedCurrencyView.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: YReferenceLigne * 3)
+        ])
+
+        // switch BTN
+        view.addSubview(switchConverterBtn)
+        NSLayoutConstraint.activate([
+            switchConverterBtn.heightAnchor.constraint(equalTo: switchConverterBtn.widthAnchor),
+            switchConverterBtn.widthAnchor.constraint(equalTo: localCurrencyView.heightAnchor),
+            switchConverterBtn.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: YReferenceLigne * 2),
+            switchConverterBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
+
+    private func setupViewNamed(_ nameView: UIView, with nameButton: UIButton, and nameLabel: UILabel) {
+        nameView.addSubview(nameButton)
+        nameView.addSubview(nameLabel)
+
+        view.addSubview(nameView)
+        NSLayoutConstraint.activate([
+            nameButton.leftAnchor.constraint(equalTo: nameView.leftAnchor),
+            nameButton.bottomAnchor.constraint(equalTo: nameView.bottomAnchor),
+            nameButton.topAnchor.constraint(equalTo: nameView.topAnchor),
+            nameButton.heightAnchor.constraint(equalTo: nameButton.widthAnchor)
+        ])
+
+        NSLayoutConstraint.activate([
+            nameLabel.leftAnchor.constraint(equalTo: nameButton.rightAnchor, constant: 30),
+            nameLabel.bottomAnchor.constraint(equalTo: nameView.bottomAnchor),
+            nameLabel.topAnchor.constraint(equalTo: nameView.topAnchor),
+            nameLabel.rightAnchor.constraint(equalTo: nameView.rightAnchor)
+        ])
+    }
+
 }
 
 extension ExchangeController: CalculatorDelegate {

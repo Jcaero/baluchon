@@ -9,7 +9,7 @@ import UIKit
 
 extension UIButton {
 
-    func setupExchangeButton(_ name: String) {
+    func setupExchangeNumberButton(_ name: String) {
         self.setTitle(name, for: .normal)
         self.setTitleColor(.navy, for: .normal)
         self.titleLabel?.font = UIFont.systemFont(ofSize: 30)
@@ -22,7 +22,12 @@ extension UIButton {
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOpacity = 0.5
         self.layer.shadowRadius = 2
+    }
 
+    func setupCurrencyBoutton(name: String) {
+        self.setTitle(name, for: .normal)
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        self.setTitleColor(.navy, for: .normal)
     }
 
 }
