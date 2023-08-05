@@ -102,7 +102,7 @@ class ExchangeController: UIViewController {
 
         view.addSubview(stackViewMain)
         NSLayoutConstraint.activate([
-            stackViewMain.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            stackViewMain.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15),
             stackViewMain.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackViewMain.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.45),
             stackViewMain.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.90)
@@ -163,35 +163,39 @@ class ExchangeController: UIViewController {
     }
 
     private func setupDisplayLayout() {
-        [localCurrencyBtn, localCurrencyLbl, switchConverterBtn, convertedCurrencyBtn, convertedCurrencyLbl, localCurrencyView, convertedCurrencyView].forEach {
+        [localCurrencyBtn, localCurrencyLbl, switchConverterBtn, convertedCurrencyBtn, convertedCurrencyLbl, localCurrencyView, convertedCurrencyView, display].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+        view.addSubview(display)
+        NSLayoutConstraint.activate([
+            display.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            display.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 10),
+            display.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -10),
+            display.bottomAnchor.constraint(equalTo: stackViewMain.topAnchor, constant: -20)
+        ])
 
-        let YReferenceLigne = view.frame.height / 8
+        setupViewNamed(localCurrencyView, with: localCurrencyBtn, and: localCurrencyLbl)
+        setupViewNamed(convertedCurrencyView, with: convertedCurrencyBtn, and: convertedCurrencyLbl)
+        
+        // switch BTN
+        display.addSubview(switchConverterBtn)
+        NSLayoutConstraint.activate([
+            switchConverterBtn.centerYAnchor.constraint(equalTo: display.centerYAnchor),
+            switchConverterBtn.centerXAnchor.constraint(equalTo: display.centerXAnchor)
+        ])
 
         // localCurrencyLayout
-        setupViewNamed(localCurrencyView, with: localCurrencyBtn, and: localCurrencyLbl)
         NSLayoutConstraint.activate([
-            localCurrencyView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10),
-            localCurrencyView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10),
-            localCurrencyView.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: YReferenceLigne)
+            localCurrencyView.leftAnchor.constraint(equalTo: display.leftAnchor),
+            localCurrencyView.rightAnchor.constraint(equalTo: display.rightAnchor),
+            localCurrencyView.bottomAnchor.constraint(equalTo: switchConverterBtn.topAnchor, constant: -35)
         ])
 
         // cnvertedCurrencyView
-        setupViewNamed(convertedCurrencyView, with: convertedCurrencyBtn, and: convertedCurrencyLbl)
         NSLayoutConstraint.activate([
-            convertedCurrencyView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10),
-            convertedCurrencyView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10),
-            convertedCurrencyView.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: YReferenceLigne * 3)
-        ])
-
-        // switch BTN
-        view.addSubview(switchConverterBtn)
-        NSLayoutConstraint.activate([
-            switchConverterBtn.heightAnchor.constraint(equalTo: switchConverterBtn.widthAnchor),
-            switchConverterBtn.widthAnchor.constraint(equalTo: localCurrencyView.heightAnchor),
-            switchConverterBtn.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: YReferenceLigne * 2),
-            switchConverterBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            convertedCurrencyView.leftAnchor.constraint(equalTo: display.leftAnchor),
+            convertedCurrencyView.rightAnchor.constraint(equalTo: display.rightAnchor),
+            convertedCurrencyView.topAnchor.constraint(equalTo: switchConverterBtn.bottomAnchor, constant: 35)
         ])
     }
 
@@ -203,7 +207,7 @@ class ExchangeController: UIViewController {
 
         nameView.layer.masksToBounds = false
 
-        view.addSubview(nameView)
+        display.addSubview(nameView)
         NSLayoutConstraint.activate([
             nameButton.leftAnchor.constraint(equalTo: nameView.leftAnchor, constant: 5),
             nameButton.bottomAnchor.constraint(equalTo: nameView.bottomAnchor),
