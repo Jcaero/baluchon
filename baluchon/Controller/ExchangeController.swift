@@ -32,8 +32,6 @@ class ExchangeController: UIViewController {
 
     let switchConverterBtn = UIButton()
 
-
-
     // MARK: - lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +76,7 @@ class ExchangeController: UIViewController {
         }
     }
 
+    // MARK: - ButtonPad
     private func setupButtons() {
         // pad Button
         buttonsName.forEach { name in
