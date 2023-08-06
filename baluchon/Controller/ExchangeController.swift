@@ -49,31 +49,36 @@ class ExchangeController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         for ( _, button ) in buttonsListe {
             button.layer.cornerRadius = button.frame.height*0.4
+            button.layer.masksToBounds = false
             #warning("pourquoi fonctionne ici et pas dans class boutton ????")
 
-            button.layer.shadowOffset = CGSize(width: 0, height: 5)
-            button.layer.shadowColor = UIColor.black.cgColor
-            button.layer.shadowOpacity = 0.5
-            button.layer.shadowRadius = 2
-            button.layer.masksToBounds = false
+            setupShadowOf(button, radius: 2, opacity: 0.5)
 
             [localCurrencyView, convertedCurrencyView].forEach {
-
-                let size: CGFloat = -10
-                let distance: CGFloat = 20
-                let rect = CGRect(
-                    x: -size,
-                    y: $0.frame.height - (size * 0.4) + distance,
-                    width: $0.frame.width + size * 2,
-                    height: size
-                )
-
-                $0.layer.shadowColor = UIColor.black.cgColor
-                $0.layer.shadowRadius = 10
-                $0.layer.shadowOpacity = 0.5
-                $0.layer.shadowPath = UIBezierPath(ovalIn: rect).cgPath
+                setupContactShadowOf($0, distance: 20, size: -15)
             }
         }
+    }
+
+    private func setupContactShadowOf(_ view: UIView, distance: CGFloat, size: CGFloat) {
+        let rect = CGRect(
+            x: -size,
+            y: view.frame.height - (size * 0.4) + distance,
+            width: view.frame.width + size * 2,
+            height: size
+        )
+
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowRadius = 5
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowPath = UIBezierPath(ovalIn: rect).cgPath
+    }
+
+    private func setupShadowOf(_ view: UIView, radius: CGFloat, opacity: Float ) {
+        view.layer.shadowOffset = CGSize(width: 0, height: 5)
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = opacity
+        view.layer.shadowRadius = radius
     }
 
     // MARK: - ButtonPad
