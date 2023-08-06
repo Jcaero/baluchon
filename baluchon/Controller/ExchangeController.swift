@@ -23,6 +23,12 @@ class ExchangeController: UIViewController {
     let display = UIView()
     let localCurrencyView = UIView()
     let convertedCurrencyView = UIView()
+    var displayPosition = Position.origin
+
+    enum Position {
+        case origin
+        case switched
+    }
 
     let localCurrencyLbl = UILabel()
     let convertedCurrencyLbl = UILabel()
@@ -153,6 +159,7 @@ class ExchangeController: UIViewController {
         let blackImage = UIImage(systemName: "arrow.up.arrow.down", withConfiguration: configurationImage)
         switchConverterBtn.setImage(blackImage, for: .normal)
         switchConverterBtn.tintColor = .black
+        switchConverterBtn.addTarget(self, action: #selector(tappedSwitch(_:)), for: .touchUpInside)
 
         setupCurrencyLabelName(localCurrencyLbl)
         setupCurrencyLabelName(convertedCurrencyLbl)
@@ -227,6 +234,26 @@ class ExchangeController: UIViewController {
         ])
     }
 
+    @objc func tappedSwitch(_ sender: UIButton) {
+        switch displayPosition {
+        case .origin:
+            let originTop = localCurrencyView.frame.origin.y
+            let originBottom = convertedCurrencyView.frame.origin.y
+            let translationY = originBottom - originTop
+            let localView = localCurrencyView.convert(localCurrencyView.frame.origin, to: nil)
+            let convertedView = convertedCurrencyView.convert(localCurrencyView.frame.origin, to: nil)
+
+            localCurrencyView.transform = CGAffineTransform(translationX: 0, y: translationY)
+            convertedCurrencyView.transform = CGAffineTransform(translationX: 0, y: -translationY)
+
+            displayPosition = .switched
+        case .switched:
+            localCurrencyView.transform = .identity
+            convertedCurrencyView.transform = .identity
+
+            displayPosition = .origin
+        }
+    }
 }
 
 extension ExchangeController: CalculatorDelegate {
