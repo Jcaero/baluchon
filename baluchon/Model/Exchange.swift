@@ -21,11 +21,17 @@ class Exchange {
         self.delegate = delegate
         expression = "0"
         converted = "0"
+        exchangeRates = ["USD":1.112954,"CHF": 0.964686]
     }
 
     // MARK: - Expression
     var expression: String
     var converted: String
+
+    var exchangeRates: [String: Float]
+
+    var localCurrency: String?
+    var convertedCurrency: String?
 
     private  var newExpression: Bool {
         return expression == "0"
@@ -42,6 +48,9 @@ class Exchange {
             delegate?.showAlert(title: "Erreur", desciption: "chiffre non reconnu")
             return
         }
+        
+        print("local : \(localCurrency)")
+        print ("converted \(convertedCurrency)")
 
         // check size on number
         guard expression.count < numberMaxLenght else {
@@ -126,9 +135,7 @@ class Exchange {
 
     // MARK: - Switch information
     func switchHasBeenTapped() {
-        let oldLocal = expression
         expression = converted
-        converted = expression
         updateDisplay()
     }
 }

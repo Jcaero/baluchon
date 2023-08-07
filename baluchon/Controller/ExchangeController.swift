@@ -59,10 +59,18 @@ class ExchangeController: UIViewController {
             #warning("pourquoi fonctionne ici et pas dans class boutton ????")
 
             setupShadowOf(button, radius: 2, opacity: 0.5)
-
-            [localCurrencyView, convertedCurrencyView].forEach {
-                setupContactShadowOf($0, distance: 20, size: -15)
-            }
+        }
+        [localCurrencyView, convertedCurrencyView].forEach {
+            setupContactShadowOf($0, distance: 20, size: -15)
+        }
+        #warning("logic ou pas logic ")
+        switch displayPosition {
+        case .origin:
+            exchange.localCurrency = localCurrencyBtn.currentTitle
+            exchange.convertedCurrency = convertedCurrencyBtn.currentTitle
+        case .switched:
+            exchange.localCurrency = convertedCurrencyBtn.currentTitle
+            exchange.convertedCurrency = localCurrencyBtn.currentTitle
         }
     }
 
@@ -235,7 +243,6 @@ class ExchangeController: UIViewController {
     }
 
     @objc func tappedSwitch(_ sender: UIButton) {
-        exchange.switchHasBeenTapped()
         switch displayPosition {
         case .origin:
             let originTop = localCurrencyView.frame.origin.y
@@ -246,22 +253,29 @@ class ExchangeController: UIViewController {
                 self.localCurrencyView.transform = CGAffineTransform(translationX: 0, y: translationY)
                 self.convertedCurrencyView.transform = CGAffineTransform(translationX: 0, y: -translationY)
             }
-
             displayPosition = .switched
         case .switched:
             UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5) {
                 self.localCurrencyView.transform = .identity
                 self.convertedCurrencyView.transform = .identity
             }
+            #warning("logic ou pas logic")
             displayPosition = .origin
         }
+        exchange.switchHasBeenTapped()
     }
 }
 
 extension ExchangeController: ExchangeDelegate {
     func updateDisplay(_ expression: String, converted: String) {
-        localCurrencyLbl.text = expression
-        convertedCurrencyLbl.text = converted
+        switch displayPosition {
+        case .origin:
+            localCurrencyLbl.text = expression
+            convertedCurrencyLbl.text = converted
+        case .switched:
+            localCurrencyLbl.text = converted
+            convertedCurrencyLbl.text = expression
+        }
     }
 
     func showAlert(title: String, desciption: String) {
