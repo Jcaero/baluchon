@@ -240,17 +240,18 @@ class ExchangeController: UIViewController {
             let originTop = localCurrencyView.frame.origin.y
             let originBottom = convertedCurrencyView.frame.origin.y
             let translationY = originBottom - originTop
-            let localView = localCurrencyView.convert(localCurrencyView.frame.origin, to: nil)
-            let convertedView = convertedCurrencyView.convert(localCurrencyView.frame.origin, to: nil)
 
-            localCurrencyView.transform = CGAffineTransform(translationX: 0, y: translationY)
-            convertedCurrencyView.transform = CGAffineTransform(translationX: 0, y: -translationY)
+            UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5) {
+                self.localCurrencyView.transform = CGAffineTransform(translationX: 0, y: translationY)
+                self.convertedCurrencyView.transform = CGAffineTransform(translationX: 0, y: -translationY)
+            }
 
             displayPosition = .switched
         case .switched:
-            localCurrencyView.transform = .identity
-            convertedCurrencyView.transform = .identity
-
+            UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5) {
+                self.localCurrencyView.transform = .identity
+                self.convertedCurrencyView.transform = .identity
+            }
             displayPosition = .origin
         }
     }
