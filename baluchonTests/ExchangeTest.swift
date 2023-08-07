@@ -22,9 +22,8 @@ final class ExchangeTest: XCTestCase {
     override func setUp() {
         super.setUp()
         exchange = Exchange(delegate: self)
-        exchange.localCurrencyISOCode = "EUR"
         #warning("changement exploser test")
-        exchange.convertedCurrencyISOCode = "Test"
+        exchange.setCurrencyISOCode(local: "EUR", converted: "Test")
     }
 
     override func tearDownWithError() throws {
@@ -182,8 +181,7 @@ final class ExchangeTest: XCTestCase {
 
     // MARK: - Test CalCulateConverted
     func testLocalIsEuroAndConvertedIsUSD_WhenTap5_ConvertedIs5_56() {
-        exchange.localCurrencyISOCode = "EUR"
-        exchange.convertedCurrencyISOCode = "USD"
+        exchange.setCurrencyISOCode(local: "EUR", converted: "USD")
 
         exchange.numberHasBeenTapped("5")
 
@@ -193,13 +191,24 @@ final class ExchangeTest: XCTestCase {
     }
 
     func testLocalIsUSDAndConvertedIsEUR_WhenTap5_ConvertedIs5_56() {
-        exchange.localCurrencyISOCode = "USD"
-        exchange.convertedCurrencyISOCode = "EUR"
+        exchange.setCurrencyISOCode(local: "USD", converted: "EUR")
 
         exchange.numberHasBeenTapped("5")
 
         XCTAssertEqual(displayLocal, "5")
         XCTAssertEqual(displayConverted, "4.49")
+    }
+
+    func testWhenSetAvailableRate_AlerteIsNil() {
+        exchange.setCurrencyISOCode(local: "EUR", converted: "USD")
+
+        XCTAssertNil(alerteTitle)
+    }
+
+    func testWhenSetNotAvailableRate_AlerteIsNil() {
+        exchange.setCurrencyISOCode(local: "AAA", converted: "USD")
+
+        XCTAssertEqual(alerteDescription, "monnaie non disponible")
     }
 
 }

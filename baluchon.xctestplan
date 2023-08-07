@@ -1,7 +1,7 @@
 {
   "configurations" : [
     {
-      "id" : "7CD7A084-2ABB-4CD2-A9E3-9F14E882795A",
+      "id" : "38810C5E-9BC4-48C8-A1AE-682617D9C8BA",
       "name" : "Test Scheme Action",
       "options" : {
 
@@ -25,7 +25,6 @@
       }
     },
     {
-      "enabled" : false,
       "parallelizable" : true,
       "target" : {
         "containerPath" : "container:baluchon.xcodeproj",

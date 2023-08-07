@@ -28,23 +28,35 @@ class Exchange {
     private var expression: String
     private var converted: String
 
-    var exchangeRates: [String: Float]
-
-    var localCurrencyISOCode: String = "EUR"
-    var convertedCurrencyISOCode: String = "USD"
-
     private  var newExpression: Bool {
         return expression == "0"
     }
 
-    private let numberAvailable: Set = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    private let availableNumber: Set = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
+    // MARK: - Rates
+    private var exchangeRates: [String: Float]
+
+    private var localCurrencyISOCode: String = "EUR"
+    private var convertedCurrencyISOCode: String = "USD"
+
+    private let availableRate = ["EUR", "Test", "USD", "CHF"]
 
     // MARK: - Configuration
     private let numberMaxLenght = 10
 
+    func setCurrencyISOCode( local: String, converted: String) {
+        guard availableRate.contains(local), availableRate.contains(converted) else {
+            delegate?.showAlert(title: "Erreur", desciption: "monnaie non disponible")
+            return
+        }
+        localCurrencyISOCode = local
+        convertedCurrencyISOCode = converted
+    }
+
     // MARK: - PAD Methode
     func numberHasBeenTapped(_ selection: String) {
-        guard numberAvailable.contains(selection) else {
+        guard availableNumber.contains(selection) else {
             delegate?.showAlert(title: "Erreur", desciption: "chiffre non reconnu")
             return
         }

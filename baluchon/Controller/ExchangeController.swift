@@ -64,13 +64,13 @@ class ExchangeController: UIViewController {
             setupContactShadowOf($0, distance: 20, size: -15)
         }
         #warning("logic ou pas logic ")
+        let localButtonLabel = localCurrencyBtn.currentTitle!
+        let convertedButtonLabel = convertedCurrencyBtn.currentTitle!
         switch displayPosition {
         case .origin:
-            exchange.localCurrencyISOCode = localCurrencyBtn.currentTitle!
-            exchange.convertedCurrencyISOCode = convertedCurrencyBtn.currentTitle!
+            exchange.setCurrencyISOCode(local: localButtonLabel, converted: convertedButtonLabel)
         case .switched:
-            exchange.localCurrencyISOCode = convertedCurrencyBtn.currentTitle!
-            exchange.convertedCurrencyISOCode = localCurrencyBtn.currentTitle!
+            exchange.setCurrencyISOCode(local: convertedButtonLabel, converted: localButtonLabel)
         }
     }
 
@@ -245,6 +245,9 @@ class ExchangeController: UIViewController {
     }
 
     @objc func tappedSwitch(_ sender: UIButton) {
+        let localButtonLabel = localCurrencyBtn.currentTitle!
+        let convertedButtonLabel = convertedCurrencyBtn.currentTitle!
+
         switch displayPosition {
         case .origin:
             let originTop = localCurrencyView.frame.origin.y
@@ -255,9 +258,7 @@ class ExchangeController: UIViewController {
                 self.localCurrencyView.transform = CGAffineTransform(translationX: 0, y: translationY)
                 self.convertedCurrencyView.transform = CGAffineTransform(translationX: 0, y: -translationY)
             }
-
-            exchange.localCurrencyISOCode = convertedCurrencyBtn.currentTitle!
-            exchange.convertedCurrencyISOCode = localCurrencyBtn.currentTitle!
+            exchange.setCurrencyISOCode(local: convertedButtonLabel, converted: localButtonLabel)
             displayPosition = .switched
         case .switched:
             UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5) {
@@ -266,8 +267,7 @@ class ExchangeController: UIViewController {
             }
             #warning("logic ou pas logic")
             displayPosition = .origin
-            exchange.localCurrencyISOCode = localCurrencyBtn.currentTitle!
-            exchange.convertedCurrencyISOCode = convertedCurrencyBtn.currentTitle!
+            exchange.setCurrencyISOCode(local: localButtonLabel, converted: convertedButtonLabel)
         }
         exchange.switchHasBeenTapped()
     }
