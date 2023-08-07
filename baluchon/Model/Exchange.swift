@@ -1,23 +1,23 @@
 //
-//  Calculator.swift
+//  Exchange.swift
 //  baluchon
 //
-//  Created by pierrick viret on 02/08/2023.
+//  Created by pierrick viret on 07/08/2023.
 //
 
 import Foundation
 
-protocol CalculatorDelegate: AnyObject {
+protocol ExchangeDelegate: AnyObject {
     func showAlert(title: String, desciption: String)
     func updateDisplay(_ expression: String)
     func updateClearButton(_ buttonName: String)
 }
 
-class Calculator {
+class Exchange {
 // delegate
-    private weak var delegate: CalculatorDelegate?
+    private weak var delegate: ExchangeDelegate?
 
-    init(delegate: CalculatorDelegate?) {
+    init(delegate: ExchangeDelegate?) {
         self.delegate = delegate
         expression = "0"
     }

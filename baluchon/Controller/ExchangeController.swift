@@ -10,7 +10,7 @@ import UIKit
 class ExchangeController: UIViewController {
 
     // MARK: - Properties
-    private var calculate: Calculator!
+    private var exchange: Exchange!
 
     var buttonsListe = [String: UIButton]()
     let buttonsName = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "AC"]
@@ -41,7 +41,7 @@ class ExchangeController: UIViewController {
     // MARK: - lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        calculate = Calculator(delegate: self)
+        exchange = Exchange(delegate: self)
 
         view.backgroundColor = .white
 
@@ -140,11 +140,11 @@ class ExchangeController: UIViewController {
 
         switch titre {
         case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
-            calculate.numberHasBeenTapped(titre)
+            exchange.numberHasBeenTapped(titre)
         case ".":
-            calculate.pointHasBeenTapped()
+            exchange.pointHasBeenTapped()
         case "AC", "C":
-            calculate.clearExpression(titre)
+            exchange.clearExpression(titre)
         default:
             print("chiffre non reconnu")
         }
@@ -257,7 +257,7 @@ class ExchangeController: UIViewController {
     }
 }
 
-extension ExchangeController: CalculatorDelegate {
+extension ExchangeController: ExchangeDelegate {
     func showAlert(title: String, desciption: String) {
         showSimpleAlerte(with: title, message: desciption)
     }

@@ -1,5 +1,5 @@
 //
-//  CalculatorTest.swift
+//  ExchangeTest.swift
 //  baluchonTests
 //
 //  Created by pierrick viret on 02/08/2023.
@@ -8,9 +8,9 @@
 import XCTest
 @testable import baluchon
 
-final class CalculatorTest: XCTestCase {
+final class ExchangeTest: XCTestCase {
 
-    private var calculate: Calculator!
+    private var exchange: Exchange!
 
     // data output
     private var alerteTitle: String?
@@ -20,7 +20,7 @@ final class CalculatorTest: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        calculate = Calculator(delegate: self)
+        exchange = Exchange(delegate: self)
     }
 
     override func tearDownWithError() throws {
@@ -32,40 +32,40 @@ final class CalculatorTest: XCTestCase {
         *******************************
         */
     func testExpressionIsZero_WhenTapFive_ResultIsFive() {
-        calculate.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
 
         XCTAssertEqual(display, "5")
     }
 
     func testExpressionIsFive_WhenTapZero_ResultIsFifty() {
-        calculate.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
 
-        calculate.numberHasBeenTapped("0")
+        exchange.numberHasBeenTapped("0")
 
         XCTAssertEqual(display, "50")
     }
 
     func testExpressionIsFive_WhenTapFive_ResultIsFiftyFive() {
-        calculate.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
 
-        calculate.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
 
         XCTAssertEqual(display, "55")
     }
 
     func testExpressionHaveTenNumber_WhenTapFive_ResultNotChangeAndShowAlerte() {
-        calculate.numberHasBeenTapped("5")
-        calculate.numberHasBeenTapped("5")
-        calculate.numberHasBeenTapped("5")
-        calculate.numberHasBeenTapped("5")
-        calculate.numberHasBeenTapped("5")
-        calculate.numberHasBeenTapped("5")
-        calculate.numberHasBeenTapped("5")
-        calculate.numberHasBeenTapped("5")
-        calculate.numberHasBeenTapped("5")
-        calculate.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
 
-        calculate.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
 
         XCTAssertEqual(display, "5555555555")
         XCTAssertEqual(alerteTitle, "Erreur")
@@ -73,9 +73,9 @@ final class CalculatorTest: XCTestCase {
     }
 
     func testExpressionIsFive_WhenWrongElementHasBeenTapped_ResultNotChangeAndShowAlert() {
-        calculate.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
 
-        calculate.numberHasBeenTapped("A")
+        exchange.numberHasBeenTapped("A")
 
         XCTAssertEqual(display, "5")
         XCTAssertEqual(alerteTitle, "Erreur")
@@ -88,18 +88,18 @@ final class CalculatorTest: XCTestCase {
     */
 
     func testExpressionIsFive_WhenPointHasBeenTapped_ResultIsFivePoint() {
-        calculate.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
 
-        calculate.pointHasBeenTapped()
+        exchange.pointHasBeenTapped()
 
         XCTAssertEqual(display, "5.")
     }
 
     func testExpressionIsFivePoint_WhenPointHasBeenTapped_ResultIsFivePointAndShowAlerte() {
-        calculate.numberHasBeenTapped("5")
-        calculate.pointHasBeenTapped()
+        exchange.numberHasBeenTapped("5")
+        exchange.pointHasBeenTapped()
 
-        calculate.pointHasBeenTapped()
+        exchange.pointHasBeenTapped()
 
         XCTAssertEqual(display, "5.")
         XCTAssertEqual(alerteTitle, "Erreur")
@@ -108,11 +108,11 @@ final class CalculatorTest: XCTestCase {
     }
 
     func testExpressionIsFivePointTwo_WhenPointHasBeenTapped_ResultIsFivePointAndShowAlerte() {
-        calculate.numberHasBeenTapped("5")
-        calculate.pointHasBeenTapped()
-        calculate.numberHasBeenTapped("2")
+        exchange.numberHasBeenTapped("5")
+        exchange.pointHasBeenTapped()
+        exchange.numberHasBeenTapped("2")
 
-        calculate.pointHasBeenTapped()
+        exchange.pointHasBeenTapped()
 
         XCTAssertEqual(display, "5.2")
         XCTAssertEqual(alerteTitle, "Erreur")
@@ -125,34 +125,34 @@ final class CalculatorTest: XCTestCase {
     */
 
     func testExpressionIsFive_WhenClearExpressionAC_ResultIsZero() {
-        calculate.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
 
-        calculate.clearExpression("AC")
+        exchange.clearExpression("AC")
 
         XCTAssertEqual(display, "0")
     }
 
     func testExpressionIsFiftyTwo_WhenClearExpressionC_ResultIsFive() {
-        calculate.numberHasBeenTapped("5")
-        calculate.numberHasBeenTapped("2")
+        exchange.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("2")
 
-        calculate.clearExpression("C")
+        exchange.clearExpression("C")
 
         XCTAssertEqual(display, "5")
         XCTAssertEqual(clearButton, "AC")
     }
 
     func testExpressionIsFiftyTwo_WhenClearExpressionIsNotCorrect_ResultNotChnage() {
-        calculate.numberHasBeenTapped("5")
-        calculate.numberHasBeenTapped("2")
+        exchange.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("2")
 
-        calculate.clearExpression("D")
+        exchange.clearExpression("D")
 
         XCTAssertEqual(display, "52")
     }
 }
 
-extension CalculatorTest: CalculatorDelegate {
+extension ExchangeTest: ExchangeDelegate {
     func showAlert(title: String, desciption: String) {
         alerteTitle = title
         alerteDescription = desciption
