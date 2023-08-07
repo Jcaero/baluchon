@@ -115,8 +115,21 @@ final class ExchangeTest: XCTestCase {
         XCTAssertEqual(alerteDescription, "Un point est deja présent")
     }
 
+    func testExpressionHaveTwoNumberAfterPoint_WhenNumberHasBeenTapped_ResultNotCHange() {
+        exchange.numberHasBeenTapped("5")
+        exchange.pointHasBeenTapped()
+        exchange.numberHasBeenTapped("2")
+        exchange.numberHasBeenTapped("2")
+
+        exchange.numberHasBeenTapped("2")
+
+        XCTAssertEqual(displayLocal, "5.22")
+        XCTAssertEqual(alerteTitle, "Limitation")
+        XCTAssertEqual(alerteDescription, "Deux nombres après la virgule Maximum")
+    }
+
     // MARK: - TEST clearExpression()
- 
+
     func testExpressionIsFive_WhenClearExpressionAC_ResultIsZero() {
         exchange.numberHasBeenTapped("5")
 

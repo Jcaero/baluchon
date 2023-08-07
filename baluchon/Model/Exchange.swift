@@ -47,6 +47,14 @@ class Exchange {
             return
         }
 
+        // check number after point
+        if hasPoint {
+            guard indexOfPoint! < 3  else {
+                delegate?.showAlert(title: "Limitation", desciption: "Deux nombres après la virgule Maximum")
+                return
+            }
+        }
+
         if newExpression {
             expression.removeLast()
         }
@@ -56,13 +64,22 @@ class Exchange {
         delegate?.updateClearButton("C")
     }
 
+    private var indexOfPoint: Int? {
+        if let index = expression.firstIndex(where: {$0 == "."}) {
+            let distance = expression.distance(from: index, to: expression.endIndex)
+            return distance
+        } else {
+            return nil
+        }
+    }
+
     private var hasPoint: Bool {
-        return !expression.contains(".")
+        return expression.contains(".")
     }
 
     func pointHasBeenTapped() {
 
-        guard hasPoint else {
+        guard hasPoint == false else {
             delegate?.showAlert(title: "Erreur", desciption: "Un point est deja présent")
             return
         }
