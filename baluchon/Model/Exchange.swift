@@ -25,13 +25,13 @@ class Exchange {
     }
 
     // MARK: - Expression
-    var expression: String
-    var converted: String
+    private var expression: String
+    private var converted: String
 
     var exchangeRates: [String: Float]
 
-    var localCurrencyISOCode: String?
-    var convertedCurrencyISOCode: String?
+    var localCurrencyISOCode: String = "EUR"
+    var convertedCurrencyISOCode: String = "USD"
 
     private  var newExpression: Bool {
         return expression == "0"
@@ -133,10 +133,15 @@ class Exchange {
 
     func calculateConvertedCurrency() -> Float? {
         guard let expressionNumber = Float(expression) else {return nil}
-        guard let currency = convertedCurrencyISOCode else {return nil}
-        guard let rate = exchangeRates[currency] else {return nil}
-        
-        let result = expressionNumber * rate
+        let result: Float
+
+        if localCurrencyISOCode == "EUR" {
+            guard let rate = exchangeRates[convertedCurrencyISOCode] else {return nil}
+            result = expressionNumber * rate
+        } else {
+            guard let rate = exchangeRates[localCurrencyISOCode] else {return nil}
+            result = expressionNumber / rate
+        }
         return result
     }
 

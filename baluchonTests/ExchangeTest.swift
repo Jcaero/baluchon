@@ -181,7 +181,7 @@ final class ExchangeTest: XCTestCase {
     }
 
     // MARK: - Test CalCulateConverted
-    func testLocalIsEuroAndConvertedIsUSD_WhenTap5_ConvertedIs5_56(){
+    func testLocalIsEuroAndConvertedIsUSD_WhenTap5_ConvertedIs5_56() {
         exchange.localCurrencyISOCode = "EUR"
         exchange.convertedCurrencyISOCode = "USD"
 
@@ -190,6 +190,16 @@ final class ExchangeTest: XCTestCase {
         XCTAssertEqual(displayLocal, "5")
         XCTAssertEqual(displayConverted, "5.56")
 
+    }
+
+    func testLocalIsUSDAndConvertedIsEUR_WhenTap5_ConvertedIs5_56() {
+        exchange.localCurrencyISOCode = "USD"
+        exchange.convertedCurrencyISOCode = "EUR"
+
+        exchange.numberHasBeenTapped("5")
+
+        XCTAssertEqual(displayLocal, "5")
+        XCTAssertEqual(displayConverted, "4.49")
     }
 
 }

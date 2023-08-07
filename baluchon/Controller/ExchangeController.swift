@@ -66,11 +66,11 @@ class ExchangeController: UIViewController {
         #warning("logic ou pas logic ")
         switch displayPosition {
         case .origin:
-            exchange.localCurrencyISOCode = localCurrencyBtn.currentTitle
-            exchange.convertedCurrencyISOCode = convertedCurrencyBtn.currentTitle
+            exchange.localCurrencyISOCode = localCurrencyBtn.currentTitle!
+            exchange.convertedCurrencyISOCode = convertedCurrencyBtn.currentTitle!
         case .switched:
-            exchange.localCurrencyISOCode = convertedCurrencyBtn.currentTitle
-            exchange.convertedCurrencyISOCode = localCurrencyBtn.currentTitle
+            exchange.localCurrencyISOCode = convertedCurrencyBtn.currentTitle!
+            exchange.convertedCurrencyISOCode = localCurrencyBtn.currentTitle!
         }
     }
 
@@ -255,6 +255,9 @@ class ExchangeController: UIViewController {
                 self.localCurrencyView.transform = CGAffineTransform(translationX: 0, y: translationY)
                 self.convertedCurrencyView.transform = CGAffineTransform(translationX: 0, y: -translationY)
             }
+
+            exchange.localCurrencyISOCode = convertedCurrencyBtn.currentTitle!
+            exchange.convertedCurrencyISOCode = localCurrencyBtn.currentTitle!
             displayPosition = .switched
         case .switched:
             UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5) {
@@ -263,6 +266,8 @@ class ExchangeController: UIViewController {
             }
             #warning("logic ou pas logic")
             displayPosition = .origin
+            exchange.localCurrencyISOCode = localCurrencyBtn.currentTitle!
+            exchange.convertedCurrencyISOCode = convertedCurrencyBtn.currentTitle!
         }
         exchange.switchHasBeenTapped()
     }
