@@ -165,6 +165,18 @@ final class ExchangeTest: XCTestCase {
         XCTAssertEqual(displayLocal, "8")
         XCTAssertEqual(displayConverted, "40")
     }
+
+    // MARK: - TEST SWITCH
+
+    func testExpressionIs5AndConvertedIs25_WhenSwitchTapped_ExpressionIs25AndConvertedIs5() {
+        exchange.numberHasBeenTapped("5")
+
+        exchange.switchHasBeenTapped()
+
+        XCTAssertEqual(displayLocal, "25")
+        XCTAssertEqual(displayConverted, "125")
+    }
+
 }
 
 extension ExchangeTest: ExchangeDelegate {

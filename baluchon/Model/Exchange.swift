@@ -20,10 +20,12 @@ class Exchange {
     init(delegate: ExchangeDelegate?) {
         self.delegate = delegate
         expression = "0"
+        converted = "0"
     }
 
     // MARK: - Expression
-     var expression: String
+    var expression: String
+    var converted: String
 
     private  var newExpression: Bool {
         return expression == "0"
@@ -101,9 +103,9 @@ class Exchange {
     private func updateDisplay() {
 
         guard let expressionNumber = Float(expression) else {return}
-        let converted = expressionNumber * 5
-        let convertedString = convertInString(converted)
-        delegate?.updateDisplay(expression, converted: convertedString)
+        let convertedNumber = expressionNumber * 5
+        converted = convertInString(convertedNumber)
+        delegate?.updateDisplay(expression, converted: converted)
     }
 
     private func convertInString (_ floatNumber: Float) -> String {
@@ -120,5 +122,13 @@ class Exchange {
         }
 
         return stringFloat
+    }
+
+    // MARK: - Switch information
+    func switchHasBeenTapped() {
+        let oldLocal = expression
+        expression = converted
+        converted = expression
+        updateDisplay()
     }
 }

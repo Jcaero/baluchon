@@ -235,6 +235,7 @@ class ExchangeController: UIViewController {
     }
 
     @objc func tappedSwitch(_ sender: UIButton) {
+        exchange.switchHasBeenTapped()
         switch displayPosition {
         case .origin:
             let originTop = localCurrencyView.frame.origin.y
@@ -262,7 +263,7 @@ extension ExchangeController: ExchangeDelegate {
         localCurrencyLbl.text = expression
         convertedCurrencyLbl.text = converted
     }
-    
+
     func showAlert(title: String, desciption: String) {
         showSimpleAlerte(with: title, message: desciption)
     }
