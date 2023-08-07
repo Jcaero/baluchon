@@ -81,10 +81,27 @@ class Exchange {
     }
 
     // MARK: - Display
-    func updateDisplay() {
-        
+    private func updateDisplay() {
+
         guard let expressionNumber = Float(expression) else {return}
-        let converted = "\(expressionNumber * 5)"
-        delegate?.updateDisplay(expression, converted: converted)
+        let converted = expressionNumber * 5
+        let convertedString = convertInString(converted)
+        delegate?.updateDisplay(expression, converted: convertedString)
+    }
+
+    private func convertInString (_ floatNumber: Float) -> String {
+        var stringFloat: String
+        stringFloat = String(format: "%.2f", floatNumber)
+
+        // remove O at the end of expression
+        while stringFloat.last == "0"{
+            stringFloat.removeLast()
+        }
+        // remove point if number have no decimal
+        if stringFloat.last == "."{
+            stringFloat.removeLast()
+        }
+
+        return stringFloat
     }
 }

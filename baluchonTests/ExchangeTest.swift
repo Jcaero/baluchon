@@ -28,10 +28,8 @@ final class ExchangeTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-        /*****************************
-        *     TEST numberHasBeenTapped        *
-        *******************************
-        */
+    // MARK: - TEST numberHasBeenTapped
+
     func testExpressionIsZero_WhenTapFive_ResultIsFive() {
         exchange.numberHasBeenTapped("5")
 
@@ -83,10 +81,7 @@ final class ExchangeTest: XCTestCase {
         XCTAssertEqual(alerteDescription, "chiffre non reconnu")
     }
 
-    /*****************************
-    *     TEST pointHasBeenTapped()        *
-    *******************************
-    */
+    // MARK: - TEST pointHasBeenTapped()
 
     func testExpressionIsFive_WhenPointHasBeenTapped_ResultIsFivePoint() {
         exchange.numberHasBeenTapped("5")
@@ -120,11 +115,8 @@ final class ExchangeTest: XCTestCase {
         XCTAssertEqual(alerteDescription, "Un point est deja présent")
     }
 
-    /*****************************
-    *     TEST clearExpression()        *
-    *******************************
-    */
-
+    // MARK: - TEST clearExpression()
+ 
     func testExpressionIsFive_WhenClearExpressionAC_ResultIsZero() {
         exchange.numberHasBeenTapped("5")
 
@@ -150,6 +142,15 @@ final class ExchangeTest: XCTestCase {
         exchange.clearExpression("D")
 
         XCTAssertEqual(displayLocal, "52")
+    }
+
+    // MARK: - TEST converted
+
+    func testExpressionIsZero_WhenTapEight_ConvertedIsForty() {
+        exchange.numberHasBeenTapped("8")
+
+        XCTAssertEqual(displayLocal, "8")
+        XCTAssertEqual(displayConverted, "40")
     }
 }
 
