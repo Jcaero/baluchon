@@ -258,14 +258,13 @@ class ExchangeController: UIViewController {
 }
 
 extension ExchangeController: ExchangeDelegate {
+    func updateDisplay(_ expression: String, converted: String) {
+        localCurrencyLbl.text = expression
+        convertedCurrencyLbl.text = converted
+    }
+    
     func showAlert(title: String, desciption: String) {
         showSimpleAlerte(with: title, message: desciption)
-    }
-
-    func updateDisplay(_ expression: String) {
-        localCurrencyLbl.text = expression
-        guard let expressionNumber = Float(expression) else {return}
-        convertedCurrencyLbl.text = "\(expressionNumber * 5)"
     }
 
     func updateClearButton(_ buttonName: String) {

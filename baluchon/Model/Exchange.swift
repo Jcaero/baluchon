@@ -9,12 +9,12 @@ import Foundation
 
 protocol ExchangeDelegate: AnyObject {
     func showAlert(title: String, desciption: String)
-    func updateDisplay(_ expression: String)
+    func updateDisplay(_ expression: String, converted: String)
     func updateClearButton(_ buttonName: String)
 }
 
 class Exchange {
-// delegate
+    // MARK: - Delegate
     private weak var delegate: ExchangeDelegate?
 
     init(delegate: ExchangeDelegate?) {
@@ -22,7 +22,7 @@ class Exchange {
         expression = "0"
     }
 
-    // expression
+    // MARK: - Expression
      var expression: String
 
     private  var newExpression: Bool {
@@ -31,9 +31,10 @@ class Exchange {
 
     private let numberAvailable: Set = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-    // configuration
+    // MARK: - Configuration
     private let numberMaxLenght = 10
 
+    // MARK: - PAD Methode
     func numberHasBeenTapped(_ selection: String) {
         guard numberAvailable.contains(selection) else {
             delegate?.showAlert(title: "Erreur", desciption: "chiffre non reconnu")
@@ -51,7 +52,7 @@ class Exchange {
         }
 
         expression.append(selection)
-        delegate?.updateDisplay(expression)
+        updateDisplay()
         delegate?.updateClearButton("C")
     }
 
@@ -66,7 +67,7 @@ class Exchange {
             return
         }
         expression.append(".")
-        delegate?.updateDisplay(expression)
+        updateDisplay()
     }
 
     func clearExpression(_ selection: String) {
@@ -76,6 +77,14 @@ class Exchange {
             expression.removeLast()
             delegate?.updateClearButton("AC")
         }
-        delegate?.updateDisplay(expression)
+        updateDisplay()
+    }
+
+    // MARK: - Display
+    func updateDisplay() {
+        
+        guard let expressionNumber = Float(expression) else {return}
+        let converted = "\(expressionNumber * 5)"
+        delegate?.updateDisplay(expression, converted: converted)
     }
 }

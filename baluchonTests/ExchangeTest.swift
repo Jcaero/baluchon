@@ -15,7 +15,8 @@ final class ExchangeTest: XCTestCase {
     // data output
     private var alerteTitle: String?
     private var alerteDescription: String?
-    private var display: String?
+    private var displayLocal: String?
+    private var displayConverted: String?
     private var clearButton: String?
 
     override func setUp() {
@@ -34,7 +35,7 @@ final class ExchangeTest: XCTestCase {
     func testExpressionIsZero_WhenTapFive_ResultIsFive() {
         exchange.numberHasBeenTapped("5")
 
-        XCTAssertEqual(display, "5")
+        XCTAssertEqual(displayLocal, "5")
     }
 
     func testExpressionIsFive_WhenTapZero_ResultIsFifty() {
@@ -42,7 +43,7 @@ final class ExchangeTest: XCTestCase {
 
         exchange.numberHasBeenTapped("0")
 
-        XCTAssertEqual(display, "50")
+        XCTAssertEqual(displayLocal, "50")
     }
 
     func testExpressionIsFive_WhenTapFive_ResultIsFiftyFive() {
@@ -50,7 +51,7 @@ final class ExchangeTest: XCTestCase {
 
         exchange.numberHasBeenTapped("5")
 
-        XCTAssertEqual(display, "55")
+        XCTAssertEqual(displayLocal, "55")
     }
 
     func testExpressionHaveTenNumber_WhenTapFive_ResultNotChangeAndShowAlerte() {
@@ -67,7 +68,7 @@ final class ExchangeTest: XCTestCase {
 
         exchange.numberHasBeenTapped("5")
 
-        XCTAssertEqual(display, "5555555555")
+        XCTAssertEqual(displayLocal, "5555555555")
         XCTAssertEqual(alerteTitle, "Erreur")
         XCTAssertEqual(alerteDescription, "vous ne pouvez pas dépaser 10 chiffres")
     }
@@ -77,7 +78,7 @@ final class ExchangeTest: XCTestCase {
 
         exchange.numberHasBeenTapped("A")
 
-        XCTAssertEqual(display, "5")
+        XCTAssertEqual(displayLocal, "5")
         XCTAssertEqual(alerteTitle, "Erreur")
         XCTAssertEqual(alerteDescription, "chiffre non reconnu")
     }
@@ -92,7 +93,7 @@ final class ExchangeTest: XCTestCase {
 
         exchange.pointHasBeenTapped()
 
-        XCTAssertEqual(display, "5.")
+        XCTAssertEqual(displayLocal, "5.")
     }
 
     func testExpressionIsFivePoint_WhenPointHasBeenTapped_ResultIsFivePointAndShowAlerte() {
@@ -101,7 +102,7 @@ final class ExchangeTest: XCTestCase {
 
         exchange.pointHasBeenTapped()
 
-        XCTAssertEqual(display, "5.")
+        XCTAssertEqual(displayLocal, "5.")
         XCTAssertEqual(alerteTitle, "Erreur")
         XCTAssertEqual(alerteDescription, "Un point est deja présent")
 
@@ -114,7 +115,7 @@ final class ExchangeTest: XCTestCase {
 
         exchange.pointHasBeenTapped()
 
-        XCTAssertEqual(display, "5.2")
+        XCTAssertEqual(displayLocal, "5.2")
         XCTAssertEqual(alerteTitle, "Erreur")
         XCTAssertEqual(alerteDescription, "Un point est deja présent")
     }
@@ -129,7 +130,7 @@ final class ExchangeTest: XCTestCase {
 
         exchange.clearExpression("AC")
 
-        XCTAssertEqual(display, "0")
+        XCTAssertEqual(displayLocal, "0")
     }
 
     func testExpressionIsFiftyTwo_WhenClearExpressionC_ResultIsFive() {
@@ -138,7 +139,7 @@ final class ExchangeTest: XCTestCase {
 
         exchange.clearExpression("C")
 
-        XCTAssertEqual(display, "5")
+        XCTAssertEqual(displayLocal, "5")
         XCTAssertEqual(clearButton, "AC")
     }
 
@@ -148,7 +149,7 @@ final class ExchangeTest: XCTestCase {
 
         exchange.clearExpression("D")
 
-        XCTAssertEqual(display, "52")
+        XCTAssertEqual(displayLocal, "52")
     }
 }
 
@@ -158,8 +159,9 @@ extension ExchangeTest: ExchangeDelegate {
         alerteDescription = desciption
     }
 
-    func updateDisplay(_ expression: String) {
-        display = expression
+    func updateDisplay(_ expression: String, converted: String) {
+        displayLocal = expression
+        displayConverted = converted
     }
 
     func updateClearButton(_ buttonName: String) {
