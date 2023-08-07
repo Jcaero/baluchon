@@ -207,14 +207,16 @@ class ExchangeController: UIViewController {
         NSLayoutConstraint.activate([
             localCurrencyView.leftAnchor.constraint(equalTo: display.leftAnchor),
             localCurrencyView.rightAnchor.constraint(equalTo: display.rightAnchor),
-            localCurrencyView.bottomAnchor.constraint(equalTo: switchConverterBtn.topAnchor, constant: -35)
+            localCurrencyView.bottomAnchor.constraint(equalTo: switchConverterBtn.topAnchor, constant: -35),
+            localCurrencyView.heightAnchor.constraint(equalToConstant: 71)
         ])
 
         // cnvertedCurrencyView
         NSLayoutConstraint.activate([
             convertedCurrencyView.leftAnchor.constraint(equalTo: display.leftAnchor),
             convertedCurrencyView.rightAnchor.constraint(equalTo: display.rightAnchor),
-            convertedCurrencyView.topAnchor.constraint(equalTo: switchConverterBtn.bottomAnchor, constant: 25)
+            convertedCurrencyView.topAnchor.constraint(equalTo: switchConverterBtn.bottomAnchor, constant: 25),
+            convertedCurrencyView.heightAnchor.constraint(equalToConstant: 71)
         ])
     }
 
