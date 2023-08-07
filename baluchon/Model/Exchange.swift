@@ -21,7 +21,7 @@ class Exchange {
         self.delegate = delegate
         expression = "0"
         converted = "0"
-        exchangeRates = ["USD":1.112954,"CHF": 0.964686]
+        exchangeRates = ["Test": 5, "USD": 1.112954, "CHF": 0.964686 ]
     }
 
     // MARK: - Expression
@@ -30,8 +30,8 @@ class Exchange {
 
     var exchangeRates: [String: Float]
 
-    var localCurrency: String?
-    var convertedCurrency: String?
+    var localCurrencyISOCode: String?
+    var convertedCurrencyISOCode: String?
 
     private  var newExpression: Bool {
         return expression == "0"
@@ -48,9 +48,6 @@ class Exchange {
             delegate?.showAlert(title: "Erreur", desciption: "chiffre non reconnu")
             return
         }
-        
-        print("local : \(localCurrency)")
-        print ("converted \(convertedCurrency)")
 
         // check size on number
         guard expression.count < numberMaxLenght else {
@@ -110,9 +107,10 @@ class Exchange {
 
     // MARK: - Display
     private func updateDisplay() {
-
-        guard let expressionNumber = Float(expression) else {return}
-        let convertedNumber = expressionNumber * 5
+        guard let convertedNumber = calculateConvertedCurrency() else {
+            delegate?.showAlert(title: "Erreur", desciption: "Problème de conversion")
+            return
+        }
         converted = convertInString(convertedNumber)
         delegate?.updateDisplay(expression, converted: converted)
     }
@@ -131,6 +129,15 @@ class Exchange {
         }
 
         return stringFloat
+    }
+
+    func calculateConvertedCurrency() -> Float? {
+        guard let expressionNumber = Float(expression) else {return nil}
+        guard let currency = convertedCurrencyISOCode else {return nil}
+        guard let rate = exchangeRates[currency] else {return nil}
+        
+        let result = expressionNumber * rate
+        return result
     }
 
     // MARK: - Switch information

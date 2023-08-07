@@ -66,11 +66,11 @@ class ExchangeController: UIViewController {
         #warning("logic ou pas logic ")
         switch displayPosition {
         case .origin:
-            exchange.localCurrency = localCurrencyBtn.currentTitle
-            exchange.convertedCurrency = convertedCurrencyBtn.currentTitle
+            exchange.localCurrencyISOCode = localCurrencyBtn.currentTitle
+            exchange.convertedCurrencyISOCode = convertedCurrencyBtn.currentTitle
         case .switched:
-            exchange.localCurrency = convertedCurrencyBtn.currentTitle
-            exchange.convertedCurrency = localCurrencyBtn.currentTitle
+            exchange.localCurrencyISOCode = convertedCurrencyBtn.currentTitle
+            exchange.convertedCurrencyISOCode = localCurrencyBtn.currentTitle
         }
     }
 

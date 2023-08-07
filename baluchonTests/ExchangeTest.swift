@@ -22,6 +22,9 @@ final class ExchangeTest: XCTestCase {
     override func setUp() {
         super.setUp()
         exchange = Exchange(delegate: self)
+        exchange.localCurrencyISOCode = "EUR"
+        #warning("changement exploser test")
+        exchange.convertedCurrencyISOCode = "Test"
     }
 
     override func tearDownWithError() throws {
@@ -177,8 +180,20 @@ final class ExchangeTest: XCTestCase {
         XCTAssertEqual(displayConverted, "125")
     }
 
-}
+    // MARK: - Test CalCulateConverted
+    func testLocalIsEuroAndConvertedIsUSD_WhenTap5_ConvertedIs5_56(){
+        exchange.localCurrencyISOCode = "EUR"
+        exchange.convertedCurrencyISOCode = "USD"
 
+        exchange.numberHasBeenTapped("5")
+
+        XCTAssertEqual(displayLocal, "5")
+        XCTAssertEqual(displayConverted, "5.56")
+
+    }
+
+}
+    // MARK: - Delegate
 extension ExchangeTest: ExchangeDelegate {
     func showAlert(title: String, desciption: String) {
         alerteTitle = title
