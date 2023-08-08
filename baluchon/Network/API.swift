@@ -23,12 +23,14 @@ enum API {
                     componments.host = "api.forismatic.com"
                     componments.path = "/api/1.0/"
                     componments.queryItems = [
-                    URLQueryItem(name: "method", value: "getQuote"),
-                    URLQueryItem(name: "format", value: "json"),
-                    URLQueryItem(name: "lang", value: "en"),
+                        URLQueryItem(name: "method", value: "getQuote"),
+                        URLQueryItem(name: "format", value: "json"),
+                        URLQueryItem(name: "lang", value: "en"),
                     ]
                     return componments.url!
                 }
             }
         }
+    }
+    
 }
