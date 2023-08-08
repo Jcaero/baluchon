@@ -18,7 +18,7 @@
 		47A31A072A80A07800ED1A4B /* Exchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A31A062A80A07800ED1A4B /* Exchange.swift */; };
 		47A31A092A80A10B00ED1A4B /* ExchangeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A31A082A80A10B00ED1A4B /* ExchangeTest.swift */; };
 		47DB13EB2A81FD5D00B4C0C0 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB13EA2A81FD5D00B4C0C0 /* API.swift */; };
-		47DB13ED2A81FD7500B4C0C0 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB13EC2A81FD7500B4C0C0 /* APIKey.swift */; };
+		47DB13EF2A81FDEC00B4C0C0 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB13EE2A81FDEC00B4C0C0 /* APIKey.swift */; };
 		47F3CB052A7B594D000545A6 /* Alerte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F3CB042A7B594D000545A6 /* Alerte.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,7 +58,7 @@
 		47A31A082A80A10B00ED1A4B /* ExchangeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTest.swift; sourceTree = "<group>"; };
 		47DB13E32A81F0DA00B4C0C0 /* baluchon.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = baluchon.xctestplan; sourceTree = "<group>"; };
 		47DB13EA2A81FD5D00B4C0C0 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		47DB13EC2A81FD7500B4C0C0 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		47DB13EE2A81FDEC00B4C0C0 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		47F3CB042A7B594D000545A6 /* Alerte.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerte.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,7 +162,7 @@
 				47A31A062A80A07800ED1A4B /* Exchange.swift */,
 				47F3CB042A7B594D000545A6 /* Alerte.swift */,
 				47DB13EA2A81FD5D00B4C0C0 /* API.swift */,
-				47DB13EC2A81FD7500B4C0C0 /* APIKey.swift */,
+				47DB13EE2A81FDEC00B4C0C0 /* APIKey.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -345,7 +345,7 @@
 				47A31A072A80A07800ED1A4B /* Exchange.swift in Sources */,
 				477221A92A73F7230023CA57 /* SceneDelegate.swift in Sources */,
 				47DB13EB2A81FD5D00B4C0C0 /* API.swift in Sources */,
-				47DB13ED2A81FD7500B4C0C0 /* APIKey.swift in Sources */,
+				47DB13EF2A81FDEC00B4C0C0 /* APIKey.swift in Sources */,
 				47F3CB052A7B594D000545A6 /* Alerte.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
