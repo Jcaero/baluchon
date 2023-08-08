@@ -36,7 +36,7 @@ class ExchangeController: UIViewController {
     let localCurrencyBtn = UIButton()
     let convertedCurrencyBtn = UIButton()
 
-    let switchConverterBtn = UIButton()
+    let switchConverterBtn = UIImageView()
     var canUseButton: Bool = true
 
     // MARK: - lifeCycle
@@ -169,10 +169,8 @@ class ExchangeController: UIViewController {
         localCurrencyBtn.setupCurrencyBoutton(name: "EUR")
 
         let configurationImage = UIImage.SymbolConfiguration(pointSize: 30)
-        let blackImage = UIImage(systemName: "arrow.up.arrow.down", withConfiguration: configurationImage)
-        switchConverterBtn.setImage(blackImage, for: .normal)
+        switchConverterBtn.image = UIImage(systemName: "arrow.up.arrow.down", withConfiguration: configurationImage)
         switchConverterBtn.tintColor = .black
-        switchConverterBtn.addTarget(self, action: #selector(tappedSwitch), for: .touchUpInside)
 
         setupCurrencyLabelName(localCurrencyLbl)
         setupCurrencyLabelName(convertedCurrencyLbl)
