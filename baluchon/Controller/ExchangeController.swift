@@ -37,6 +37,7 @@ class ExchangeController: UIViewController {
     let convertedCurrencyBtn = UIButton()
 
     let switchConverterBtn = UIButton()
+    var canUseButton: Bool = true
 
     // MARK: - lifeCycle
     override func viewDidLoad() {
@@ -144,6 +145,8 @@ class ExchangeController: UIViewController {
     }
 
     @objc func tappedButton(_ sender: UIButton) {
+        guard canUseButton == true else {return}
+
         guard let titre = sender.currentTitle else {return}
 
         switch titre {
@@ -245,6 +248,7 @@ class ExchangeController: UIViewController {
     }
 
     @objc func tappedSwitch(_ sender: UIButton) {
+        canUseButton = false
         let localButtonLabel = localCurrencyBtn.currentTitle!
         let convertedButtonLabel = convertedCurrencyBtn.currentTitle!
 
@@ -254,17 +258,31 @@ class ExchangeController: UIViewController {
             let originBottom = convertedCurrencyView.frame.origin.y
             let translationY = originBottom - originTop
 
-            UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5) {
-                self.localCurrencyView.transform = CGAffineTransform(translationX: 0, y: translationY)
-                self.convertedCurrencyView.transform = CGAffineTransform(translationX: 0, y: -translationY)
-            }
+            UIView.animate(withDuration: 0.7,
+                           delay: 0,
+                           usingSpringWithDamping: 0.5,
+                           initialSpringVelocity: 0.5,
+                           animations: {
+                                        self.localCurrencyView.transform = CGAffineTransform(translationX: 0, y: translationY)
+                                        self.convertedCurrencyView.transform = CGAffineTransform(translationX: 0, y: -translationY)
+                                        },
+                           completion: { [weak self] _ in
+                                        self?.canUseButton = true
+            })
             exchange.setCurrencyISOCode(local: convertedButtonLabel, converted: localButtonLabel)
             displayPosition = .switched
         case .switched:
-            UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5) {
-                self.localCurrencyView.transform = .identity
-                self.convertedCurrencyView.transform = .identity
-            }
+            UIView.animate(withDuration: 0.7,
+                           delay: 0,
+                           usingSpringWithDamping: 0.5,
+                           initialSpringVelocity: 0.5,
+                           animations: {
+                                        self.localCurrencyView.transform = .identity
+                                        self.convertedCurrencyView.transform = .identity
+                                        },
+                           completion: { [weak self] _ in
+                                       self?.canUseButton = true
+            })
             #warning("logic ou pas logic")
             displayPosition = .origin
             exchange.setCurrencyISOCode(local: localButtonLabel, converted: convertedButtonLabel)
