@@ -49,8 +49,10 @@ class ExchangeController: UIViewController {
         setupButtons()
         setupButtonLayout()
 
-       setupDisplay()
-       setupDisplayLayout()
+        setupDisplay()
+        setupDisplayLayout()
+
+        setupGestureRecogniser()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -170,7 +172,7 @@ class ExchangeController: UIViewController {
         let blackImage = UIImage(systemName: "arrow.up.arrow.down", withConfiguration: configurationImage)
         switchConverterBtn.setImage(blackImage, for: .normal)
         switchConverterBtn.tintColor = .black
-        switchConverterBtn.addTarget(self, action: #selector(tappedSwitch(_:)), for: .touchUpInside)
+        switchConverterBtn.addTarget(self, action: #selector(tappedSwitch), for: .touchUpInside)
 
         setupCurrencyLabelName(localCurrencyLbl)
         setupCurrencyLabelName(convertedCurrencyLbl)
@@ -247,7 +249,8 @@ class ExchangeController: UIViewController {
         ])
     }
 
-    @objc func tappedSwitch(_ sender: UIButton) {
+    // MARK: - Switch
+    @objc func tappedSwitch() {
         canUseButton = false
         let localButtonLabel = localCurrencyBtn.currentTitle!
         let convertedButtonLabel = convertedCurrencyBtn.currentTitle!
@@ -289,8 +292,16 @@ class ExchangeController: UIViewController {
         }
         exchange.switchHasBeenTapped()
     }
+
+    private func setupGestureRecogniser() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedSwitch))
+        tap.numberOfTouchesRequired = 1
+        display.addGestureRecognizer(tap)
+    }
+
 }
 
+// MARK: - Delegate
 extension ExchangeController: ExchangeDelegate {
     func updateDisplay(_ expression: String, converted: String) {
         switch displayPosition {

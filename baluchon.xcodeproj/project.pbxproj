@@ -54,6 +54,7 @@
 		479331272A759EF700952447 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		47A31A062A80A07800ED1A4B /* Exchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exchange.swift; sourceTree = "<group>"; };
 		47A31A082A80A10B00ED1A4B /* ExchangeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTest.swift; sourceTree = "<group>"; };
+		47DB13E32A81F0DA00B4C0C0 /* baluchon.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = baluchon.xctestplan; sourceTree = "<group>"; };
 		47F3CB042A7B594D000545A6 /* Alerte.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerte.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,6 +86,7 @@
 		4772219A2A73F7230023CA57 = {
 			isa = PBXGroup;
 			children = (
+				47DB13E32A81F0DA00B4C0C0 /* baluchon.xctestplan */,
 				4780A00C2A81304E00FA8C3E /* baluchon.xctestplan */,
 				470C23442A7A107A0044A393 /* baluchon.xctestplan */,
 				477221A52A73F7230023CA57 /* baluchon */,
