@@ -8,12 +8,12 @@
 import Foundation
 
 protocol NetworkSession {
-    func loadData(from endPoint: API.Types.EndPoint ,
+    func loadData(from endPoint: API.Types.EndPoint,
                   completionHandler: @escaping (Result<Data, API.ErrorNetwork>) -> Void)
 }
 
 extension URLSession: NetworkSession {
-    
+
     func loadData(from endpoint: API.Types.EndPoint, completionHandler: @escaping (Result<Data, API.ErrorNetwork>) -> Void) {
         let task = dataTask(with: endpoint.url) { (data, _, error) in
             guard let data else {
@@ -27,26 +27,26 @@ extension URLSession: NetworkSession {
 }
 
 class NetworkManager {
-    private let session : NetworkSession
+    private let session: NetworkSession
     static var shared = NetworkManager()
-    
-    init(session: NetworkSession = URLSession.shared){
+
+    init(session: NetworkSession = URLSession.shared) {
         self.session = session
     }
-    
+
     func loadData(from endpoint: API.Types.EndPoint,
                   completionHandler: @escaping (Result<Data, API.ErrorNetwork>) -> Void) {
         session.loadData(from: endpoint) { result in
             completionHandler(result)
         }
     }
-    
-    func decodeJSON<T: Codable>(jsonData: Data, to type: T.Type)-> (Result<T, Error>) {
+
+    func decodeJSON<T: Codable>(jsonData: Data, to type: T.Type) -> (Result<T, Error>) {
         let decoder = JSONDecoder()
         do {
             let decodeData = try decoder.decode(T.self, from: jsonData)
             return .success(decodeData)
-        }catch {
+        } catch {
             return .failure(API.ErrorNetwork.parseData(reason: "Erreur lors du decodage : \(error)"))
         }
     }

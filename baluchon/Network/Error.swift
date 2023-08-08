@@ -11,7 +11,7 @@ extension API {
     enum ErrorNetwork: Error {
         case noData(reason: String)
         case parseData(reason: String)
-        
+
         var title: String {
             switch self {
             case .noData:
@@ -20,7 +20,7 @@ extension API {
                 return "Erreur Réseau"
             }
         }
-        
+
         var description: String {
             switch self {
             case .noData(let reason):
