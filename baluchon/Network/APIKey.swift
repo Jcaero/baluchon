@@ -9,6 +9,7 @@ import Foundation
 extension API {
     enum APIKey {
         case exchange
+        case test
         
         var user: String {
             return "test"
