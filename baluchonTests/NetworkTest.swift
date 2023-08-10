@@ -50,11 +50,11 @@ final class NetworkTest: XCTestCase {
         let expectedData = getData(fromJson: "testJSON")!
         self.session.data = expectedData
 
-        self.manager.loadData(from: API.Types.EndPoint.exchange) { response in
+        self.manager.loadData(from: API.EndPoint.exchange) { response in
             switch response {
             case .success(let data):
                 XCTAssertEqual(data, expectedData)
-            case .failure(_):
+            case .failure:
                 XCTFail("testSuccessFulResponse should have data")
             }
         }

@@ -11,11 +11,11 @@ class NetworkSessionMock: NetworkSession {
     var data: Data?
     var error: Error?
 
-    func loadData(from url: API.Types.EndPoint, completionHandler: @escaping (Result<Data, API.ErrorNetwork>) -> Void) {
+    func loadData(from url: API.EndPoint, completionHandler: @escaping (Result<Data, API.ErrorNetwork>) -> Void) {
         if let data = data {
             completionHandler(.success(data))
         } else {
-            completionHandler(.failure(API.ErrorNetwork.noData(reason:"no data load : \(String(describing: error?.localizedDescription))")))
+            completionHandler(.failure(API.ErrorNetwork.noData(reason: "no data load : \(String(describing: error?.localizedDescription))")))
         }
     }
 }

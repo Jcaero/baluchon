@@ -7,14 +7,15 @@
 
 import Foundation
 
+// MARK: - Protocol
 protocol NetworkSession {
-    func loadData(from endPoint: API.Types.EndPoint,
+    func loadData(from endPoint: API.EndPoint,
                   completionHandler: @escaping (Result<Data, API.ErrorNetwork>) -> Void)
 }
 
 extension URLSession: NetworkSession {
 
-    func loadData(from endpoint: API.Types.EndPoint, completionHandler: @escaping (Result<Data, API.ErrorNetwork>) -> Void) {
+    func loadData(from endpoint: API.EndPoint, completionHandler: @escaping (Result<Data, API.ErrorNetwork>) -> Void) {
         let task = dataTask(with: endpoint.url) { (data, _, error) in
             guard let data else {
                 completionHandler(.failure(API.ErrorNetwork.noData(reason: "\(String(describing: error?.localizedDescription))")))
@@ -26,6 +27,7 @@ extension URLSession: NetworkSession {
     }
 }
 
+// MARK: - NetworkManager
 class NetworkManager {
     private let session: NetworkSession
     static var shared = NetworkManager()
@@ -34,7 +36,7 @@ class NetworkManager {
         self.session = session
     }
 
-    func loadData(from endpoint: API.Types.EndPoint,
+    func loadData(from endpoint: API.EndPoint,
                   completionHandler: @escaping (Result<Data, API.ErrorNetwork>) -> Void) {
         session.loadData(from: endpoint) { result in
             completionHandler(result)

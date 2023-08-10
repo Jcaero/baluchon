@@ -8,24 +8,20 @@
 import Foundation
 
 enum API {
-    enum Types {
-        enum EndPoint {
-            case exchange
+    enum EndPoint {
+        case exchange
 
-            var url: URL {
-                switch self {
-//                case .exchange:
-//                    return URL(string: "http://data.fixer.io/api/")!
-                case .exchange:
-                    var componments = URLComponents()
-                    componments.scheme = "http"
-                    componments.host = "data.fixer.io/api/"
-                    componments.path = "latest"
-                    componments.queryItems = [
-                        URLQueryItem(name: "access_key", value: "getQuote"),
-                    ]
-                    return componments.url!
-                }
+        var url: URL {
+            switch self {
+            case .exchange:
+                var componments = URLComponents()
+                componments.scheme = "http"
+                componments.host = "data.fixer.io/api/"
+                componments.path = "latest"
+                componments.queryItems = [
+                    URLQueryItem(name: "access_key", value: APIKey.fixer.keyValue)
+                ]
+                return componments.url!
             }
         }
     }

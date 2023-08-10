@@ -189,8 +189,8 @@
 			isa = PBXGroup;
 			children = (
 				47F3CB042A7B594D000545A6 /* Alerte.swift */,
-				47DB13F42A8200E600B4C0C0 /* Network */,
 				479331272A759EF700952447 /* UIColor+.swift */,
+				47DB13F42A8200E600B4C0C0 /* Network */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -198,10 +198,10 @@
 		47DB13F42A8200E600B4C0C0 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				47DB13EA2A81FD5D00B4C0C0 /* API.swift */,
 				47DB13F02A82007F00B4C0C0 /* NetworkSession.swift */,
-				47DB13F22A8200A600B4C0C0 /* Error.swift */,
 				477FE13E2A82CA2A005C3481 /* NetworkSessionMock.swift */,
+				47DB13EA2A81FD5D00B4C0C0 /* API.swift */,
+				47DB13F22A8200A600B4C0C0 /* Error.swift */,
 				47F09CA92A853FEF00E52B5E /* APIKey.swift */,
 			);
 			path = Network;

@@ -69,6 +69,7 @@ class ExchangeController: UIViewController {
         #warning("logic ou pas logic ")
         let localButtonLabel = localCurrencyBtn.currentTitle!
         let convertedButtonLabel = convertedCurrencyBtn.currentTitle!
+
         switch displayPosition {
         case .origin:
             exchange.setCurrencyISOCode(local: localButtonLabel, converted: convertedButtonLabel)
