@@ -23,6 +23,7 @@
 		47DB13EB2A81FD5D00B4C0C0 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB13EA2A81FD5D00B4C0C0 /* API.swift */; };
 		47DB13F12A82007F00B4C0C0 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB13F02A82007F00B4C0C0 /* NetworkSession.swift */; };
 		47DB13F32A8200A600B4C0C0 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB13F22A8200A600B4C0C0 /* Error.swift */; };
+		47F09CAA2A853FEF00E52B5E /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F09CA92A853FEF00E52B5E /* APIKey.swift */; };
 		47F3CB052A7B594D000545A6 /* Alerte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F3CB042A7B594D000545A6 /* Alerte.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		47DB13EA2A81FD5D00B4C0C0 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		47DB13F02A82007F00B4C0C0 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
 		47DB13F22A8200A600B4C0C0 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		47F09CA92A853FEF00E52B5E /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		47F3CB042A7B594D000545A6 /* Alerte.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerte.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,9 +125,7 @@
 			children = (
 				477221A62A73F7230023CA57 /* AppDelegate.swift */,
 				477221A82A73F7230023CA57 /* SceneDelegate.swift */,
-				47DB13F42A8200E600B4C0C0 /* Network */,
-				477221D92A73FAD60023CA57 /* Model */,
-				477221D82A73FA7B0023CA57 /* Controller */,
+				47F09CA82A853F8C00E52B5E /* Exchange */,
 				477221D72A73FA750023CA57 /* View */,
 				479331262A759ED600952447 /* Common */,
 				477221DA2A73FAE20023CA57 /* Ressources */,
@@ -169,9 +169,8 @@
 		477221D92A73FAD60023CA57 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4768BF142A7ED69D005190DC /* ButtonExchange.swift */,
 				47A31A062A80A07800ED1A4B /* Exchange.swift */,
-				47F3CB042A7B594D000545A6 /* Alerte.swift */,
+				4768BF142A7ED69D005190DC /* ButtonExchange.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -189,6 +188,8 @@
 		479331262A759ED600952447 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				47F3CB042A7B594D000545A6 /* Alerte.swift */,
+				47DB13F42A8200E600B4C0C0 /* Network */,
 				479331272A759EF700952447 /* UIColor+.swift */,
 			);
 			path = Common;
@@ -201,8 +202,18 @@
 				47DB13F02A82007F00B4C0C0 /* NetworkSession.swift */,
 				47DB13F22A8200A600B4C0C0 /* Error.swift */,
 				477FE13E2A82CA2A005C3481 /* NetworkSessionMock.swift */,
+				47F09CA92A853FEF00E52B5E /* APIKey.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		47F09CA82A853F8C00E52B5E /* Exchange */ = {
+			isa = PBXGroup;
+			children = (
+				477221D92A73FAD60023CA57 /* Model */,
+				477221D82A73FA7B0023CA57 /* Controller */,
+			);
+			path = Exchange;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,6 +380,7 @@
 				477221A92A73F7230023CA57 /* SceneDelegate.swift in Sources */,
 				47DB13EB2A81FD5D00B4C0C0 /* API.swift in Sources */,
 				477FE13F2A82CA2A005C3481 /* NetworkSessionMock.swift in Sources */,
+				47F09CAA2A853FEF00E52B5E /* APIKey.swift in Sources */,
 				47F3CB052A7B594D000545A6 /* Alerte.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
