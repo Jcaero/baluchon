@@ -11,4 +11,5 @@ import UIKit
 extension UIColor {
     static let navy = UIColor(red: 0.15, green: 0.29, blue: 0.36, alpha: 1.00)
     static let pearlGrey = UIColor(red: 0.90, green: 0.90, blue: 0.86, alpha: 1.00)
+    static let whiteSmoke = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1.00)
 }

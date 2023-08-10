@@ -13,15 +13,15 @@ extension UIButton {
         self.setTitle(name, for: .normal)
         self.setTitleColor(.navy, for: .normal)
         self.titleLabel?.font = UIFont.systemFont(ofSize: 30)
-        self.backgroundColor = .pearlGrey
+        self.backgroundColor = .whiteSmoke
 
         self.translatesAutoresizingMaskIntoConstraints = false
         self.layer.masksToBounds = true
 
-        self.layer.shadowOffset = CGSize(width: 0, height: 5)
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOpacity = 0.5
-        self.layer.shadowRadius = 2
+//        self.layer.shadowOffset = CGSize(width: 0, height: 5)
+//        self.layer.shadowColor = UIColor.black.cgColor
+//        self.layer.shadowOpacity = 0.5
+//        self.layer.shadowRadius = 2
     }
 
     func setupCurrencyBoutton(name: String) {

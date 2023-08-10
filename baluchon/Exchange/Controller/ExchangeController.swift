@@ -86,7 +86,7 @@ class ExchangeController: UIViewController {
             height: size
         )
 
-        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowColor = UIColor.lightGray.cgColor
         view.layer.shadowRadius = 5
         view.layer.shadowOpacity = 0.5
         view.layer.shadowPath = UIBezierPath(ovalIn: rect).cgPath
@@ -94,7 +94,7 @@ class ExchangeController: UIViewController {
 
     private func setupShadowOf(_ view: UIView, radius: CGFloat, opacity: Float ) {
         view.layer.shadowOffset = CGSize(width: 0, height: 5)
-        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowColor = UIColor.lightGray.cgColor
         view.layer.shadowOpacity = opacity
         view.layer.shadowRadius = radius
     }
@@ -171,7 +171,7 @@ class ExchangeController: UIViewController {
 
         let configurationImage = UIImage.SymbolConfiguration(pointSize: 30)
         switchConverterBtn.image = UIImage(systemName: "arrow.up.arrow.down", withConfiguration: configurationImage)
-        switchConverterBtn.tintColor = .black
+        switchConverterBtn.tintColor = .gray
 
         setupCurrencyLabelName(localCurrencyLbl)
         setupCurrencyLabelName(convertedCurrencyLbl)
@@ -182,7 +182,7 @@ class ExchangeController: UIViewController {
         name.textAlignment = .right
         name.numberOfLines = 0
         name.adjustsFontSizeToFitWidth = true
-        name.font = UIFont.systemFont(ofSize: 60)
+        name.font = UIFont.systemFont(ofSize: 60, weight: .ultraLight)
     }
 
     private func setupDisplayLayout() {
@@ -227,7 +227,7 @@ class ExchangeController: UIViewController {
     private func setupViewNamed(_ nameView: UIView, with nameButton: UIButton, and nameLabel: UILabel) {
         nameView.addSubview(nameButton)
         nameView.addSubview(nameLabel)
-        nameView.backgroundColor = .pearlGrey
+        nameView.backgroundColor = .whiteSmoke
         nameView.layer.cornerRadius = 30
 
         nameView.layer.masksToBounds = false
