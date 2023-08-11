@@ -19,7 +19,7 @@ enum API {
                 componments.host = "data.fixer.io/api/"
                 componments.path = "latest"
                 componments.queryItems = [
-                    URLQueryItem(name: "access_key", value: APIKey.fixer.keyValue)
+                    URLQueryItem(name: "access_key", value: APIKey.fixer.key)
                 ]
                 return componments.url!
             }

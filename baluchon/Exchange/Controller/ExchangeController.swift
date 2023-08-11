@@ -57,16 +57,15 @@ class ExchangeController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         for ( _, button ) in buttonsListe {
-            button.layer.cornerRadius = button.frame.height*0.4
+            button.layer.cornerRadius = button.frame.height*0.2
             button.layer.masksToBounds = false
-            #warning("pourquoi fonctionne ici et pas dans class boutton ????")
 
-            setupShadowOf(button, radius: 2, opacity: 0.5)
+            setupShadowOf(button, radius: 1, opacity: 0.5)
         }
-        [localCurrencyView, convertedCurrencyView].forEach {
-            setupContactShadowOf($0, distance: 20, size: -15)
-        }
-        #warning("logic ou pas logic ")
+
+        setupShadowOf(localCurrencyView, radius: 1, opacity: 0.5)
+        setupShadowOf(convertedCurrencyView, radius: 1, opacity: 0.5)
+
         let localButtonLabel = localCurrencyBtn.currentTitle!
         let convertedButtonLabel = convertedCurrencyBtn.currentTitle!
 
@@ -78,22 +77,8 @@ class ExchangeController: UIViewController {
         }
     }
 
-    private func setupContactShadowOf(_ view: UIView, distance: CGFloat, size: CGFloat) {
-        let rect = CGRect(
-            x: -size,
-            y: view.frame.height - (size * 0.4) + distance,
-            width: view.frame.width + size * 2,
-            height: size
-        )
-
-        view.layer.shadowColor = UIColor.lightGray.cgColor
-        view.layer.shadowRadius = 5
-        view.layer.shadowOpacity = 0.5
-        view.layer.shadowPath = UIBezierPath(ovalIn: rect).cgPath
-    }
-
     private func setupShadowOf(_ view: UIView, radius: CGFloat, opacity: Float ) {
-        view.layer.shadowOffset = CGSize(width: 0, height: 5)
+        view.layer.shadowOffset = CGSize(width: 0, height: 3)
         view.layer.shadowColor = UIColor.lightGray.cgColor
         view.layer.shadowOpacity = opacity
         view.layer.shadowRadius = radius
@@ -106,6 +91,8 @@ class ExchangeController: UIViewController {
             let button = UIButton()
             button.setupExchangeNumberButton(name)
             button.addTarget(self, action: #selector(tappedButton(_:)), for: .touchUpInside)
+            button.addTarget(self, action: #selector(holdDown), for: .touchDown)
+
             self.buttonsListe[name] = button
         }
     }
@@ -148,6 +135,9 @@ class ExchangeController: UIViewController {
     }
 
     @objc func tappedButton(_ sender: UIButton) {
+        sender.backgroundColor = .whiteSmoke
+        sender.setTitleColor(.navy, for: .normal)
+
         guard canUseButton == true else {return}
 
         guard let titre = sender.currentTitle else {return}
@@ -162,6 +152,11 @@ class ExchangeController: UIViewController {
         default:
             print("chiffre non reconnu")
         }
+    }
+
+    @objc func holdDown(sender: UIButton) {
+        sender.backgroundColor = .lightGray
+        sender.setTitleColor(.white, for: .normal)
     }
 
     // MARK: - DISPLAY
@@ -301,6 +296,7 @@ class ExchangeController: UIViewController {
 }
 
 // MARK: - Delegate
+
 extension ExchangeController: ExchangeDelegate {
     func updateDisplay(_ expression: String, converted: String) {
         switch displayPosition {
