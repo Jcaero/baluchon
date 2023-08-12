@@ -20,7 +20,7 @@ class ExchangeController: UIViewController {
     let stackViewVertical2 = UIStackView()
     let stackViewVertical3 = UIStackView()
 
-    let display = UIView()
+    let displayArea = UIView()
     let localCurrencyView = UIView()
     let convertedCurrencyView = UIView()
     var displayPosition = Position.origin
@@ -30,6 +30,8 @@ class ExchangeController: UIViewController {
         case switched
     }
 
+    let warningLimitation = UILabel()
+    
     let localCurrencyLbl = UILabel()
     let convertedCurrencyLbl = UILabel()
 
@@ -51,6 +53,7 @@ class ExchangeController: UIViewController {
 
         setupDisplay()
         setupDisplayLayout()
+        setupWarningLimitation()
 
         setupGestureRecogniser()
     }
@@ -181,39 +184,39 @@ class ExchangeController: UIViewController {
     }
 
     private func setupDisplayLayout() {
-        [localCurrencyBtn, localCurrencyLbl, switchConverterBtn, convertedCurrencyBtn, convertedCurrencyLbl, localCurrencyView, convertedCurrencyView, display].forEach {
+        [localCurrencyBtn, localCurrencyLbl, switchConverterBtn, convertedCurrencyBtn, convertedCurrencyLbl, localCurrencyView, convertedCurrencyView, displayArea].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        view.addSubview(display)
+        view.addSubview(displayArea)
         NSLayoutConstraint.activate([
-            display.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            display.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 10),
-            display.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -10),
-            display.bottomAnchor.constraint(equalTo: stackViewMain.topAnchor, constant: -20)
+            displayArea.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            displayArea.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 10),
+            displayArea.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -10),
+            displayArea.bottomAnchor.constraint(equalTo: stackViewMain.topAnchor, constant: -20)
         ])
 
         setupViewNamed(localCurrencyView, with: localCurrencyBtn, and: localCurrencyLbl)
         setupViewNamed(convertedCurrencyView, with: convertedCurrencyBtn, and: convertedCurrencyLbl)
 
         // switch BTN
-        display.addSubview(switchConverterBtn)
+        displayArea.addSubview(switchConverterBtn)
         NSLayoutConstraint.activate([
-            switchConverterBtn.centerYAnchor.constraint(equalTo: display.centerYAnchor),
-            switchConverterBtn.centerXAnchor.constraint(equalTo: display.centerXAnchor)
+            switchConverterBtn.centerYAnchor.constraint(equalTo: displayArea.centerYAnchor),
+            switchConverterBtn.centerXAnchor.constraint(equalTo: displayArea.centerXAnchor)
         ])
 
         // localCurrencyLayout
         NSLayoutConstraint.activate([
-            localCurrencyView.leftAnchor.constraint(equalTo: display.leftAnchor),
-            localCurrencyView.rightAnchor.constraint(equalTo: display.rightAnchor),
+            localCurrencyView.leftAnchor.constraint(equalTo: displayArea.leftAnchor),
+            localCurrencyView.rightAnchor.constraint(equalTo: displayArea.rightAnchor),
             localCurrencyView.bottomAnchor.constraint(equalTo: switchConverterBtn.topAnchor, constant: -35),
             localCurrencyView.heightAnchor.constraint(equalToConstant: 71)
         ])
 
         // cnvertedCurrencyView
         NSLayoutConstraint.activate([
-            convertedCurrencyView.leftAnchor.constraint(equalTo: display.leftAnchor),
-            convertedCurrencyView.rightAnchor.constraint(equalTo: display.rightAnchor),
+            convertedCurrencyView.leftAnchor.constraint(equalTo: displayArea.leftAnchor),
+            convertedCurrencyView.rightAnchor.constraint(equalTo: displayArea.rightAnchor),
             convertedCurrencyView.topAnchor.constraint(equalTo: switchConverterBtn.bottomAnchor, constant: 25),
             convertedCurrencyView.heightAnchor.constraint(equalToConstant: 71)
         ])
@@ -227,7 +230,7 @@ class ExchangeController: UIViewController {
 
         nameView.layer.masksToBounds = false
 
-        display.addSubview(nameView)
+        displayArea.addSubview(nameView)
         NSLayoutConstraint.activate([
             nameButton.leftAnchor.constraint(equalTo: nameView.leftAnchor, constant: 5),
             nameButton.bottomAnchor.constraint(equalTo: nameView.bottomAnchor),
@@ -240,6 +243,21 @@ class ExchangeController: UIViewController {
             nameLabel.bottomAnchor.constraint(equalTo: nameView.bottomAnchor),
             nameLabel.topAnchor.constraint(equalTo: nameView.topAnchor),
             nameLabel.rightAnchor.constraint(equalTo: nameView.rightAnchor, constant: -10)
+        ])
+    }
+
+    private func setupWarningLimitation() {
+        warningLimitation.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        warningLimitation.textColor = .red
+        displayArea.addSubview(warningLimitation)
+        warningLimitation.textAlignment = .center
+        warningLimitation.isHidden = true
+        warningLimitation.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            warningLimitation.widthAnchor.constraint(equalTo: localCurrencyView.widthAnchor),
+            warningLimitation.centerXAnchor.constraint(equalTo: localCurrencyView.centerXAnchor),
+            warningLimitation.bottomAnchor.constraint(equalTo: switchConverterBtn.topAnchor, constant: -12)
         ])
     }
 
@@ -290,7 +308,7 @@ class ExchangeController: UIViewController {
     private func setupGestureRecogniser() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(tappedSwitch))
         tap.numberOfTouchesRequired = 1
-        display.addGestureRecognizer(tap)
+        displayArea.addGestureRecognizer(tap)
     }
 
 }
@@ -310,7 +328,18 @@ extension ExchangeController: ExchangeDelegate {
     }
 
     func showAlert(title: String, desciption: String) {
-        showSimpleAlerte(with: title, message: desciption)
+        if title == "Limitation" {
+            let text = title + ": " + desciption
+            warningLimitation.text = text
+            warningLimitation.isHidden = false
+
+            // call after 5s to hidde
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+                self?.warningLimitation.isHidden = true
+                   }
+        } else {
+            showSimpleAlerte(with: title, message: desciption)
+        }
     }
 
     func updateClearButton(_ buttonName: String) {
