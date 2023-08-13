@@ -31,7 +31,7 @@ class ExchangeController: UIViewController {
     }
 
     let warningLimitation = UILabel()
-    
+
     let localCurrencyLbl = UILabel()
     let convertedCurrencyLbl = UILabel()
 
@@ -317,6 +317,10 @@ class ExchangeController: UIViewController {
 
 extension ExchangeController: ExchangeDelegate {
     func updateDisplay(_ expression: String, converted: String) {
+        if expression == "666" {
+            let overLayer = OverLayerPopUP("Oops !", description: "Test de Julien")
+            overLayer.appear(sender: self)
+        }
         switch displayPosition {
         case .origin:
             localCurrencyLbl.text = expression
