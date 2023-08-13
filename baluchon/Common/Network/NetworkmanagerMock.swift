@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NetworkSessionMock: NetworkSession {
+class NetworkManagerMock: NetworkSession {
     var data: Data?
     var error: Error?
 

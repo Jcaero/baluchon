@@ -10,14 +10,14 @@ import XCTest
 
 final class NetworkTest: XCTestCase {
 
-    var session: NetworkSessionMock!
+    var session: NetworkManagerMock!
     var manager: NetworkManager!
 
     var data: Data!
 
     override func setUp() {
         super.setUp()
-         session = NetworkSessionMock()
+         session = NetworkManagerMock()
         manager = NetworkManager(session: session)
         data = self.getData(fromJson: "testJSON")!
     }
