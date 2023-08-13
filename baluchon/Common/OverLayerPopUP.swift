@@ -34,7 +34,7 @@ class OverLayerPopUP: UIViewController {
         setupViewsLayout()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidLayoutSubviews() {
         contentView.layer.cornerRadius = 10
         imageView.layer.cornerRadius = 5
         doneBtn.layer.cornerRadius = 5
