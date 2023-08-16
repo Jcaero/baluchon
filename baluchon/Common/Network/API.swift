@@ -25,4 +25,11 @@ enum API {
             }
         }
     }
+
+    enum JSONDataType {
+        struct TestJSON: Codable, Equatable {
+            var testText: String
+            var testAuthor: String
+        }
+    }
 }

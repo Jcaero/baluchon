@@ -60,4 +60,17 @@ final class NetworkTest: XCTestCase {
         }
     }
 
+    func testWhenDecodeGoodExpression_ResultIsGood() {
+
+        let expectedData = API.JSONDataType.TestJSON(testText: "ceci est un test", testAuthor: "julien")
+
+        let responseData = self.manager.decodeJSON(jsonData: data, to: API.JSONDataType.TestJSON.self)
+
+        switch responseData {
+        case .success(let decodedData):
+            XCTAssertEqual(decodedData, expectedData)
+        case .failure(let error):
+            XCTFail("testSuccessFulResponse should have data \(error.localizedDescription)")
+        }
+    }
 }

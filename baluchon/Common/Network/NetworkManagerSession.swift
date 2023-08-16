@@ -49,7 +49,7 @@ class NetworkManager {
             let decodeData = try decoder.decode(T.self, from: jsonData)
             return .success(decodeData)
         } catch {
-            return .failure(API.ErrorNetwork.parseData(reason: "Erreur lors du decodage : \(error)"))
+            return .failure(error)
         }
     }
 }
