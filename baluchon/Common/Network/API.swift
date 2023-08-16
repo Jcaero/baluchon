@@ -31,5 +31,10 @@ enum API {
             var testText: String
             var testAuthor: String
         }
+
+        struct ExchangeRate: Codable, Equatable {
+            var date: String
+            var rates: [String: Float]
+        }
     }
 }

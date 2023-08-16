@@ -30,7 +30,6 @@ extension URLSession: NetworkSession {
 // MARK: - NetworkManager
 class NetworkManager {
     private let session: NetworkSession
-    static var shared = NetworkManager()
 
     init(session: NetworkSession = URLSession.shared) {
         self.session = session

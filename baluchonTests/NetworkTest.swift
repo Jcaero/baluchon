@@ -46,7 +46,7 @@ final class NetworkTest: XCTestCase {
             }
     }
 
-    func testSuccessFulResponse() {
+    func testWhenCall_SuccessFulResponse() {
         let expectedData = getData(fromJson: "testJSON")!
         self.session.data = expectedData
 
@@ -56,6 +56,20 @@ final class NetworkTest: XCTestCase {
                 XCTAssertEqual(data, expectedData)
             case .failure:
                 XCTFail("testSuccessFulResponse should have data")
+            }
+        }
+    }
+
+    func testWhenNoData_FailureWithReason() {
+        self.session.data = nil
+
+        self.manager.loadData(from: API.EndPoint.exchange) { response in
+            switch response {
+            case .success:
+                XCTFail("testWhenNoData_FailureWithReason should not have data")
+            case .failure(let error):
+                XCTAssertTrue(true)
+                print("\(error.description)")
             }
         }
     }

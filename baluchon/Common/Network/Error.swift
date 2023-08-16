@@ -23,8 +23,8 @@ extension API {
 
         var description: String {
             switch self {
-            case .noData(let reason):
-                return "pas de data : \(reason)"
+            case .noData:
+                return "pas de data chargée"
             case .parseData(let reason):
                 return "data not decodable \(reason)"
             }

@@ -10,6 +10,9 @@
 		470773AE2A873E0100601B5D /* OverLayerPopUP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470773AD2A873E0100601B5D /* OverLayerPopUP.swift */; };
 		470C233F2A7A02540044A393 /* ExchangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C233E2A7A02540044A393 /* ExchangeController.swift */; };
 		470C23462A7A11900044A393 /* baluchonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C23452A7A11900044A393 /* baluchonUITests.swift */; };
+		471B64DF2A8CC4A600FFDEEA /* ExchangeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471B64DE2A8CC4A600FFDEEA /* ExchangeRepository.swift */; };
+		471B64E12A8CC98F00FFDEEA /* RatesJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 471B64E02A8CC98F00FFDEEA /* RatesJSON.json */; };
+		471B64E32A8CCBB100FFDEEA /* ExchangeRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471B64E22A8CCBB100FFDEEA /* ExchangeRepositoryTest.swift */; };
 		4768BF152A7ED69D005190DC /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4768BF142A7ED69D005190DC /* UIButton+.swift */; };
 		477221A72A73F7230023CA57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477221A62A73F7230023CA57 /* AppDelegate.swift */; };
 		477221A92A73F7230023CA57 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477221A82A73F7230023CA57 /* SceneDelegate.swift */; };
@@ -50,6 +53,9 @@
 		470C233E2A7A02540044A393 /* ExchangeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeController.swift; sourceTree = "<group>"; };
 		470C23442A7A107A0044A393 /* baluchon.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = baluchon.xctestplan; sourceTree = "<group>"; };
 		470C23452A7A11900044A393 /* baluchonUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baluchonUITests.swift; sourceTree = "<group>"; };
+		471B64DE2A8CC4A600FFDEEA /* ExchangeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRepository.swift; sourceTree = "<group>"; };
+		471B64E02A8CC98F00FFDEEA /* RatesJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RatesJSON.json; sourceTree = "<group>"; };
+		471B64E22A8CCBB100FFDEEA /* ExchangeRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRepositoryTest.swift; sourceTree = "<group>"; };
 		4768BF142A7ED69D005190DC /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		477221A32A73F7230023CA57 /* baluchon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = baluchon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		477221A62A73F7230023CA57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -140,7 +146,9 @@
 			children = (
 				477FE1402A82CA91005C3481 /* NetworkTest.swift */,
 				47A31A082A80A10B00ED1A4B /* ExchangeTest.swift */,
+				471B64E22A8CCBB100FFDEEA /* ExchangeRepositoryTest.swift */,
 				477FE1422A82CB6C005C3481 /* testJSON.json */,
+				471B64E02A8CC98F00FFDEEA /* RatesJSON.json */,
 			);
 			path = baluchonTests;
 			sourceTree = "<group>";
@@ -172,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				47A31A062A80A07800ED1A4B /* Exchange.swift */,
+				471B64DE2A8CC4A600FFDEEA /* ExchangeRepository.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -335,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				477FE1432A82CB6C005C3481 /* testJSON.json in Resources */,
+				471B64E12A8CC98F00FFDEEA /* RatesJSON.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +393,7 @@
 				477221A92A73F7230023CA57 /* SceneDelegate.swift in Sources */,
 				47DB13EB2A81FD5D00B4C0C0 /* API.swift in Sources */,
 				477FE13F2A82CA2A005C3481 /* NetworkmanagerMock.swift in Sources */,
+				471B64DF2A8CC4A600FFDEEA /* ExchangeRepository.swift in Sources */,
 				47F09CAA2A853FEF00E52B5E /* APIKey.swift in Sources */,
 				470773AE2A873E0100601B5D /* OverLayerPopUP.swift in Sources */,
 				47F3CB052A7B594D000545A6 /* Alerte.swift in Sources */,
@@ -393,6 +404,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				471B64E32A8CCBB100FFDEEA /* ExchangeRepositoryTest.swift in Sources */,
 				477FE1412A82CA91005C3481 /* NetworkTest.swift in Sources */,
 				47A31A092A80A10B00ED1A4B /* ExchangeTest.swift in Sources */,
 			);
