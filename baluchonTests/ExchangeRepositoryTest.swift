@@ -76,8 +76,9 @@ final class ExchangeRepositoryTest: XCTestCase {
                 XCTFail("testSuccessFulResponse should not success")
 
             case .failure(let error):
-                XCTAssert(true)
+                XCTAssertEqual(error.title, "Erreur Réseau")
                 print("Erreur de decode: \(error.description)")
+
             }
         }
     }
