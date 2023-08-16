@@ -15,7 +15,7 @@ class NetworkManagerMock: NetworkSession {
         if let data = data {
             completionHandler(.success(data))
         } else {
-            completionHandler(.failure(API.ErrorNetwork.noData(reason: "no data load : \(String(describing: error?.localizedDescription))")))
+            completionHandler(.failure(.noData))
         }
     }
 }

@@ -27,11 +27,11 @@ class ForeignExchangeRatesAPI: ExchangeRepository {
                 switch resultDecode {
                 case .success(let decode):
                     completionHandler(.success(decode))
-                case .failure(let error):
-                    completionHandler(.failure(.noData(reason: "\(error.localizedDescription)")))
+                case .failure:
+                    completionHandler(.failure(.parseData))
                 }
-            case .failure(let error):
-                return completionHandler(.failure(.noData(reason: "\(error.localizedDescription)")))
+            case .failure:
+                return completionHandler(.failure(.noData))
             }
         }
     }

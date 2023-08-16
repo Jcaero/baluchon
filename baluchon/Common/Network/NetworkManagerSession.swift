@@ -18,7 +18,7 @@ extension URLSession: NetworkSession {
     func loadData(from endpoint: API.EndPoint, completionHandler: @escaping (Result<Data, API.ErrorNetwork>) -> Void) {
         let task = dataTask(with: endpoint.url) { (data, _, error) in
             guard let data else {
-                completionHandler(.failure(API.ErrorNetwork.noData(reason: "\(String(describing: error?.localizedDescription))")))
+                completionHandler(.failure(.noData))
                 return
             }
             completionHandler(.success(data))

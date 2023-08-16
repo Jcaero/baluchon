@@ -9,8 +9,8 @@ import Foundation
 
 extension API {
     enum ErrorNetwork: Error {
-        case noData(reason: String)
-        case parseData(reason: String)
+        case noData
+        case parseData
 
         var title: String {
             switch self {
@@ -25,8 +25,8 @@ extension API {
             switch self {
             case .noData:
                 return "pas de data chargée"
-            case .parseData(let reason):
-                return "data not decodable \(reason)"
+            case .parseData:
+                return "impossible de décoder les données"
             }
         }
     }

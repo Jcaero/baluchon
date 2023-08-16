@@ -77,9 +77,23 @@ final class ExchangeRepositoryTest: XCTestCase {
 
             case .failure(let error):
                 XCTAssert(true)
-                print("Erreur: \(error.localizedDescription)")
+                print("Erreur de decode: \(error.description)")
             }
         }
     }
 
+    func testNoDataLoaded_ShowError() {
+        self.session.data = nil
+
+        self.repository.getRates { result in
+            switch result {
+            case .success:
+                XCTFail("testSuccessFulResponse should not success")
+
+            case .failure(let error):
+                XCTAssert(true)
+                print("Erreur de chargement: \(error.description)")
+            }
+        }
+    }
 }
