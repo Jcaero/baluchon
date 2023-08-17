@@ -24,6 +24,7 @@
 		479331282A759EF700952447 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479331272A759EF700952447 /* UIColor+.swift */; };
 		47A31A072A80A07800ED1A4B /* Exchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A31A062A80A07800ED1A4B /* Exchange.swift */; };
 		47A31A092A80A10B00ED1A4B /* ExchangeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A31A082A80A10B00ED1A4B /* ExchangeTest.swift */; };
+		47D6BFBB2A8DCE8500B4CA82 /* APITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D6BFBA2A8DCE8500B4CA82 /* APITest.swift */; };
 		47DB13EB2A81FD5D00B4C0C0 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB13EA2A81FD5D00B4C0C0 /* API.swift */; };
 		47DB13F12A82007F00B4C0C0 /* NetworkManagerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB13F02A82007F00B4C0C0 /* NetworkManagerSession.swift */; };
 		47DB13F32A8200A600B4C0C0 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB13F22A8200A600B4C0C0 /* Error.swift */; };
@@ -72,6 +73,7 @@
 		479331272A759EF700952447 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		47A31A062A80A07800ED1A4B /* Exchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exchange.swift; sourceTree = "<group>"; };
 		47A31A082A80A10B00ED1A4B /* ExchangeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTest.swift; sourceTree = "<group>"; };
+		47D6BFBA2A8DCE8500B4CA82 /* APITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITest.swift; sourceTree = "<group>"; };
 		47DB13E32A81F0DA00B4C0C0 /* baluchon.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = baluchon.xctestplan; sourceTree = "<group>"; };
 		47DB13EA2A81FD5D00B4C0C0 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		47DB13F02A82007F00B4C0C0 /* NetworkManagerSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerSession.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				477FE1402A82CA91005C3481 /* NetworkTest.swift */,
 				47A31A082A80A10B00ED1A4B /* ExchangeTest.swift */,
 				471B64E22A8CCBB100FFDEEA /* ExchangeRepositoryTest.swift */,
+				47D6BFBA2A8DCE8500B4CA82 /* APITest.swift */,
 				477FE1422A82CB6C005C3481 /* testJSON.json */,
 				471B64E02A8CC98F00FFDEEA /* RatesJSON.json */,
 			);
@@ -406,6 +409,7 @@
 			files = (
 				471B64E32A8CCBB100FFDEEA /* ExchangeRepositoryTest.swift in Sources */,
 				477FE1412A82CA91005C3481 /* NetworkTest.swift in Sources */,
+				47D6BFBB2A8DCE8500B4CA82 /* APITest.swift in Sources */,
 				47A31A092A80A10B00ED1A4B /* ExchangeTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

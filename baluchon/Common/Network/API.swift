@@ -16,8 +16,8 @@ enum API {
             case .exchange:
                 var componments = URLComponents()
                 componments.scheme = "http"
-                componments.host = "data.fixer.io/api/"
-                componments.path = "latest"
+                componments.host = "data.fixer.io"
+                componments.path = "/api/latest"
                 componments.queryItems = [
                     URLQueryItem(name: "access_key", value: APIKey.fixer.key)
                 ]

@@ -93,6 +93,7 @@ final class ExchangeRepositoryTest: XCTestCase {
 
             case .failure(let error):
                 XCTAssert(true)
+                XCTAssertEqual(error.title, "Erreur Réseau")
                 print("Erreur de chargement: \(error.description)")
             }
         }
