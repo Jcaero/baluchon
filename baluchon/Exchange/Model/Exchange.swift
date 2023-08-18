@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ExchangeDelegate: AnyObject {
-    func showAlert(title: String, desciption: String)
+    func showAlert(title: String, description: String)
     func updateDisplay(_ expression: String, converted: String)
     func updateClearButton(_ buttonName: String)
 }
@@ -47,7 +47,7 @@ class Exchange {
 
     func setCurrencyISOCode( local: String, converted: String) {
         guard availableRate.contains(local), availableRate.contains(converted) else {
-            delegate?.showAlert(title: "Erreur", desciption: "monnaie non disponible")
+            delegate?.showAlert(title: "Erreur", description: "monnaie non disponible")
             return
         }
         localCurrencyISOCode = local
@@ -57,20 +57,20 @@ class Exchange {
     // MARK: - PAD Methode
     func numberHasBeenTapped(_ selection: String) {
         guard availableNumber.contains(selection) else {
-            delegate?.showAlert(title: "Erreur", desciption: "chiffre non reconnu")
+            delegate?.showAlert(title: "Erreur", description: "chiffre non reconnu")
             return
         }
 
         // check size on number
         guard expression.count < numberMaxLenght else {
-            delegate?.showAlert(title: "Erreur", desciption: "vous ne pouvez pas dépaser 10 chiffres")
+            delegate?.showAlert(title: "Erreur", description: "vous ne pouvez pas dépaser 10 chiffres")
             return
         }
 
         // check number after point
         if hasPoint {
             guard indexOfPoint! < 3  else {
-                delegate?.showAlert(title: "Limitation", desciption: "Deux nombres après la virgule Maximum")
+                delegate?.showAlert(title: "Limitation", description: "Deux nombres après la virgule Maximum")
                 return
             }
         }
@@ -100,7 +100,7 @@ class Exchange {
     func pointHasBeenTapped() {
 
         guard hasPoint == false else {
-            delegate?.showAlert(title: "Erreur", desciption: "Un point est deja présent")
+            delegate?.showAlert(title: "Erreur", description: "Un point est deja présent")
             return
         }
         expression.append(".")
@@ -120,7 +120,7 @@ class Exchange {
     // MARK: - Display
     private func updateDisplay() {
         guard let convertedNumber = calculateConvertedCurrency() else {
-            delegate?.showAlert(title: "Erreur", desciption: "Problème de conversion")
+            delegate?.showAlert(title: "Erreur", description: "Problème de conversion")
             return
         }
         converted = convertInString(convertedNumber)
@@ -143,7 +143,7 @@ class Exchange {
         return stringFloat
     }
 
-    func calculateConvertedCurrency() -> Float? {
+    private func calculateConvertedCurrency() -> Float? {
         guard let expressionNumber = Float(expression) else {return nil}
         let result: Float
 
@@ -155,6 +155,21 @@ class Exchange {
             result = expressionNumber / rate
         }
         return result
+    }
+
+    // MARK: - Rates
+    func loadRates(with repository: ExchangeRepository = ForeignExchangeRatesAPI()) {
+        DispatchQueue.main.async {
+            repository.getRates {[weak self] result in
+                switch result {
+                case .success(let response):
+                    self?.exchangeRates = response.rates
+                    print("OK")
+                case .failure(let error):
+                    self?.delegate?.showAlert(title: error.title, description: error.description)
+                }
+            }
+        }
     }
 
     // MARK: - Switch information

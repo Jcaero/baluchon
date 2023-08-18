@@ -331,9 +331,9 @@ extension ExchangeController: ExchangeDelegate {
         }
     }
 
-    func showAlert(title: String, desciption: String) {
+    func showAlert(title: String, description: String) {
         if title == "Limitation" {
-            let text = title + ": " + desciption
+            let text = title + ": " + description
             warningLimitation.text = text
             warningLimitation.isHidden = false
 
@@ -342,7 +342,7 @@ extension ExchangeController: ExchangeDelegate {
                 self?.warningLimitation.isHidden = true
                    }
         } else {
-            showSimpleAlerte(with: title, message: desciption)
+            showSimpleAlerte(with: title, message: description)
         }
     }
 

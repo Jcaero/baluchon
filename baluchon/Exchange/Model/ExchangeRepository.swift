@@ -20,18 +20,20 @@ class ForeignExchangeRatesAPI: ExchangeRepository {
     }
 
     func getRates(completionHandler: @escaping (Result<API.JSONDataType.ExchangeRate, API.ErrorNetwork>) -> Void) {
-        APIManager.loadData(from: .exchange) { [weak self] result in
-            switch result {
-            case .success(let data):
-                let resultDecode = self!.APIManager.decodeJSON(jsonData: data, to: API.JSONDataType.ExchangeRate.self)
-                switch resultDecode {
-                case .success(let decode):
-                    completionHandler(.success(decode))
+        APIManager.loadData(from: .exchange) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    let resultDecode = self.APIManager.decodeJSON(jsonData: data, to: API.JSONDataType.ExchangeRate.self)
+                    switch resultDecode {
+                    case .success(let decode):
+                        completionHandler(.success(decode))
+                    case .failure:
+                        completionHandler(.failure(.parseData))
+                    }
                 case .failure:
-                    completionHandler(.failure(.parseData))
+                    return completionHandler(.failure(.noData))
                 }
-            case .failure:
-                return completionHandler(.failure(.noData))
             }
         }
     }
