@@ -157,20 +157,20 @@ class Exchange {
         return result
     }
 
-    // MARK: - Rates
-    func loadRates(with repository: ExchangeRepository = ForeignExchangeRatesAPI()) {
-        DispatchQueue.main.async {
-            repository.getRates {[weak self] result in
-                switch result {
-                case .success(let response):
-                    self?.exchangeRates = response.rates
-                    print("OK")
-                case .failure(let error):
-                    self?.delegate?.showAlert(title: error.title, description: error.description)
-                }
-            }
-        }
-    }
+//    // MARK: - Rates
+//    func loadRates(with repository: ExchangeRepository = ForeignExchangeRatesAPI()) {
+//        DispatchQueue.main.async {
+//            repository.getRates {[weak self] result in
+//                switch result {
+//                case .success(let response):
+//                    self?.exchangeRates = response.rates
+//                    print("OK")
+//                case .failure(let error):
+//                    self?.delegate?.showAlert(title: error.title, description: error.description)
+//                }
+//            }
+//        }
+//    }
 
     // MARK: - Switch information
     func switchHasBeenTapped() {

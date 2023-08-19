@@ -22,7 +22,7 @@ final class ExchangeTest: XCTestCase {
     override func setUp() {
         super.setUp()
         exchange = Exchange(delegate: self)
-        #warning("changement exploser test")
+#warning("changement exploser test")
         exchange.setCurrencyISOCode(local: "EUR", converted: "Test")
     }
 
@@ -210,21 +210,7 @@ final class ExchangeTest: XCTestCase {
 
         XCTAssertEqual(alerteDescription, "monnaie non disponible")
     }
-
-    // MARK: - TEST REPOSITORY
-    func testWhenCallWithGoodRepository_UpdateRate() {
-        let repository = ExchangeRepositoryMock()
-        let data =  API.JSONDataType.ExchangeRate(date: "2023-06-12", rates: ["USD": 2])
-        repository.data = data
-
-        exchange.loadRates(with: repository)
-        exchange.numberHasBeenTapped("8")
-
-        XCTAssertEqual(displayLocal, "8")
-        XCTAssertEqual(displayConverted, "16")
-    }
 }
-
     // MARK: - Delegate
 extension ExchangeTest: ExchangeDelegate {
     func showAlert(title: String, description: String) {

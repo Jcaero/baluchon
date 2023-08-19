@@ -7,33 +7,21 @@
 
 import Foundation
 
-protocol ExchangeRepository {
-    func getRates(completionHandler: @escaping (Result<API.JSONDataType.ExchangeRate, API.ErrorNetwork>) -> Void)
-}
+class ExchangeRepository {
 
-class ForeignExchangeRatesAPI: ExchangeRepository {
+    private var httpClient: HttpClient
 
-    let APIManager: NetworkManager
-
-    init(APIManager: NetworkManager = NetworkManager()) {
-        self.APIManager = APIManager
+    init(httpClient: HttpClient = HttpClient(urlsession: URLSession.shared)) {
+        self.httpClient = httpClient
     }
 
-    func getRates(completionHandler: @escaping (Result<API.JSONDataType.ExchangeRate, API.ErrorNetwork>) -> Void) {
-        APIManager.loadData(from: .exchange) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let data):
-                    let resultDecode = self.APIManager.decodeJSON(jsonData: data, to: API.JSONDataType.ExchangeRate.self)
-                    switch resultDecode {
-                    case .success(let decode):
-                        completionHandler(.success(decode))
-                    case .failure:
-                        completionHandler(.failure(.parseData))
-                    }
-                case .failure:
-                    return completionHandler(.failure(.noData))
-                }
+    func getRates(completionHandler: @escaping (Result<API.JSONDataType.ExchangeRate, Error>) -> Void) {
+        httpClient.fetch(url: API.EndPoint.exchange.url) { (response: Result<API.JSONDataType.ExchangeRate, Error>)in
+            switch response {
+            case .success(let rate):
+                completionHandler(.success(rate))
+            case .failure(let error):
+                completionHandler(.failure(error))
             }
         }
     }
