@@ -8,7 +8,7 @@
 import XCTest
 @testable import baluchon
 
-final class HTTPClientTest: XCTestCase {
+final class HTTPClientTest: TestCase {
 
     var urlSession: URLSession!
     var httpClient: HttpClientProtocol!
@@ -18,24 +18,6 @@ final class HTTPClientTest: XCTestCase {
         config.protocolClasses = [MockURLProtocol.self]
         urlSession = URLSession(configuration: config)
         httpClient = HttpClient(urlsession: urlSession)
-    }
-
-    func getData(fromJson file: String) -> Data? {
-        // get bundle of class
-        let bundle = Bundle(for: HTTPClientTest.self)
-        // get url of file and data
-        if let url = bundle.url(forResource: file, withExtension: "json") {
-                do {
-                    let data = try Data(contentsOf: url)
-                    return data
-                } catch {
-                    print("Error reading data: \(error)")
-                    return nil
-                }
-            } else {
-                print("File not found")
-                return nil
-            }
     }
 
     func test_GetRate_Succes() throws {
@@ -63,5 +45,4 @@ final class HTTPClientTest: XCTestCase {
         }
         wait(for: [expectation], timeout: 2)
     }
-
 }

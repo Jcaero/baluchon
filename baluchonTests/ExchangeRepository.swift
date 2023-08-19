@@ -8,7 +8,7 @@
 import XCTest
 @testable import baluchon
 
-final class ExchangeRepositoryTest: XCTestCase {
+final class ExchangeRepositoryTest: TestCase {
 
     var urlSession: URLSession!
     var repository: ExchangeRepository!
@@ -28,24 +28,6 @@ final class ExchangeRepositoryTest: XCTestCase {
 
             super.tearDown()
         }
-
-    func getData(fromJson file: String) -> Data? {
-        // get bundle of class
-        let bundle = Bundle(for: ExchangeRepositoryTest.self)
-        // get url of file and data
-        if let url = bundle.url(forResource: file, withExtension: "json") {
-                do {
-                    let data = try Data(contentsOf: url)
-                    return data
-                } catch {
-                    print("Error reading data: \(error)")
-                    return nil
-                }
-            } else {
-                print("File not found")
-                return nil
-            }
-    }
 
     func test_RepositoryGetRate_Succes() throws {
         let response = HTTPURLResponse(url: API.EndPoint.exchange.url,
@@ -73,4 +55,3 @@ final class ExchangeRepositoryTest: XCTestCase {
         wait(for: [expectation], timeout: 2)
     }
 }
-
