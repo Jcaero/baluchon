@@ -63,7 +63,7 @@ class Exchange {
 
         // check size on number
         guard expression.count < numberMaxLenght else {
-            delegate?.showAlert(title: "Erreur", description: "vous ne pouvez pas dépaser 10 chiffres")
+            delegate?.showAlert(title: "Limitation", description: "vous ne pouvez pas dépaser 10 chiffres")
             return
         }
 
@@ -103,6 +103,13 @@ class Exchange {
             delegate?.showAlert(title: "Erreur", description: "Un point est deja présent")
             return
         }
+
+        // check size on number
+        guard expression.count < numberMaxLenght else {
+            delegate?.showAlert(title: "Limitation", description: "vous ne pouvez pas dépaser 10 chiffres")
+            return
+        }
+
         expression.append(".")
         updateDisplay()
     }
