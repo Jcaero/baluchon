@@ -138,8 +138,8 @@ class ExchangeController: UIViewController {
     }
 
     @objc func tappedButton(_ sender: UIButton) {
-        sender.backgroundColor = .whiteSmoke
-        sender.setTitleColor(.navy, for: .normal)
+        sender.transform = .identity
+        sender.layer.shadowOpacity = 0.5
 
         guard canUseButton == true else {return}
 
@@ -158,8 +158,8 @@ class ExchangeController: UIViewController {
     }
 
     @objc func holdDown(sender: UIButton) {
-        sender.backgroundColor = .lightGray
-        sender.setTitleColor(.white, for: .normal)
+        sender.transform = CGAffineTransform(scaleX: 0.97, y: 0.97)
+        sender.layer.shadowOpacity = 0
     }
 
     // MARK: - DISPLAY

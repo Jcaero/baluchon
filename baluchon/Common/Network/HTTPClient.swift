@@ -20,13 +20,14 @@ class HttpClient: HttpClientProtocol {
     }
 
     func fetch<T: Codable>(url: URL, completion: @escaping (Result<T, Error>) -> Void) {
-        self.urlSession.dataTask(with: url, completionHandler: { data, response, _ in
+        self.urlSession.dataTask(with: url, completionHandler: { [weak self] data, response, _ in
+
+            guard let self = self else {return}
 
             guard (response as? HTTPURLResponse)?.statusCode == 200 else {
                 completion(.failure(HttpError.badResponse))
                 return
             }
-
             guard let data = data,
                   let object = try? JSONDecoder().decode(T.self, from: data) else {
                 completion(.failure(HttpError.errorDecodingData))
