@@ -9,7 +9,7 @@ import Foundation
 import XCTest
 
 class TestCase: XCTestCase {
-    
+
     func getData(fromJson file: String) -> Data? {
         // get bundle of class
         let bundle = Bundle(for: APITest.self)
@@ -28,4 +28,3 @@ class TestCase: XCTestCase {
         }
     }
 }
-

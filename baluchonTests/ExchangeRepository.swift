@@ -54,4 +54,30 @@ final class ExchangeRepositoryTest: TestCase {
         }
         wait(for: [expectation], timeout: 2)
     }
+
+    func test_RepositoryGetRate_WhenDataNotGood_Failure() throws {
+        let response = HTTPURLResponse(url: API.EndPoint.exchange.url,
+                                       statusCode: 404,
+                                       httpVersion: nil,
+                                       headerFields: nil)!
+
+        let mockData = self.getData(fromJson: "errorJSON")!
+
+        MockURLProtocol.requestHandler = { _ in
+            return (response, mockData)
+        }
+
+        let expectation = XCTestExpectation(description: "response")
+
+        repository.getRates { response in
+            switch response {
+            case .success:
+                XCTFail("pas ici")
+            case .failure(let error):
+                XCTAssertNotNil(error)
+                expectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 2)
+    }
 }

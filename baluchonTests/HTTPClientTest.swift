@@ -45,4 +45,56 @@ final class HTTPClientTest: TestCase {
         }
         wait(for: [expectation], timeout: 2)
     }
+
+    func test_GetRate_WhenDataNotGood_Failure() throws {
+        let response = HTTPURLResponse(url: API.EndPoint.exchange.url,
+                                       statusCode: 404,
+                                       httpVersion: nil,
+                                       headerFields: nil)!
+
+        let mockData = self.getData(fromJson: "errorJSON")!
+
+        MockURLProtocol.requestHandler = { _ in
+            return (response, mockData)
+        }
+
+        let expectation = XCTestExpectation(description: "response")
+
+        httpClient.fetch(url: API.EndPoint.exchange.url) { (response: Result<API.JSONDataType.TestJSON, Error>) in
+            switch response {
+            case .success:
+                XCTFail("pas ici")
+            case .failure(let error):
+                XCTAssertNotNil(error)
+                expectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 2)
+    }
+
+    func test_GetRate_WhenResponseIsGoodAndDataNotGood_Failure() throws {
+        let response = HTTPURLResponse(url: API.EndPoint.exchange.url,
+                                       statusCode: 200,
+                                       httpVersion: nil,
+                                       headerFields: nil)!
+
+        let mockData = self.getData(fromJson: "errorJSON")!
+
+        MockURLProtocol.requestHandler = { _ in
+            return (response, mockData)
+        }
+
+        let expectation = XCTestExpectation(description: "response")
+
+        httpClient.fetch(url: API.EndPoint.exchange.url) { (response: Result<API.JSONDataType.TestJSON, Error>) in
+            switch response {
+            case .success:
+                XCTFail("pas ici")
+            case .failure(let error):
+                XCTAssertNotNil(error)
+                expectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 2)
+    }
 }

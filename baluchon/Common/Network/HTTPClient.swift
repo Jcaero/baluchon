@@ -7,10 +7,6 @@
 
 import Foundation
 
-enum HttpError: Error {
-    case badURL, badResponse, errorDecodingData, invalideURL
-}
-
 protocol HttpClientProtocol {
     func fetch<T: Codable>(url: URL, completion: @escaping (Result<T, Error>) -> Void)
 }

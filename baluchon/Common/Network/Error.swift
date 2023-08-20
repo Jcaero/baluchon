@@ -7,6 +7,28 @@
 
 import Foundation
 
+enum HttpError: Error {
+    case badURL, badResponse, errorDecodingData
+
+    var title: String {
+        switch self {
+        case .badURL, .errorDecodingData:
+            return "Erreur Réseau"
+        case .badResponse:
+            return "Erreur Réseau"
+        }
+
+        var description: String {
+            switch self {
+            case .badResponse, .badURL:
+                return "probleme serveur"
+            case .errorDecodingData:
+                return "impossible de décoder les données"
+            }
+        }
+    }
+}
+
 extension API {
     enum ErrorNetwork: Error {
         case noData
