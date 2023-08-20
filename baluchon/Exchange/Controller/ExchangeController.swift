@@ -40,6 +40,8 @@ class ExchangeController: UIViewController {
 
     let switchConverterBtn = UIImageView()
     var canUseButton: Bool = true
+    
+    var dateUpdateRate: Date?
 
     // MARK: - lifeCycle
     override func viewDidLoad() {
@@ -309,6 +311,36 @@ class ExchangeController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(tappedSwitch))
         tap.numberOfTouchesRequired = 1
         displayArea.addGestureRecognizer(tap)
+    }
+
+    // MARK: - Rates
+    private func checkRates () {
+        if dateUpdateRate == nil {
+            let repository = ExchangeRepository()
+            repository.getRates { response in
+                switch response {
+                case .success(let data):
+                    if let date = self.convertInDate(date: data.date) {
+                        #warning("create func in model")
+                    } else {
+                        self.showAlert(title: "erreur", description: "Probleme de donnée, rechager le taux de change")
+                    }
+                case .failure(let error):
+                    self.showAlert(title: error.title, description: error.description)
+                }
+            }
+        }
+    }
+
+    private func convertInDate( date: String) -> Date? {
+        let dateString = date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        if let newDate = dateFormatter.date(from: dateString) {
+            return newDate
+        } else {
+            return nil
+        }
     }
 
 }

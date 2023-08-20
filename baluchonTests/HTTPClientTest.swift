@@ -34,7 +34,7 @@ final class HTTPClientTest: TestCase {
 
         let expectation = XCTestExpectation(description: "response")
 
-        httpClient.fetch(url: API.EndPoint.exchange.url) { (response: Result<API.JSONDataType.TestJSON, Error>) in
+        httpClient.fetch(url: API.EndPoint.exchange.url) { (response: Result<API.JSONDataType.TestJSON, HttpError>) in
             switch response {
             case .success(let data):
                 XCTAssertEqual(data.testAuthor, "julien")
@@ -60,7 +60,7 @@ final class HTTPClientTest: TestCase {
 
         let expectation = XCTestExpectation(description: "response")
 
-        httpClient.fetch(url: API.EndPoint.exchange.url) { (response: Result<API.JSONDataType.TestJSON, Error>) in
+        httpClient.fetch(url: API.EndPoint.exchange.url) { (response: Result<API.JSONDataType.TestJSON, HttpError>) in
             switch response {
             case .success:
                 XCTFail("pas ici")
@@ -86,7 +86,7 @@ final class HTTPClientTest: TestCase {
 
         let expectation = XCTestExpectation(description: "response")
 
-        httpClient.fetch(url: API.EndPoint.exchange.url) { (response: Result<API.JSONDataType.TestJSON, Error>) in
+        httpClient.fetch(url: API.EndPoint.exchange.url) { (response: Result<API.JSONDataType.TestJSON, HttpError>) in
             switch response {
             case .success:
                 XCTFail("pas ici")

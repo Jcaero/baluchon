@@ -69,7 +69,7 @@ final class ExchangeTest: XCTestCase {
         exchange.numberHasBeenTapped("5")
 
         XCTAssertEqual(displayLocal, "5555555555")
-        XCTAssertEqual(alerteTitle, "Erreur")
+        XCTAssertEqual(alerteTitle, "Limitation")
         XCTAssertEqual(alerteDescription, "vous ne pouvez pas dépaser 10 chiffres")
     }
 

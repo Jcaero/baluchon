@@ -9,7 +9,7 @@ import Foundation
 
 enum HttpError: Error {
     case badResponse, errorDecodingData
- 
+
     var title: String {
         switch self {
         case .errorDecodingData:
@@ -17,14 +17,14 @@ enum HttpError: Error {
         case .badResponse:
             return "Erreur Réseau"
         }
+    }
 
-        var description: String {
-            switch self {
-            case .badResponse:
-                return "probleme serveur"
-            case .errorDecodingData:
-                return "impossible de décoder les données"
-            }
+    var description: String {
+        switch self {
+        case .badResponse:
+            return "probleme serveur"
+        case .errorDecodingData:
+            return "impossible de décoder les données"
         }
     }
 }

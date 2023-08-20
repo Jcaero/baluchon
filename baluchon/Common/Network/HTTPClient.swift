@@ -8,7 +8,7 @@
 import Foundation
 
 protocol HttpClientProtocol {
-    func fetch<T: Codable>(url: URL, completion: @escaping (Result<T, Error>) -> Void)
+    func fetch<T: Codable>(url: URL, completion: @escaping (Result<T, HttpError>) -> Void)
 }
 
 class HttpClient: HttpClientProtocol {
@@ -19,7 +19,7 @@ class HttpClient: HttpClientProtocol {
         self.urlSession = urlsession
     }
 
-    func fetch<T: Codable>(url: URL, completion: @escaping (Result<T, Error>) -> Void) {
+    func fetch<T: Codable>(url: URL, completion: @escaping (Result<T, HttpError>) -> Void) {
         self.urlSession.dataTask(with: url, completionHandler: { [weak self] data, response, _ in
 
             guard let self = self else {return}
