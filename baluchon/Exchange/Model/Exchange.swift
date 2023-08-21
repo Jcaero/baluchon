@@ -21,7 +21,7 @@ class Exchange {
         self.delegate = delegate
         expression = "0"
         converted = "0"
-        exchangeRates = ["Test": 5, "USD": 1.112954, "CHF": 0.964686 ]
+        exchangeRates = ["USD": 1.112954]
     }
 
     // MARK: - Expression
@@ -36,11 +36,10 @@ class Exchange {
 
     // MARK: - Rates
     private var exchangeRates: [String: Float]
+    private var availableRate = ["EUR", "USD"]
 
     private var localCurrencyISOCode: String = "EUR"
     private var convertedCurrencyISOCode: String = "USD"
-
-    private let availableRate = ["EUR", "Test", "USD", "CHF"]
 
     // MARK: - Configuration
     private let numberMaxLenght = 10
@@ -115,12 +114,21 @@ class Exchange {
     }
 
     func clearExpression(_ selection: String) {
-        if selection == "AC" {
-            expression = "0"
-        } else if selection == "C" {
-            expression.removeLast()
+        guard selection == "AC" || selection == "C" else {return}
+
+        switch selection {
+        case "C":
+            if expression.count == 1 {
+                expression = "0"
+            } else {
+                expression.removeLast()
+            }
+
             delegate?.updateClearButton("AC")
+        default:
+            expression = "0"
         }
+
         updateDisplay()
     }
 
@@ -164,20 +172,14 @@ class Exchange {
         return result
     }
 
-//    // MARK: - Rates
-//    func loadRates(with repository: ExchangeRepository = ForeignExchangeRatesAPI()) {
-//        DispatchQueue.main.async {
-//            repository.getRates {[weak self] result in
-//                switch result {
-//                case .success(let response):
-//                    self?.exchangeRates = response.rates
-//                    print("OK")
-//                case .failure(let error):
-//                    self?.delegate?.showAlert(title: error.title, description: error.description)
-//                }
-//            }
-//        }
-//    }
+    // MARK: - Rates
+
+    func setupRates(with rates: [String: Float]) {
+        exchangeRates = rates
+
+        availableRate = Array(exchangeRates.keys)
+        availableRate.append("EUR")
+    }
 
     // MARK: - Switch information
     func switchHasBeenTapped() {

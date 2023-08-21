@@ -40,7 +40,7 @@ class ExchangeController: UIViewController {
 
     let switchConverterBtn = UIImageView()
     var canUseButton: Bool = true
-    
+
     var dateUpdateRate: Date?
 
     // MARK: - lifeCycle
@@ -80,6 +80,8 @@ class ExchangeController: UIViewController {
         case .switched:
             exchange.setCurrencyISOCode(local: convertedButtonLabel, converted: localButtonLabel)
         }
+
+        checkRates()
     }
 
     private func setupShadowOf(_ view: UIView, radius: CGFloat, opacity: Float ) {
@@ -315,21 +317,11 @@ class ExchangeController: UIViewController {
 
     // MARK: - Rates
     private func checkRates () {
-        if dateUpdateRate == nil {
-            let repository = ExchangeRepository()
-            repository.getRates { response in
-                switch response {
-                case .success(let data):
-                    if let date = self.convertInDate(date: data.date) {
-                        #warning("create func in model")
-                    } else {
-                        self.showAlert(title: "erreur", description: "Probleme de donnée, rechager le taux de change")
-                    }
-                case .failure(let error):
-                    self.showAlert(title: error.title, description: error.description)
-                }
-            }
-        }
+        guard let yesterday = getYesterday() else {return}
+
+        guard dateUpdateRate == nil || dateUpdateRate! <= yesterday else {return}
+
+        downloadRates()
     }
 
     private func convertInDate( date: String) -> Date? {
@@ -343,6 +335,38 @@ class ExchangeController: UIViewController {
         }
     }
 
+    #warning("ne fonctionne pas")
+    private func downloadRates() {
+        canUseButton = false
+        let repository = ExchangeRepository()
+            repository.getRates { [weak self] response in
+                guard let self = self else {return}
+
+                switch response {
+                case .success(let data):
+                    guard let date = self.convertInDate(date: data.date),
+                          let rates = data.rates as? [String: Float] else {
+                        self.showAlert(title: "erreur", description: "Probleme de donnée, rechager le taux de change");
+                        self.canUseButton = true;
+                        return
+                    }
+                    self.dateUpdateRate = date
+                    self.exchange.setupRates(with: rates)
+                    self.canUseButton = true
+                    self.showAlert(title: "information", description: "Taux Actualisé")
+
+                case .failure(let error):
+                    self.showAlert(title: error.title, description: error.description)
+                    self.canUseButton = true
+                }
+            }
+    }
+
+    func getYesterday() -> Date? {
+        let calendar = Calendar.current
+        let yesterday = calendar.date(byAdding: .day, value: -1, to: Date())
+        return yesterday ?? nil
+    }
 }
 
 // MARK: - Delegate
@@ -381,5 +405,4 @@ extension ExchangeController: ExchangeDelegate {
     func updateClearButton(_ buttonName: String) {
         buttonsListe["AC"]!.setTitle(buttonName, for: .normal)
     }
-
 }

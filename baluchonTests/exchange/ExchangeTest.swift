@@ -22,7 +22,7 @@ final class ExchangeTest: XCTestCase {
     override func setUp() {
         super.setUp()
         exchange = Exchange(delegate: self)
-#warning("changement exploser test")
+        exchange.setupRates(with: ["Test": 5, "USD": 1.112954, "CHF": 0.964686 ])
         exchange.setCurrencyISOCode(local: "EUR", converted: "Test")
     }
 
@@ -207,6 +207,22 @@ final class ExchangeTest: XCTestCase {
 
     func testWhenSetNotAvailableRate_AlerteIsNil() {
         exchange.setCurrencyISOCode(local: "AAA", converted: "USD")
+
+        XCTAssertEqual(alerteDescription, "monnaie non disponible")
+    }
+
+    func testWhenUpdateRates_RatesUpdated() {
+        let newRates: [String: Float] = ["USD": 2.0, "BBB": 3.0]
+        exchange.setupRates(with: newRates)
+        exchange.setCurrencyISOCode(local: "USD", converted: "BBB")
+
+        XCTAssertNil(alerteTitle)
+    }
+
+    func testWhenUpdateRates_CHFNotExist() {
+        let newRates: [String: Float] = ["USD": 2.0, "BBB": 3.0]
+        exchange.setupRates(with: newRates)
+        exchange.setCurrencyISOCode(local: "USD", converted: "CHF")
 
         XCTAssertEqual(alerteDescription, "monnaie non disponible")
     }

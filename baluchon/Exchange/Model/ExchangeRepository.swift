@@ -17,7 +17,7 @@ class ExchangeRepository {
 
     func getRates(completionHandler: @escaping (Result<API.JSONDataType.ExchangeRate, HttpError>) -> Void) {
         DispatchQueue.main.async {
-            self.httpClient.fetch(url: API.EndPoint.exchange.url) { (response: Result<API.JSONDataType.ExchangeRate, HttpError>)in
+            self.httpClient.fetch(url: API.EndPoint.exchange.url) { (response: Result<API.JSONDataType.ExchangeRate, HttpError>) in
                 switch response {
                 case .success(let rate):
                     completionHandler(.success(rate))
