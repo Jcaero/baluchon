@@ -9,26 +9,25 @@ import Foundation
 
 enum OverLayoutCase {
     case ratesUpdate
-    
+
     var title: String {
         switch self {
         case.ratesUpdate:
             return "Information"
         }
     }
-    
+
     var description: String {
         switch self {
         case.ratesUpdate:
             return "Taux Actualisé"
         }
     }
-    
+
     var imageName: String {
         switch self {
         case.ratesUpdate:
             return "ratesDownload"
         }
     }
-    
 }

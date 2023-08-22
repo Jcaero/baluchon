@@ -27,6 +27,7 @@
 		47A31A072A80A07800ED1A4B /* Exchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A31A062A80A07800ED1A4B /* Exchange.swift */; };
 		47A31A092A80A10B00ED1A4B /* ExchangeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A31A082A80A10B00ED1A4B /* ExchangeTest.swift */; };
 		47B6A4D42A9467F2001DA33F /* OverLayoutCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B6A4D32A9467F2001DA33F /* OverLayoutCase.swift */; };
+		47B6A4D62A946BBA001DA33F /* TabBarControlleur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B6A4D52A946BBA001DA33F /* TabBarControlleur.swift */; };
 		47C744D12A91BE39002757DE /* errorJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 47C744D02A91BE39002757DE /* errorJSON.json */; };
 		47D6BFBB2A8DCE8500B4CA82 /* APITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D6BFBA2A8DCE8500B4CA82 /* APITest.swift */; };
 		47DB13EB2A81FD5D00B4C0C0 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB13EA2A81FD5D00B4C0C0 /* API.swift */; };
@@ -79,6 +80,7 @@
 		47A31A062A80A07800ED1A4B /* Exchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exchange.swift; sourceTree = "<group>"; };
 		47A31A082A80A10B00ED1A4B /* ExchangeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTest.swift; sourceTree = "<group>"; };
 		47B6A4D32A9467F2001DA33F /* OverLayoutCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverLayoutCase.swift; sourceTree = "<group>"; };
+		47B6A4D52A946BBA001DA33F /* TabBarControlleur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarControlleur.swift; path = baluchon/TabBarControlleur.swift; sourceTree = SOURCE_ROOT; };
 		47C744D02A91BE39002757DE /* errorJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = errorJSON.json; sourceTree = "<group>"; };
 		47D6BFBA2A8DCE8500B4CA82 /* APITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITest.swift; sourceTree = "<group>"; };
 		47DB13E32A81F0DA00B4C0C0 /* baluchon.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = baluchon.xctestplan; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			children = (
 				477221A62A73F7230023CA57 /* AppDelegate.swift */,
 				477221A82A73F7230023CA57 /* SceneDelegate.swift */,
+				47B6A4D52A946BBA001DA33F /* TabBarControlleur.swift */,
 				47F09CA82A853F8C00E52B5E /* Exchange */,
 				477221D72A73FA750023CA57 /* View */,
 				479331262A759ED600952447 /* Common */,
@@ -412,6 +415,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47B6A4D62A946BBA001DA33F /* TabBarControlleur.swift in Sources */,
 				479331282A759EF700952447 /* UIColor+.swift in Sources */,
 				470C233F2A7A02540044A393 /* ExchangeController.swift in Sources */,
 				47DB13F32A8200A600B4C0C0 /* Error.swift in Sources */,
