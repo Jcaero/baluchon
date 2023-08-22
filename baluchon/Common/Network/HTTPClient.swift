@@ -21,20 +21,22 @@ class HttpClient: HttpClientProtocol {
 
     func fetch<T: Codable>(url: URL, completion: @escaping (Result<T, HttpError>) -> Void) {
         self.urlSession.dataTask(with: url, completionHandler: { [weak self] data, response, _ in
+            #warning("ne fonctionne pas")
+ //           guard let self = self else {return}
 
-            guard let self = self else {return}
+            DispatchQueue.main.async {
+                guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+                    completion(.failure(HttpError.badResponse))
+                    return
+                }
+                guard let data = data,
+                      let object = try? JSONDecoder().decode(T.self, from: data) else {
+                    completion(.failure(HttpError.errorDecodingData))
+                    return
+                }
 
-            guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-                completion(.failure(HttpError.badResponse))
-                return
+                completion(.success(object))
             }
-            guard let data = data,
-                  let object = try? JSONDecoder().decode(T.self, from: data) else {
-                completion(.failure(HttpError.errorDecodingData))
-                return
-            }
-
-            completion(.success(object))
         }).resume()
 
     }

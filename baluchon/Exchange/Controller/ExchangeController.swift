@@ -335,7 +335,7 @@ class ExchangeController: UIViewController {
         }
     }
 
-    #warning("ne fonctionne pas")
+
     private func downloadRates() {
         canUseButton = false
         let repository = ExchangeRepository()
@@ -346,8 +346,8 @@ class ExchangeController: UIViewController {
                 case .success(let data):
                     guard let date = self.convertInDate(date: data.date),
                           let rates = data.rates as? [String: Float] else {
-                        self.showAlert(title: "erreur", description: "Probleme de donnée, rechager le taux de change");
-                        self.canUseButton = true;
+                        self.showAlert(title: "erreur", description: "Probleme de donnée, rechager le taux de change")
+                        self.canUseButton = true
                         return
                     }
                     self.dateUpdateRate = date

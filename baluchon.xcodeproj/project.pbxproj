@@ -11,7 +11,7 @@
 		470A467B2A906CDC00B22D74 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470A467A2A906CDC00B22D74 /* HTTPClient.swift */; };
 		470A467D2A906F9400B22D74 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470A467C2A906F9400B22D74 /* MockURLProtocol.swift */; };
 		470A467F2A9072B800B22D74 /* HTTPClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470A467E2A9072B800B22D74 /* HTTPClientTest.swift */; };
-		470A46812A907FC900B22D74 /* ExchangeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470A46802A907FC900B22D74 /* ExchangeRepository.swift */; };
+		470A46812A907FC900B22D74 /* ExchangeRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470A46802A907FC900B22D74 /* ExchangeRepositoryTest.swift */; };
 		470A46832A90855400B22D74 /* TestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470A46822A90855400B22D74 /* TestCase.swift */; };
 		470C233F2A7A02540044A393 /* ExchangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C233E2A7A02540044A393 /* ExchangeController.swift */; };
 		470C23462A7A11900044A393 /* baluchonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C23452A7A11900044A393 /* baluchonUITests.swift */; };
@@ -56,7 +56,7 @@
 		470A467A2A906CDC00B22D74 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		470A467C2A906F9400B22D74 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		470A467E2A9072B800B22D74 /* HTTPClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientTest.swift; sourceTree = "<group>"; };
-		470A46802A907FC900B22D74 /* ExchangeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRepository.swift; sourceTree = "<group>"; };
+		470A46802A907FC900B22D74 /* ExchangeRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRepositoryTest.swift; sourceTree = "<group>"; };
 		470A46822A90855400B22D74 /* TestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCase.swift; sourceTree = "<group>"; };
 		470C233E2A7A02540044A393 /* ExchangeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeController.swift; sourceTree = "<group>"; };
 		470C23442A7A107A0044A393 /* baluchon.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = baluchon.xctestplan; sourceTree = "<group>"; };
@@ -234,7 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				47A31A082A80A10B00ED1A4B /* ExchangeTest.swift */,
-				470A46802A907FC900B22D74 /* ExchangeRepository.swift */,
+				470A46802A907FC900B22D74 /* ExchangeRepositoryTest.swift */,
 				471B64E02A8CC98F00FFDEEA /* RatesJSON.json */,
 			);
 			path = exchange;
@@ -431,7 +431,7 @@
 			files = (
 				470A467F2A9072B800B22D74 /* HTTPClientTest.swift in Sources */,
 				470A46832A90855400B22D74 /* TestCase.swift in Sources */,
-				470A46812A907FC900B22D74 /* ExchangeRepository.swift in Sources */,
+				470A46812A907FC900B22D74 /* ExchangeRepositoryTest.swift in Sources */,
 				470A467D2A906F9400B22D74 /* MockURLProtocol.swift in Sources */,
 				47D6BFBB2A8DCE8500B4CA82 /* APITest.swift in Sources */,
 				47A31A092A80A10B00ED1A4B /* ExchangeTest.swift in Sources */,
