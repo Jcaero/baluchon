@@ -17,11 +17,13 @@ class OverLayerPopUP: UIViewController {
     let descriptionLbl = UILabel()
     let doneBtn = UIButton()
 
-    init(_ name: String, description: String) {
+    init(_ setup: OverLayoutCase) {
         super.init(nibName: nil, bundle: nil)
         self.modalPresentationStyle = .overFullScreen
-        titleLbl.text = name
-        descriptionLbl.text = description
+        titleLbl.text = setup.title
+        descriptionLbl.text = setup.description
+        imageView.image = UIImage(named: setup.imageName)
+        
     }
 
     required init?(coder: NSCoder) {
@@ -38,6 +40,8 @@ class OverLayerPopUP: UIViewController {
         contentView.layer.cornerRadius = 10
         imageView.layer.cornerRadius = 5
         doneBtn.layer.cornerRadius = 5
+
+        show()
     }
 
     private func configViews() {
@@ -47,7 +51,6 @@ class OverLayerPopUP: UIViewController {
         backView.alpha = 0
         contentView.alpha = 0
 
-        imageView.image = UIImage(named: "oops")
         imageView.layer.masksToBounds = true
 
         setupButton()
@@ -112,7 +115,7 @@ class OverLayerPopUP: UIViewController {
 
     private func setupButton() {
         doneBtn.layer.cornerRadius = 4
-        doneBtn.backgroundColor = .red
+        doneBtn.backgroundColor = .lightGray
         doneBtn.setTitleColor(.white, for: .normal)
         doneBtn.addTarget(self, action: #selector(hide), for: .touchUpInside)
         doneBtn.setTitle("OK", for: .normal)
@@ -128,12 +131,6 @@ class OverLayerPopUP: UIViewController {
     }
 
     // MARK: - Action
-
-    func appear( sender: UIViewController) {
-        sender.present(self, animated: false) {
-            self.show()
-        }
-    }
 
     private func show() {
         UIView.animate(withDuration: 1, delay: 0.1) {

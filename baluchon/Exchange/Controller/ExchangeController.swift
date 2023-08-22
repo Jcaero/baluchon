@@ -335,7 +335,6 @@ class ExchangeController: UIViewController {
         }
     }
 
-
     private func downloadRates() {
         canUseButton = false
         let repository = ExchangeRepository()
@@ -353,7 +352,9 @@ class ExchangeController: UIViewController {
                     self.dateUpdateRate = date
                     self.exchange.setupRates(with: rates)
                     self.canUseButton = true
-                    self.showAlert(title: "information", description: "Taux Actualisé")
+
+                    let overlayer = OverLayerPopUP(.ratesUpdate)
+                    self.present(overlayer, animated: false)
 
                 case .failure(let error):
                     self.showAlert(title: error.title, description: error.description)
@@ -373,10 +374,10 @@ class ExchangeController: UIViewController {
 
 extension ExchangeController: ExchangeDelegate {
     func updateDisplay(_ expression: String, converted: String) {
-        if expression == "666" {
-            let overLayer = OverLayerPopUP("Oops !", description: "Test de Julien")
-            overLayer.appear(sender: self)
-        }
+//        if expression == "666" {
+//            let overLayer = OverLayerPopUP("Oops !", description: "Test de Julien")
+//            overLayer.appear(sender: self)
+//        }
         switch displayPosition {
         case .origin:
             localCurrencyLbl.text = expression
