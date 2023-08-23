@@ -23,7 +23,7 @@ class OverLayerPopUP: UIViewController {
         titleLbl.text = setup.title
         descriptionLbl.text = setup.description
         imageView.image = UIImage(named: setup.imageName)
-        
+
     }
 
     required init?(coder: NSCoder) {

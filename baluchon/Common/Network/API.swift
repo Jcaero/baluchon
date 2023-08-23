@@ -10,6 +10,7 @@ import Foundation
 enum API {
     enum EndPoint {
         case exchange
+        case translate([String: String])
 
         var url: URL {
             switch self {
@@ -21,6 +22,19 @@ enum API {
                 componments.queryItems = [
                     URLQueryItem(name: "access_key", value: APIKey.fixer.key)
                 ]
+                return componments.url!
+
+            case .translate(let addQueryItems):
+                var componments = URLComponents()
+                componments.scheme = "https"
+                componments.host = "translation.googleapis.com"
+                componments.path = "/language/translate/v2"
+                let queryItems = [
+                    URLQueryItem(name: "key", value: APIKey.googleTranslate.key),
+                    URLQueryItem(name: "q", value: addQueryItems["q"]),
+                    URLQueryItem(name: "target", value: addQueryItems["target"])
+                ]
+                componments.queryItems = queryItems
                 return componments.url!
             }
         }
@@ -35,6 +49,15 @@ enum API {
         struct ExchangeRate: Codable, Equatable {
             var date: String
             var rates: [String: Float]
+        }
+
+        struct TranslationResponse: Codable, Equatable {
+            var data: [Translation]
+            
+            struct Translation: Codable {
+                var translatedText: String
+                var detectedSourceLanguage: String
+            }
         }
     }
 }
