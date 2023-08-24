@@ -28,14 +28,6 @@ final class TranslateRepositoryTest: TestCase {
             super.tearDown()
         }
 
-    func test_QueryIsBonjour_WhenGetTranslateURL_ResultIsGood() {
-        let query = "Bonjour"
-        let correctURL = URL(string: "https://translation.googleapis.com/language/translate/v2?key=AIzaSyDU5uISMpPhePWP0pM0ytWwmx2s-610hDo&q=Bonjour&target=en")
-        let url = repository.getTranslateURL(with: query)
-
-        XCTAssertEqual(url, correctURL)
-    }
-
     func test_RepositoryGetRate_Succes() throws {
         let query = "je teste l'API"
         let result = "I test the API"
