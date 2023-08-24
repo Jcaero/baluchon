@@ -38,8 +38,9 @@ final class TranslateRepositoryTest: TestCase {
 
     func test_RepositoryGetRate_Succes() throws {
         let query = "je teste l'API"
-        
-        let response = HTTPURLResponse(url: API.EndPoint.translate(["q":query, "target":"en"]).url,
+        let result = "I test the API"
+
+        let response = HTTPURLResponse(url: API.EndPoint.translate(["q": query, "target": "en"]).url,
                                        statusCode: 200,
                                        httpVersion: nil,
                                        headerFields: nil)!
@@ -55,7 +56,8 @@ final class TranslateRepositoryTest: TestCase {
         repository.getTraduction(of: query) { response in
             switch response {
             case .success(let translate):
-                XCTAssertEqual(translate.data
+                XCTAssertEqual(translate.data.translations[0].translatedText, result)
+                XCTAssertEqual(translate.data.translations[0].detectedSourceLanguage, "fr")
                 expectation.fulfill()
             case .failure:
                 XCTFail("pas ici")

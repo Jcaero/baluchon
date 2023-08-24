@@ -18,14 +18,14 @@ class TabBar: UITabBarController {
 
             let firstViewController = ExchangeController()
 
-            let secondViewController = UIViewController()
-        secondViewController.view.backgroundColor = .systemGray2
+            let secondViewController = TranslateController()
+
             let thirdViewController = UIViewController()
         thirdViewController.view.backgroundColor = .systemGray3
 
             // define title and items
             firstViewController.tabBarItem = UITabBarItem(title: "Convertisseur", image: UIImage(systemName: "dollarsign.circle")!, tag: 0)
-            secondViewController.tabBarItem = UITabBarItem(title: "Deuxième", image: UIImage(systemName: "house")!, tag: 1)
+            secondViewController.tabBarItem = UITabBarItem(title: "Traduction", image: UIImage(systemName: "pencil")!, tag: 1)
             thirdViewController.tabBarItem = UITabBarItem(title: "Troisième", image: UIImage(systemName: "person")!, tag: 2)
 
            viewControllers = [firstViewController, secondViewController, thirdViewController]

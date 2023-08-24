@@ -46,18 +46,24 @@ enum API {
             var testAuthor: String
         }
 
+        // MARK: - Rate
         struct ExchangeRate: Codable, Equatable {
             var date: String
             var rates: [String: Float]
         }
 
+        // MARK: - Translation
         struct TranslationResponse: Codable, Equatable {
-            var data: [Translation]
-            
-            struct Translation: Codable {
-                var translatedText: String
-                var detectedSourceLanguage: String
-            }
+            let data: DataClass
         }
+
+        struct DataClass: Codable, Equatable {
+            let translations: [Translation]
+        }
+
+        struct Translation: Codable, Equatable {
+            let translatedText, detectedSourceLanguage: String
+        }
+
     }
 }

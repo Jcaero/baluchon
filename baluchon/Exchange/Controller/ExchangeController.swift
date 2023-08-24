@@ -38,7 +38,7 @@ class ExchangeController: UIViewController {
     let localCurrencyBtn = UIButton()
     let convertedCurrencyBtn = UIButton()
 
-    let switchConverterBtn = UIImageView()
+    let switchConverter = UIImageView()
     var canUseButton: Bool = true
 
     var dateUpdateRate: Date?
@@ -172,8 +172,8 @@ class ExchangeController: UIViewController {
         localCurrencyBtn.setupCurrencyBoutton(name: "EUR")
 
         let configurationImage = UIImage.SymbolConfiguration(pointSize: 30, weight: .ultraLight)
-        switchConverterBtn.image = UIImage(systemName: "arrow.up.arrow.down", withConfiguration: configurationImage)
-        switchConverterBtn.tintColor = .darkGray
+        switchConverter.image = UIImage(systemName: "arrow.up.arrow.down", withConfiguration: configurationImage)
+        switchConverter.tintColor = .darkGray
 
         setupCurrencyLabelName(localCurrencyLbl)
         setupCurrencyLabelName(convertedCurrencyLbl)
@@ -188,7 +188,7 @@ class ExchangeController: UIViewController {
     }
 
     private func setupDisplayLayout() {
-        [localCurrencyBtn, localCurrencyLbl, switchConverterBtn, convertedCurrencyBtn, convertedCurrencyLbl, localCurrencyView, convertedCurrencyView, displayArea].forEach {
+        [localCurrencyBtn, localCurrencyLbl, switchConverter, convertedCurrencyBtn, convertedCurrencyLbl, localCurrencyView, convertedCurrencyView, displayArea].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         view.addSubview(displayArea)
@@ -203,17 +203,17 @@ class ExchangeController: UIViewController {
         setupViewNamed(convertedCurrencyView, with: convertedCurrencyBtn, and: convertedCurrencyLbl)
 
         // switch BTN
-        displayArea.addSubview(switchConverterBtn)
+        displayArea.addSubview(switchConverter)
         NSLayoutConstraint.activate([
-            switchConverterBtn.centerYAnchor.constraint(equalTo: displayArea.centerYAnchor),
-            switchConverterBtn.centerXAnchor.constraint(equalTo: displayArea.centerXAnchor)
+            switchConverter.centerYAnchor.constraint(equalTo: displayArea.centerYAnchor),
+            switchConverter.centerXAnchor.constraint(equalTo: displayArea.centerXAnchor)
         ])
 
         // localCurrencyLayout
         NSLayoutConstraint.activate([
             localCurrencyView.leftAnchor.constraint(equalTo: displayArea.leftAnchor),
             localCurrencyView.rightAnchor.constraint(equalTo: displayArea.rightAnchor),
-            localCurrencyView.bottomAnchor.constraint(equalTo: switchConverterBtn.topAnchor, constant: -35),
+            localCurrencyView.bottomAnchor.constraint(equalTo: switchConverter.topAnchor, constant: -35),
             localCurrencyView.heightAnchor.constraint(equalToConstant: 71)
         ])
 
@@ -221,7 +221,7 @@ class ExchangeController: UIViewController {
         NSLayoutConstraint.activate([
             convertedCurrencyView.leftAnchor.constraint(equalTo: displayArea.leftAnchor),
             convertedCurrencyView.rightAnchor.constraint(equalTo: displayArea.rightAnchor),
-            convertedCurrencyView.topAnchor.constraint(equalTo: switchConverterBtn.bottomAnchor, constant: 25),
+            convertedCurrencyView.topAnchor.constraint(equalTo: switchConverter.bottomAnchor, constant: 25),
             convertedCurrencyView.heightAnchor.constraint(equalToConstant: 71)
         ])
     }
@@ -261,7 +261,7 @@ class ExchangeController: UIViewController {
         NSLayoutConstraint.activate([
             warningLimitation.widthAnchor.constraint(equalTo: localCurrencyView.widthAnchor),
             warningLimitation.centerXAnchor.constraint(equalTo: localCurrencyView.centerXAnchor),
-            warningLimitation.bottomAnchor.constraint(equalTo: switchConverterBtn.topAnchor, constant: -12)
+            warningLimitation.bottomAnchor.constraint(equalTo: switchConverter.topAnchor, constant: -12)
         ])
     }
 
@@ -338,7 +338,7 @@ class ExchangeController: UIViewController {
     private func downloadRates() {
         canUseButton = false
         let repository = ExchangeRepository()
-            repository.getRates { [weak self] response in
+        repository.getRates { [weak self] response in
                 guard let self = self else {return}
 
                 switch response {
