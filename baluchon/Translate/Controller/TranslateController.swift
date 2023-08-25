@@ -12,6 +12,7 @@ class TranslateController: UIViewController {
 
     let inputText = UITextField()
     let outputText = UILabel()
+    let wrappedOutputText = UIView()
 
     let switchText = UIButton()
 
@@ -35,8 +36,11 @@ class TranslateController: UIViewController {
 
             setupShadowOf($0, radius: 1, opacity: 0.5)
         }
+        
+        outputText.layer.cornerRadius = 30
+        outputText.layer.masksToBounds = true
 
-        [inputText, outputText].forEach {
+        [inputText, wrappedOutputText].forEach {
             $0.layer.cornerRadius = 30
             $0.layer.masksToBounds = false
 
@@ -44,7 +48,7 @@ class TranslateController: UIViewController {
         }
     }
 
-    private func setupShadowOf(_ iew: UIView, radius: CGFloat, opacity: Float ) {
+    private func setupShadowOf(_ view: UIView, radius: CGFloat, opacity: Float ) {
         view.layer.shadowOffset = CGSize(width: 0, height: 3)
         view.layer.shadowColor = UIColor.lightGray.cgColor
         view.layer.shadowOpacity = opacity
@@ -76,6 +80,8 @@ class TranslateController: UIViewController {
             $0.text = ""
         }
 
+        wrappedOutputText.backgroundColor = .whiteSmoke
+
         inputText.textAlignment = .center
         inputText.backgroundColor = .whiteSmoke
         inputText.placeholder = "Tapez le texte à traduire"
@@ -83,7 +89,7 @@ class TranslateController: UIViewController {
 
     // MARK: - SetupLayout
     private func setupLayouts() {
-        [inputText, inputLanguage, outputText, outputLanguage, switchText].forEach {  $0.translatesAutoresizingMaskIntoConstraints = false
+        [inputText, inputLanguage, outputText, outputLanguage, switchText, wrappedOutputText].forEach {  $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
         // MARK: - SwitchText Layout
@@ -121,12 +127,20 @@ class TranslateController: UIViewController {
             outputLanguage.heightAnchor.constraint(equalToConstant: 50)
         ])
 
-        view.addSubview(outputText)
+        view.addSubview(wrappedOutputText)
         NSLayoutConstraint.activate([
-            outputText.topAnchor.constraint(equalTo: switchText.bottomAnchor, constant: 20),
-            outputText.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            outputText.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 15),
-            outputText.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -15)
+            wrappedOutputText.topAnchor.constraint(equalTo: switchText.bottomAnchor, constant: 20),
+            wrappedOutputText.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            wrappedOutputText.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 15),
+            wrappedOutputText.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -15)
+        ])
+
+        wrappedOutputText.addSubview(outputText)
+        NSLayoutConstraint.activate([
+            outputText.topAnchor.constraint(equalTo: wrappedOutputText.topAnchor),
+            outputText.bottomAnchor.constraint(equalTo: wrappedOutputText.bottomAnchor),
+            outputText.leftAnchor.constraint(equalTo: wrappedOutputText.leftAnchor),
+            outputText.rightAnchor.constraint(equalTo: wrappedOutputText.rightAnchor)
         ])
     }
 }
