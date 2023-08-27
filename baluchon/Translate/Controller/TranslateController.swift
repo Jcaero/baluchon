@@ -14,12 +14,18 @@ class TranslateController: UIViewController {
     let outputText = UILabel()
     let wrappedOutputText = UIView()
 
-    let switchText = UIButton()
-
     let inputLanguage = UILabel()
     let outputLanguage = UILabel()
     let wrappedOutputLanguage = UIView()
     let wrappedinputLanguage = UIView()
+
+    let switchText = UIButton()
+    var displayPosition = Position.origin
+
+    enum Position {
+        case origin
+        case switched
+    }
 
     // MARK: - lifeCycle
     override func viewDidLoad() {
@@ -29,6 +35,8 @@ class TranslateController: UIViewController {
 
         setupViews()
         setupLayouts()
+
+        setupSwitchButton()
     }
 
     override func viewWillLayoutSubviews() {
@@ -156,5 +164,41 @@ class TranslateController: UIViewController {
             outputText.leftAnchor.constraint(equalTo: wrappedOutputText.leftAnchor),
             outputText.rightAnchor.constraint(equalTo: wrappedOutputText.rightAnchor)
         ])
+    }
+
+    // MARK: - Switch
+    private func setupSwitchButton() {
+        switchText.addTarget(self, action: #selector(switchLanguage), for: .touchUpInside)
+    }
+
+    @objc func switchLanguage() {
+        var transformInput: CGAffineTransform
+        var transformOutput: CGAffineTransform
+
+        switch displayPosition {
+        case .origin:
+            let originInput = wrappedinputLanguage.frame.origin.x
+            let originOutput = wrappedOutputLanguage.frame.origin.x
+            let translationX = originOutput - originInput
+            transformInput = CGAffineTransform(translationX: translationX, y: 0)
+            transformOutput = CGAffineTransform(translationX: -translationX, y: 0)
+
+            displayPosition = .switched
+
+        case .switched:
+            transformInput = .identity
+            transformOutput = .identity
+
+            displayPosition = .origin
+        }
+
+        UIView.animate(withDuration: 0.7,
+                       delay: 0,
+                       usingSpringWithDamping: 0.7,
+                       initialSpringVelocity: 0.5,
+                       animations: {
+                                    self.wrappedinputLanguage.transform = transformInput
+                                    self.wrappedOutputLanguage.transform = transformOutput
+                                    })
     }
 }
