@@ -83,7 +83,7 @@ class ExchangeController: UIViewController {
             exchange.setCurrencyISOCode(local: convertedButtonLabel, converted: localButtonLabel)
         }
         #warning("a enlever en prod")
-        checkRates()
+        // checkRates()
     }
 
     private func setupShadowOf(_ view: UIView, radius: CGFloat, opacity: Float ) {
