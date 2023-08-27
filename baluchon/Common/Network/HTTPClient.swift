@@ -20,9 +20,7 @@ class HttpClient: HttpClientProtocol {
     }
 
     func fetch<T: Codable>(url: URL, completion: @escaping (Result<T, HttpError>) -> Void) {
-        self.urlSession.dataTask(with: url, completionHandler: { [weak self] data, response, _ in
-            #warning("ne fonctionne pas")
- //           guard let self = self else {return}
+        self.urlSession.dataTask(with: url, completionHandler: { data, response, _ in
 
             DispatchQueue.main.async {
                 guard (response as? HTTPURLResponse)?.statusCode == 200 else {

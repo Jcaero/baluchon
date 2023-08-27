@@ -36,7 +36,7 @@ class TranslateController: UIViewController {
 
             setupShadowOf($0, radius: 1, opacity: 0.5)
         }
-        
+
         outputText.layer.cornerRadius = 30
         outputText.layer.masksToBounds = true
 

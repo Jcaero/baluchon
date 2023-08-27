@@ -42,6 +42,7 @@ class ExchangeController: UIViewController {
     var canUseButton: Bool = true
 
     var dateUpdateRate: Date?
+    let updateDisplay = UILabel()
 
     // MARK: - lifeCycle
     override func viewDidLoad() {
@@ -56,6 +57,7 @@ class ExchangeController: UIViewController {
         setupDisplay()
         setupDisplayLayout()
         setupWarningLimitation()
+        setupUpdateDisplay()
 
         setupGestureRecogniser()
     }
@@ -81,7 +83,7 @@ class ExchangeController: UIViewController {
             exchange.setCurrencyISOCode(local: convertedButtonLabel, converted: localButtonLabel)
         }
         #warning("a enlever en prod")
-        // checkRates()
+        checkRates()
     }
 
     private func setupShadowOf(_ view: UIView, radius: CGFloat, opacity: Float ) {
@@ -265,6 +267,21 @@ class ExchangeController: UIViewController {
         ])
     }
 
+    private func setupUpdateDisplay() {
+        updateDisplay.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        updateDisplay.textColor = .lawn
+        displayArea.addSubview(updateDisplay)
+        updateDisplay.textAlignment = .center
+        updateDisplay.isHidden = true
+        updateDisplay.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            updateDisplay.widthAnchor.constraint(equalTo: localCurrencyView.widthAnchor),
+            updateDisplay.centerXAnchor.constraint(equalTo: localCurrencyView.centerXAnchor),
+            updateDisplay.topAnchor.constraint(equalTo: convertedCurrencyView.bottomAnchor, constant: 12)
+        ])
+    }
+
     // MARK: - Switch
     @objc func tappedSwitch() {
         canUseButton = false
@@ -353,8 +370,13 @@ class ExchangeController: UIViewController {
                     self.exchange.setupRates(with: rates)
                     self.canUseButton = true
 
-                    let overlayer = OverLayerPopUP(.ratesUpdate)
-                    self.present(overlayer, animated: false)
+                    updateDisplay.text = "Information: Taux Actualisé"
+                    updateDisplay.isHidden = false
+
+                    // call after 3s to hidde
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 7) { [weak self] in
+                        self?.updateDisplay.isHidden = true
+                    }
 
                 case .failure(let error):
                     self.showAlert(title: error.title, description: error.description)
