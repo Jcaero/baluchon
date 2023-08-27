@@ -37,6 +37,7 @@ class TranslateController: UIViewController {
         setupLayouts()
 
         setupSwitchButton()
+        setupTextView()
     }
 
     override func viewWillLayoutSubviews() {
@@ -200,5 +201,45 @@ class TranslateController: UIViewController {
                                     self.wrappedinputLanguage.transform = transformInput
                                     self.wrappedOutputLanguage.transform = transformOutput
                                     })
+    }
+}
+
+// MARK: - TextView
+extension TranslateController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if inputText.textColor == UIColor.lightGray {
+            inputText.text = nil
+            inputText.textColor = UIColor.black
+            inputText.textAlignment = .left
+        }
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if inputText.text.isEmpty {
+            inputText.text = "Inserer le texte à Traduire"
+            inputText.textColor = UIColor.lightGray
+            inputText.textAlignment = .center
+        }
+    }
+
+    func textViewDidChange(_ textView: UITextView) {
+        if let text = textView.text, text.count > 80 {
+                    let endIndex = text.index(text.startIndex, offsetBy: 80)
+                    textView.text = String(text[..<endIndex])
+                }
+    }
+
+    private func setupTextView() {
+        inputText.delegate = self
+        inputText.text = "Inserer le texte à Traduire"
+        inputText.textColor = UIColor.lightGray
+        inputText.textAlignment = .center
+        inputText.adjustsFontForContentSizeCategory = true
+        // screen under iphone 7
+        if UIScreen.main.bounds.size.height < 800 {
+            inputText.font = UIFont.systemFont(ofSize: 30)
+        } else {
+            inputText.font = UIFont.systemFont(ofSize: 40)
+        }
     }
 }
