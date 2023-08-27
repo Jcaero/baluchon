@@ -38,6 +38,7 @@ class TranslateController: UIViewController {
 
         setupSwitchButton()
         setupTextView()
+        setupGestureRecogniser()
     }
 
     override func viewWillLayoutSubviews() {
@@ -222,11 +223,22 @@ extension TranslateController: UITextViewDelegate {
         }
     }
 
-    func textViewDidChange(_ textView: UITextView) {
-        if let text = textView.text, text.count > 80 {
-                    let endIndex = text.index(text.startIndex, offsetBy: 80)
-                    textView.text = String(text[..<endIndex])
-                }
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+            if text == "\n" {
+                self.inputText.resignFirstResponder()
+                return false
+            }
+
+            let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+            let numberOfChars = newText.count
+            if numberOfChars > 80 {
+                return false
+            }
+
+            if text == " " {
+                print("espace")
+            }
+            return true
     }
 
     private func setupTextView() {
@@ -241,5 +253,15 @@ extension TranslateController: UITextViewDelegate {
         } else {
             inputText.font = UIFont.systemFont(ofSize: 40)
         }
+    }
+
+    private func setupGestureRecogniser() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.numberOfTouchesRequired = 1
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        inputText.resignFirstResponder()
     }
 }
