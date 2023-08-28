@@ -33,6 +33,7 @@
 		47C744D12A91BE39002757DE /* errorJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 47C744D02A91BE39002757DE /* errorJSON.json */; };
 		47CAB08F2A95BFDB00B34B38 /* TranslateJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 47CAB08E2A95BFDB00B34B38 /* TranslateJSON.json */; };
 		47CAB0912A95C53D00B34B38 /* TranslateRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CAB0902A95C53D00B34B38 /* TranslateRepositoryTest.swift */; };
+		47D05BEB2A9C5F5B00551C81 /* GoogleLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D05BEA2A9C5F5B00551C81 /* GoogleLanguage.swift */; };
 		47D6BFBB2A8DCE8500B4CA82 /* APITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D6BFBA2A8DCE8500B4CA82 /* APITest.swift */; };
 		47DB13EB2A81FD5D00B4C0C0 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB13EA2A81FD5D00B4C0C0 /* API.swift */; };
 		47DB13F32A8200A600B4C0C0 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB13F22A8200A600B4C0C0 /* Error.swift */; };
@@ -90,6 +91,7 @@
 		47C744D02A91BE39002757DE /* errorJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = errorJSON.json; sourceTree = "<group>"; };
 		47CAB08E2A95BFDB00B34B38 /* TranslateJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TranslateJSON.json; sourceTree = "<group>"; };
 		47CAB0902A95C53D00B34B38 /* TranslateRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateRepositoryTest.swift; sourceTree = "<group>"; };
+		47D05BEA2A9C5F5B00551C81 /* GoogleLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLanguage.swift; sourceTree = "<group>"; };
 		47D6BFBA2A8DCE8500B4CA82 /* APITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITest.swift; sourceTree = "<group>"; };
 		47DB13E32A81F0DA00B4C0C0 /* baluchon.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = baluchon.xctestplan; sourceTree = "<group>"; };
 		47DB13EA2A81FD5D00B4C0C0 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				47B6A4D92A9479B6001DA33F /* TranslateRepository.swift */,
+				47D05BEA2A9C5F5B00551C81 /* GoogleLanguage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				479331282A759EF700952447 /* UIColor+.swift in Sources */,
 				47B6A4DA2A9479B6001DA33F /* TranslateRepository.swift in Sources */,
 				470C233F2A7A02540044A393 /* ExchangeController.swift in Sources */,
+				47D05BEB2A9C5F5B00551C81 /* GoogleLanguage.swift in Sources */,
 				47DB13F32A8200A600B4C0C0 /* Error.swift in Sources */,
 				477221A72A73F7230023CA57 /* AppDelegate.swift in Sources */,
 				4768BF152A7ED69D005190DC /* UIButton+.swift in Sources */,

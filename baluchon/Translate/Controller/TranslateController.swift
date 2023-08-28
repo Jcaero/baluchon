@@ -261,12 +261,14 @@ extension TranslateController: UITextViewDelegate {
 
     private func showTranslate() {
         let repository = TranslateRepository()
-        
+
         repository.getTraduction(of: self.inputText.text) { result in
             switch result {
             case .success(let response):
                 self.outputText.text = response.data.translations[0].translatedText
-                self.inputLanguage.text = response.data.translations[0].detectedSourceLanguage
+
+                let inputLanguage = response.data.translations[0].detectedSourceLanguage
+                self.inputLanguage.text = GoogleLanguage.language(inputLanguage).complete
 
             case .failure(let error):
                 self.showSimpleAlerte(with: error.title, message: error.description)
