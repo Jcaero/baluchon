@@ -14,6 +14,7 @@ class TranslateController: UIViewController {
     let outputText = UILabel()
     let wrappedOutputText = UIView()
 
+    // MARK: - Language
     let inputLanguage = UILabel()
     let outputLanguage = UILabel()
     let wrappedOutputLanguage = UIView()
@@ -25,6 +26,34 @@ class TranslateController: UIViewController {
     enum Position {
         case origin
         case switched
+    }
+
+    var sourceLanguage: String? {
+        get {
+            return displayPosition == .origin ? inputLanguage.text : outputLanguage.text
+        }
+        set(newSourceLanguage) {
+            switch displayPosition {
+            case .origin:
+                inputLanguage.text = newSourceLanguage
+            case .switched:
+                outputLanguage.text = newSourceLanguage
+            }
+        }
+    }
+
+    var translateLanguage: String? {
+        get {
+            return displayPosition == .origin ? outputLanguage.text : inputLanguage.text
+        }
+        set(newSourceLanguage) {
+            switch displayPosition {
+            case .origin:
+                outputLanguage.text = newSourceLanguage
+            case .switched:
+                inputLanguage.text = newSourceLanguage
+            }
+        }
     }
 
     // MARK: - lifeCycle
@@ -192,7 +221,6 @@ class TranslateController: UIViewController {
         case .switched:
             transformInput = .identity
             transformOutput = .identity
-
             displayPosition = .origin
         }
 
@@ -204,9 +232,9 @@ class TranslateController: UIViewController {
                                     self.wrappedinputLanguage.transform = transformInput
                                     self.wrappedOutputLanguage.transform = transformOutput
                                     })
+        showTranslate()
     }
 }
-
 // MARK: - TextView
 extension TranslateController: UITextViewDelegate {
 
@@ -262,7 +290,9 @@ extension TranslateController: UITextViewDelegate {
     private func showTranslate() {
         let repository = TranslateRepository()
 
-        repository.getTraduction(of: self.inputText.text) { result in
+        let targetLanguage = translateLanguage ?? "Anglais"
+
+        repository.getTraduction(of: self.inputText.text, language: targetLanguage) { result in
             switch result {
             case .success(let response):
                 var text = response.data.translations[0].translatedText
@@ -272,7 +302,7 @@ extension TranslateController: UITextViewDelegate {
                 self.outputText.text = response.data.translations[0].translatedText
 
                 let inputLanguage = response.data.translations[0].detectedSourceLanguage
-                self.inputLanguage.text = GoogleLanguage.language(inputLanguage).complete
+                self.sourceLanguage = GoogleLanguage.language(inputLanguage).complete
 
             case .failure(let error):
                 self.showSimpleAlerte(with: error.title, message: error.description)

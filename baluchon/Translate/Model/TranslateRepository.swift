@@ -15,9 +15,10 @@ class TranslateRepository {
         self.httpClient = httpClient
     }
 
-    func getTraduction(of query: String, completionHandler: @escaping (Result<API.JSONDataType.TranslationResponse, HttpError>) -> Void) {
+    func getTraduction(of query: String, language: String, completionHandler: @escaping (Result<API.JSONDataType.TranslationResponse, HttpError>) -> Void) {
 
-        let url = getTranslateURL(with: query)
+        let target = GoogleLanguage.language(language).code
+        let url = getTranslateURL(with: query, target: target)
 
         DispatchQueue.main.async {
             self.httpClient.fetch(url: url) { (response: Result<API.JSONDataType.TranslationResponse, HttpError>) in
@@ -31,8 +32,8 @@ class TranslateRepository {
         }
     }
 
-    private func getTranslateURL( with query: String) -> URL {
-        let queryItems: [String: String] = [ "q": query, "target": "en"]
+    private func getTranslateURL( with query: String, target: String) -> URL {
+        let queryItems: [String: String] = [ "q": query, "target": target]
 
         let url = API.EndPoint.translate(queryItems).url
 

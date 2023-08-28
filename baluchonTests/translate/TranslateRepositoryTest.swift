@@ -45,7 +45,7 @@ final class TranslateRepositoryTest: TestCase {
 
         let expectation = XCTestExpectation(description: "response")
 
-        repository.getTraduction(of: query) { response in
+        repository.getTraduction(of: query, language: "Anglais") { response in
             switch response {
             case .success(let translate):
                 XCTAssertEqual(translate.data.translations[0].translatedText, result)
