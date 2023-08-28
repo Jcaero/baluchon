@@ -10,15 +10,16 @@ import XCTest
 
 final class ExchangeTest: XCTestCase {
 
-    private var exchange: Exchange!
-
-    // data output
+    // MARK: - Data input
     private var alerteTitle: String?
     private var alerteDescription: String?
     private var displayLocal: String?
     private var displayConverted: String?
     private var clearButton: String?
 
+    // MARK: - setup
+    private var exchange: Exchange!
+    
     override func setUp() {
         super.setUp()
         exchange = Exchange(delegate: self)

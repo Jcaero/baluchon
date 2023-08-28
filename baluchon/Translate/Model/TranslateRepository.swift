@@ -31,7 +31,7 @@ class TranslateRepository {
         }
     }
 
-    func getTranslateURL( with query: String) -> URL {
+    private func getTranslateURL( with query: String) -> URL {
         let queryItems: [String: String] = [ "q": query, "target": "en"]
 
         let url = API.EndPoint.translate(queryItems).url

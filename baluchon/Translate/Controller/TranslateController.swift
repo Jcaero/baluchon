@@ -82,7 +82,9 @@ class TranslateController: UIViewController {
         // MARK: - Setup Texte
         [outputText].forEach {
             $0.backgroundColor = .whiteSmoke
-            $0.textAlignment = .right
+            $0.textColor = .darkGray
+            $0.textAlignment = .center
+            $0.numberOfLines = 6
             $0.adjustsFontSizeToFitWidth = true
             $0.text = ""
         }
@@ -207,6 +209,21 @@ class TranslateController: UIViewController {
 
 // MARK: - TextView
 extension TranslateController: UITextViewDelegate {
+
+    private func setupTextView() {
+        inputText.delegate = self
+        inputText.text = "Inserer le texte à Traduire"
+        inputText.textColor = UIColor.lightGray
+        inputText.textAlignment = .center
+        inputText.adjustsFontForContentSizeCategory = true
+        // screen under iphone 7
+        if UIScreen.main.bounds.size.height < 800 {
+            inputText.font = UIFont.systemFont(ofSize: 30)
+        } else {
+            inputText.font = UIFont.systemFont(ofSize: 40)
+        }
+    }
+
     func textViewDidBeginEditing(_ textView: UITextView) {
         if inputText.textColor == UIColor.lightGray {
             inputText.text = nil
@@ -225,6 +242,7 @@ extension TranslateController: UITextViewDelegate {
 
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
             if text == "\n" {
+                showTranslate()
                 self.inputText.resignFirstResponder()
                 return false
             }
@@ -236,22 +254,23 @@ extension TranslateController: UITextViewDelegate {
             }
 
             if text == " " {
-                print("espace")
+                showTranslate()
             }
             return true
     }
 
-    private func setupTextView() {
-        inputText.delegate = self
-        inputText.text = "Inserer le texte à Traduire"
-        inputText.textColor = UIColor.lightGray
-        inputText.textAlignment = .center
-        inputText.adjustsFontForContentSizeCategory = true
-        // screen under iphone 7
-        if UIScreen.main.bounds.size.height < 800 {
-            inputText.font = UIFont.systemFont(ofSize: 30)
-        } else {
-            inputText.font = UIFont.systemFont(ofSize: 40)
+    private func showTranslate() {
+        let repository = TranslateRepository()
+        
+        repository.getTraduction(of: self.inputText.text) { result in
+            switch result {
+            case .success(let response):
+                self.outputText.text = response.data.translations[0].translatedText
+                self.inputLanguage.text = response.data.translations[0].detectedSourceLanguage
+
+            case .failure(let error):
+                self.showSimpleAlerte(with: error.title, message: error.description)
+            }
         }
     }
 
@@ -263,5 +282,6 @@ extension TranslateController: UITextViewDelegate {
 
     @objc func dismissKeyboard() {
         inputText.resignFirstResponder()
+        showTranslate()
     }
 }
