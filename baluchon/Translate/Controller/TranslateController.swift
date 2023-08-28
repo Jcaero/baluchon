@@ -265,6 +265,10 @@ extension TranslateController: UITextViewDelegate {
         repository.getTraduction(of: self.inputText.text) { result in
             switch result {
             case .success(let response):
+                var text = response.data.translations[0].translatedText
+                if let decodedText = text.removingPercentEncoding {
+                    text = decodedText
+                }
                 self.outputText.text = response.data.translations[0].translatedText
 
                 let inputLanguage = response.data.translations[0].detectedSourceLanguage

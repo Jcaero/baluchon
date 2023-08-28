@@ -8,9 +8,9 @@
 import Foundation
 
 enum GoogleLanguage {
-    
+
     case language(String)
-    
+
     var complete: String {
         switch self {
         case.language(let code):
@@ -24,9 +24,9 @@ enum GoogleLanguage {
 }
 
 let languageCodes: [String: String] = [
-        "af" : "Afrikaan",
-        "sq" : "Albanais",
-        "am" : "Amharique",
+        "af": "Afrikaan",
+        "sq": "Albanais",
+        "am": "Amharique",
         "hy": "Arménien",
         "as": "Assamais",
         "ay": "Aymara",
