@@ -56,6 +56,8 @@ class TranslateController: UIViewController {
             }
         }
     }
+    
+    var typingTimer: Timer?
 
     // MARK: - lifeCycle
     override func viewDidLoad() {
@@ -277,6 +279,14 @@ extension TranslateController: UITextViewDelegate {
         }
     }
 
+    func textViewDidChange(_ textView: UITextView) {
+        typingTimer?.invalidate()
+
+        typingTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
+                    self.showTranslate()
+                }
+    }
+
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
             if text == "\n" {
                 showTranslate()
@@ -297,6 +307,8 @@ extension TranslateController: UITextViewDelegate {
     }
 
     private func showTranslate() {
+        typingTimer?.invalidate()
+
         let repository = TranslateRepository()
 
         guard let targetLanguage = outputLanguage,
