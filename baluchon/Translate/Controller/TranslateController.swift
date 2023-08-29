@@ -21,7 +21,7 @@ class TranslateController: UIViewController {
     let wrappedOutputLanguage = UIView()
     let wrappedinputLanguage = UIView()
 
-    let switchText = UIButton()
+    let switchBtn = UIButton()
     var displayPosition = Position.origin
 
     enum Position {
@@ -96,8 +96,8 @@ class TranslateController: UIViewController {
     private func setupViews() {
         // MARK: - Setup SwitchText
         let configurationImage = UIImage.SymbolConfiguration(pointSize: 30, weight: .ultraLight)
-        switchText.setImage(UIImage(systemName: "arrow.left.arrow.right", withConfiguration: configurationImage), for: .normal)
-        switchText.tintColor = .navy
+        switchBtn.setImage(UIImage(systemName: "arrow.left.arrow.right", withConfiguration: configurationImage), for: .normal)
+        switchBtn.tintColor = .navy
 
         // MARK: - Setup Language label
         [leftLanguage, rightLanguage].forEach {
@@ -128,17 +128,17 @@ class TranslateController: UIViewController {
 
     // MARK: - SetupLayout
     private func setupLayouts() {
-        [inputText, leftLanguage, outputText, rightLanguage, switchText, wrappedOutputText, wrappedinputLanguage, wrappedOutputLanguage].forEach {
+        [inputText, leftLanguage, outputText, rightLanguage, switchBtn, wrappedOutputText, wrappedinputLanguage, wrappedOutputLanguage].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
         // MARK: - SwitchText Layout
-        view.addSubview(switchText)
+        view.addSubview(switchBtn)
         NSLayoutConstraint.activate([
-            switchText.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            switchText.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            switchText.heightAnchor.constraint(equalTo: switchText.widthAnchor),
-            switchText.heightAnchor.constraint(equalToConstant: 50)
+            switchBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            switchBtn.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            switchBtn.heightAnchor.constraint(equalTo: switchBtn.widthAnchor),
+            switchBtn.heightAnchor.constraint(equalToConstant: 50)
         ])
 
         // MARK: - Input Layout
@@ -146,7 +146,7 @@ class TranslateController: UIViewController {
         NSLayoutConstraint.activate([
             wrappedinputLanguage.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             wrappedinputLanguage.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 15),
-            wrappedinputLanguage.rightAnchor.constraint(equalTo: switchText.leftAnchor, constant: -10),
+            wrappedinputLanguage.rightAnchor.constraint(equalTo: switchBtn.leftAnchor, constant: -10),
             wrappedinputLanguage.heightAnchor.constraint(equalToConstant: 50)
         ])
 
@@ -160,7 +160,7 @@ class TranslateController: UIViewController {
 
         view.addSubview(inputText)
         NSLayoutConstraint.activate([
-            inputText.bottomAnchor.constraint(equalTo: switchText.topAnchor, constant: -20),
+            inputText.bottomAnchor.constraint(equalTo: switchBtn.topAnchor, constant: -20),
             inputText.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             inputText.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 15),
             inputText.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -15)
@@ -171,7 +171,7 @@ class TranslateController: UIViewController {
         NSLayoutConstraint.activate([
             wrappedOutputLanguage.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             wrappedOutputLanguage.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -15),
-            wrappedOutputLanguage.leftAnchor.constraint(equalTo: switchText.rightAnchor, constant: 10),
+            wrappedOutputLanguage.leftAnchor.constraint(equalTo: switchBtn.rightAnchor, constant: 10),
             wrappedOutputLanguage.heightAnchor.constraint(equalToConstant: 50)
         ])
 
@@ -185,7 +185,7 @@ class TranslateController: UIViewController {
 
         view.addSubview(wrappedOutputText)
         NSLayoutConstraint.activate([
-            wrappedOutputText.topAnchor.constraint(equalTo: switchText.bottomAnchor, constant: 20),
+            wrappedOutputText.topAnchor.constraint(equalTo: switchBtn.bottomAnchor, constant: 20),
             wrappedOutputText.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             wrappedOutputText.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 15),
             wrappedOutputText.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -15)
@@ -202,7 +202,7 @@ class TranslateController: UIViewController {
 
     // MARK: - Switch
     private func setupSwitchButton() {
-        switchText.addTarget(self, action: #selector(switchLanguage), for: .touchUpInside)
+        switchBtn.addTarget(self, action: #selector(switchLanguage), for: .touchUpInside)
     }
 
     @objc func switchLanguage() {
@@ -233,7 +233,15 @@ class TranslateController: UIViewController {
                                     self.wrappedinputLanguage.transform = transformInput
                                     self.wrappedOutputLanguage.transform = transformOutput
                                     })
-        showTranslate()
+        switchText()
+    }
+
+    private func switchText() {
+        let oldInput = inputText.text == placeholderTextInput ? "" : inputText.text
+        let oldOutput = outputText.text == "" ? placeholderTextInput : outputText.text
+
+        outputText.text = oldInput
+        inputText.text = oldOutput
     }
 }
 // MARK: - TextView
