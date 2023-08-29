@@ -16,47 +16,13 @@ class TranslateController: UIViewController {
     let placeholderTextInput = "Inserer le texte à Traduire"
 
     // MARK: - Language
-    let leftLanguage = UILabel()
-    let rightLanguage = UILabel()
+    let inputLanguage = UILabel()
+    let outputLanguage = UILabel()
     let wrappedOutputLanguage = UIView()
     let wrappedinputLanguage = UIView()
 
     let switchBtn = UIButton()
-    var displayPosition = Position.origin
 
-    enum Position {
-        case origin
-        case switched
-    }
-
-    var inputLanguage: String? {
-        get {
-            return displayPosition == .origin ? leftLanguage.text : rightLanguage.text
-        }
-        set(newSourceLanguage) {
-            switch displayPosition {
-            case .origin:
-                leftLanguage.text = newSourceLanguage
-            case .switched:
-                rightLanguage.text = newSourceLanguage
-            }
-        }
-    }
-
-    var outputLanguage: String? {
-        get {
-            return displayPosition == .origin ? rightLanguage.text : leftLanguage.text
-        }
-        set(newSourceLanguage) {
-            switch displayPosition {
-            case .origin:
-                rightLanguage.text = newSourceLanguage
-            case .switched:
-                leftLanguage.text = newSourceLanguage
-            }
-        }
-    }
-    
     var typingTimer: Timer?
 
     // MARK: - lifeCycle
@@ -74,7 +40,7 @@ class TranslateController: UIViewController {
     }
 
     override func viewWillLayoutSubviews() {
-        [ leftLanguage, rightLanguage, outputText ].forEach {
+        [ inputLanguage, outputLanguage, outputText ].forEach {
             $0.layer.cornerRadius = 25
             $0.layer.masksToBounds = true
         }
@@ -102,14 +68,14 @@ class TranslateController: UIViewController {
         switchBtn.tintColor = .navy
 
         // MARK: - Setup Language label
-        [leftLanguage, rightLanguage].forEach {
+        [inputLanguage, outputLanguage].forEach {
             $0.backgroundColor = .whiteSmoke
             $0.textColor = .darkGray
             $0.textAlignment = .center
             $0.adjustsFontSizeToFitWidth = true
             $0.text = ""
         }
-        rightLanguage.text = "Anglais"
+        outputLanguage.text = "Anglais"
 
         // MARK: - Setup Texte
         [outputText].forEach {
@@ -130,7 +96,7 @@ class TranslateController: UIViewController {
 
     // MARK: - SetupLayout
     private func setupLayouts() {
-        [inputText, leftLanguage, outputText, rightLanguage, switchBtn, wrappedOutputText, wrappedinputLanguage, wrappedOutputLanguage].forEach {
+        [inputText, inputLanguage, outputText, outputLanguage, switchBtn, wrappedOutputText, wrappedinputLanguage, wrappedOutputLanguage].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
@@ -152,12 +118,12 @@ class TranslateController: UIViewController {
             wrappedinputLanguage.heightAnchor.constraint(equalToConstant: 50)
         ])
 
-        wrappedinputLanguage.addSubview(leftLanguage)
+        wrappedinputLanguage.addSubview(inputLanguage)
         NSLayoutConstraint.activate([
-            leftLanguage.topAnchor.constraint(equalTo: wrappedinputLanguage.topAnchor),
-            leftLanguage.bottomAnchor.constraint(equalTo: wrappedinputLanguage.bottomAnchor),
-            leftLanguage.leftAnchor.constraint(equalTo: wrappedinputLanguage.leftAnchor),
-            leftLanguage.rightAnchor.constraint(equalTo: wrappedinputLanguage.rightAnchor)
+            inputLanguage.topAnchor.constraint(equalTo: wrappedinputLanguage.topAnchor),
+            inputLanguage.bottomAnchor.constraint(equalTo: wrappedinputLanguage.bottomAnchor),
+            inputLanguage.leftAnchor.constraint(equalTo: wrappedinputLanguage.leftAnchor),
+            inputLanguage.rightAnchor.constraint(equalTo: wrappedinputLanguage.rightAnchor)
         ])
 
         view.addSubview(inputText)
@@ -177,12 +143,12 @@ class TranslateController: UIViewController {
             wrappedOutputLanguage.heightAnchor.constraint(equalToConstant: 50)
         ])
 
-        wrappedOutputLanguage.addSubview(rightLanguage)
+        wrappedOutputLanguage.addSubview(outputLanguage)
         NSLayoutConstraint.activate([
-            rightLanguage.topAnchor.constraint(equalTo: wrappedOutputLanguage.topAnchor),
-            rightLanguage.bottomAnchor.constraint(equalTo: wrappedOutputLanguage.bottomAnchor),
-            rightLanguage.leftAnchor.constraint(equalTo: wrappedOutputLanguage.leftAnchor),
-            rightLanguage.rightAnchor.constraint(equalTo: wrappedOutputLanguage.rightAnchor)
+            outputLanguage.topAnchor.constraint(equalTo: wrappedOutputLanguage.topAnchor),
+            outputLanguage.bottomAnchor.constraint(equalTo: wrappedOutputLanguage.bottomAnchor),
+            outputLanguage.leftAnchor.constraint(equalTo: wrappedOutputLanguage.leftAnchor),
+            outputLanguage.rightAnchor.constraint(equalTo: wrappedOutputLanguage.rightAnchor)
         ])
 
         view.addSubview(wrappedOutputText)
@@ -204,38 +170,19 @@ class TranslateController: UIViewController {
 
     // MARK: - Switch
     private func setupSwitchButton() {
-        switchBtn.addTarget(self, action: #selector(switchLanguage), for: .touchUpInside)
+        switchBtn.addTarget(self, action: #selector(switchTraduction), for: .touchUpInside)
     }
 
-    @objc func switchLanguage() {
-        var transformInput: CGAffineTransform
-        var transformOutput: CGAffineTransform
+    @objc func switchTraduction() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.switchBtn.transform = self.switchBtn.transform.rotated(by: .pi)
+                })
 
-        switch displayPosition {
-        case .origin:
-            let originInput = wrappedinputLanguage.frame.origin.x
-            let originOutput = wrappedOutputLanguage.frame.origin.x
-            let translationX = originOutput - originInput
-            transformInput = CGAffineTransform(translationX: translationX, y: 0)
-            transformOutput = CGAffineTransform(translationX: -translationX, y: 0)
-
-            displayPosition = .switched
-
-        case .switched:
-            transformInput = .identity
-            transformOutput = .identity
-            displayPosition = .origin
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            self.switchLanguage()
+            self.switchText()
+            self.inputText.resignFirstResponder()
         }
-
-        UIView.animate(withDuration: 0.7,
-                       delay: 0,
-                       usingSpringWithDamping: 0.7,
-                       initialSpringVelocity: 0.5,
-                       animations: {
-                                    self.wrappedinputLanguage.transform = transformInput
-                                    self.wrappedOutputLanguage.transform = transformOutput
-                                    })
-        switchText()
     }
 
     private func switchText() {
@@ -244,6 +191,14 @@ class TranslateController: UIViewController {
 
         outputText.text = oldInput
         inputText.text = oldOutput
+    }
+
+    private func switchLanguage() {
+        let oldInput = inputLanguage.text == nil ? "" : inputLanguage.text
+        let oldOutput = outputLanguage.text == nil ? "" : outputLanguage.text
+
+        outputLanguage.text = oldInput
+        inputLanguage.text = oldOutput
     }
 }
 // MARK: - TextView
@@ -311,13 +266,12 @@ extension TranslateController: UITextViewDelegate {
 
         let repository = TranslateRepository()
 
-        guard let targetLanguage = outputLanguage,
-                let text = self.inputText.text,
+        guard let text = self.inputText.text,
                 text != placeholderTextInput else {return}
 
-        if targetLanguage == "" { outputLanguage = "Anglais" }
+        if outputLanguage.text == "" { outputLanguage.text = "Anglais"}
 
-        repository.getTraduction(of: self.inputText.text, language: targetLanguage) { result in
+        repository.getTraduction(of: self.inputText.text, language: outputLanguage.text!) { result in
             switch result {
             case .success(let response):
                 var text = response.data.translations[0].translatedText
@@ -327,7 +281,7 @@ extension TranslateController: UITextViewDelegate {
                 self.outputText.text = response.data.translations[0].translatedText
 
                 let input = response.data.translations[0].detectedSourceLanguage
-                self.inputLanguage = GoogleLanguage.language(input).complete
+                self.inputLanguage.text = GoogleLanguage.language(input).complete
 
             case .failure(let error):
                 self.showSimpleAlerte(with: error.title, message: error.description)
