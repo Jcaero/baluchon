@@ -23,6 +23,7 @@
 		477221A92A73F7230023CA57 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477221A82A73F7230023CA57 /* SceneDelegate.swift */; };
 		477221B02A73F7230023CA57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 477221AF2A73F7230023CA57 /* Assets.xcassets */; };
 		477221B32A73F7230023CA57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 477221B12A73F7230023CA57 /* LaunchScreen.storyboard */; };
+		477625A22A9DA9AF00050EBE /* SelectLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477625A12A9DA9AF00050EBE /* SelectLanguageController.swift */; };
 		477FE1432A82CB6C005C3481 /* testJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 477FE1422A82CB6C005C3481 /* testJSON.json */; };
 		479331282A759EF700952447 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479331272A759EF700952447 /* UIColor+.swift */; };
 		47A31A072A80A07800ED1A4B /* Exchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A31A062A80A07800ED1A4B /* Exchange.swift */; };
@@ -80,6 +81,7 @@
 		477221B42A73F7230023CA57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = baluchon/Ressources/Info.plist; sourceTree = SOURCE_ROOT; };
 		477221B92A73F7240023CA57 /* baluchonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = baluchonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		477221C32A73F7240023CA57 /* baluchonUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = baluchonUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		477625A12A9DA9AF00050EBE /* SelectLanguageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLanguageController.swift; sourceTree = "<group>"; };
 		477FE1422A82CB6C005C3481 /* testJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = testJSON.json; sourceTree = "<group>"; };
 		4780A00C2A81304E00FA8C3E /* baluchon.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = baluchon.xctestplan; sourceTree = "<group>"; };
 		479331272A759EF700952447 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				4719B5AC2A97068900638F4B /* TranslateController.swift */,
+				477625A12A9DA9AF00050EBE /* SelectLanguageController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 				477221A72A73F7230023CA57 /* AppDelegate.swift in Sources */,
 				4768BF152A7ED69D005190DC /* UIButton+.swift in Sources */,
 				47A31A072A80A07800ED1A4B /* Exchange.swift in Sources */,
+				477625A22A9DA9AF00050EBE /* SelectLanguageController.swift in Sources */,
 				4719B5AD2A97068900638F4B /* TranslateController.swift in Sources */,
 				477221A92A73F7230023CA57 /* SceneDelegate.swift in Sources */,
 				47B6A4D42A9467F2001DA33F /* OverLayoutCase.swift in Sources */,

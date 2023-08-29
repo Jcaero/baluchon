@@ -360,6 +360,7 @@ class ExchangeController: UIViewController {
 
                 switch response {
                 case .success(let data):
+                    #warning("pourquoi on force ici")
                     guard let date = self.convertInDate(date: data.date),
                           let rates = data.rates as? [String: Float] else {
                         self.showAlert(title: "erreur", description: "Probleme de donnée, rechager le taux de change")

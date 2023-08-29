@@ -14,22 +14,16 @@ enum GoogleLanguage {
     var complete: String {
         switch self {
         case.language(let code):
-            if let completLanguage = languageCodes[code] {
-                return completLanguage
-            } else {
-                return "Anglais"
-            }
+            guard let completLanguage = languageCodes[code] else {return "Anglais"}
+            return completLanguage
         }
     }
 
     var code: String {
         switch self {
         case.language(let name):
-            if let codeLanguage = languageNames[name] {
-                return codeLanguage
-            } else {
-                return "en"
-            }
+            guard let codeLanguage = languageNames[name] else {return "en"}
+            return codeLanguage
         }
     }
 }
