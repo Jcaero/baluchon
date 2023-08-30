@@ -185,6 +185,10 @@ class TranslateController: UIViewController {
         let myViewController = SelectLanguageController()
         present(myViewController, animated: true, completion: nil)
     }
+    
+    func changeOutputLanguage(_ language: String) {
+        outputLanguage.setTitle(language, for: .normal)
+    }
 }
 // MARK: - TextView
 extension TranslateController: UITextViewDelegate {

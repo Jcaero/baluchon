@@ -19,7 +19,7 @@ final class ExchangeTest: XCTestCase {
 
     // MARK: - setup
     private var exchange: Exchange!
-    
+
     override func setUp() {
         super.setUp()
         exchange = Exchange(delegate: self)
