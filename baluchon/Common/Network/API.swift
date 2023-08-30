@@ -11,6 +11,7 @@ enum API {
     enum EndPoint {
         case exchange
         case translate([String: String])
+        case weather([String: String])
 
         var url: URL {
             switch self {
@@ -36,6 +37,22 @@ enum API {
                 ]
                 componments.queryItems = queryItems
                 return componments.url!
+
+            case .weather(let addQueryItems):
+                var componments = URLComponents()
+                componments.scheme = "https"
+                componments.host = "api.openweathermap.org"
+                componments.path = "data/2.5/forecast"
+                let queryItems = [
+                    URLQueryItem(name: "appid", value: APIKey.openwheathermap.key),
+                    URLQueryItem(name: "lat", value: addQueryItems["lat"]),
+                    URLQueryItem(name: "long", value: addQueryItems["long"]),
+                    URLQueryItem(name: "lang", value: "fr"),
+                    URLQueryItem(name: "units", value: "metric"),
+                    URLQueryItem(name: "cnt", value: "3")
+                ]
+                componments.queryItems = queryItems
+                return componments.url!
             }
         }
     }
@@ -57,13 +74,79 @@ enum API {
             let data: DataClass
         }
 
-        struct DataClass: Codable, Equatable {
-            let translations: [Translation]
-        }
 
-        struct Translation: Codable, Equatable {
-            let translatedText, detectedSourceLanguage: String
-        }
 
+        // MARK: - Meteo
+        struct WeatherResponse: Codable, Equatable {
+            let cod: String
+            let message, cnt: Int
+            let list: [List]
+            let city: City
+        }
     }
 }
+
+// MARK: - Translate
+struct DataClass: Codable, Equatable {
+    let translations: [Translation]
+}
+
+struct Translation: Codable, Equatable {
+    let translatedText, detectedSourceLanguage: String
+}
+
+// MARK: - Weather
+struct City: Codable, Equatable {
+    let id: Int
+    let name: String
+    let coord: Coord
+    let country: String
+    let population, timezone, sunrise, sunset: Int
+}
+
+struct Coord: Codable, Equatable {
+    let lat, lon: Double
+}
+
+struct List: Codable, Equatable {
+    let dt: Int
+    let main: Main
+    let weather: [Weather]
+    let clouds: Clouds
+    let wind: Wind
+    let visibility: Int
+    let pop: Double
+    let sys: Sys
+    let dtTxt: String
+    let rain: Rain?
+}
+
+struct Clouds: Codable, Equatable {
+    let all: Int
+}
+
+struct Main: Codable, Equatable {
+    let temp, feelsLike, tempMin, tempMax: Double
+    let pressure, seaLevel, grndLevel, humidity: Int
+    let tempKf: Double
+}
+
+struct Rain: Codable, Equatable {
+    let the3H: Double
+}
+
+struct Sys: Codable, Equatable {
+    let pod: String
+}
+
+struct Weather: Codable, Equatable {
+    let id: Int
+    let main, weatherDescription, icon: String
+}
+
+struct Wind: Codable, Equatable {
+    let speed: Double
+    let deg: Int
+    let gust: Double
+}
+

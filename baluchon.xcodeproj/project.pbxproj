@@ -25,6 +25,8 @@
 		477221B32A73F7230023CA57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 477221B12A73F7230023CA57 /* LaunchScreen.storyboard */; };
 		477625A22A9DA9AF00050EBE /* SelectLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477625A12A9DA9AF00050EBE /* SelectLanguageController.swift */; };
 		477FE1432A82CB6C005C3481 /* testJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 477FE1422A82CB6C005C3481 /* testJSON.json */; };
+		478524412A9EFFFC003DE666 /* weatherJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 478524402A9EFFFC003DE666 /* weatherJSON.json */; };
+		478524472A9F01D5003DE666 /* WeatherRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478524462A9F01D5003DE666 /* WeatherRepository.swift */; };
 		479331282A759EF700952447 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479331272A759EF700952447 /* UIColor+.swift */; };
 		47A31A072A80A07800ED1A4B /* Exchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A31A062A80A07800ED1A4B /* Exchange.swift */; };
 		47A31A092A80A10B00ED1A4B /* ExchangeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A31A082A80A10B00ED1A4B /* ExchangeTest.swift */; };
@@ -84,6 +86,8 @@
 		477625A12A9DA9AF00050EBE /* SelectLanguageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLanguageController.swift; sourceTree = "<group>"; };
 		477FE1422A82CB6C005C3481 /* testJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = testJSON.json; sourceTree = "<group>"; };
 		4780A00C2A81304E00FA8C3E /* baluchon.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = baluchon.xctestplan; sourceTree = "<group>"; };
+		478524402A9EFFFC003DE666 /* weatherJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = weatherJSON.json; sourceTree = "<group>"; };
+		478524462A9F01D5003DE666 /* WeatherRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRepository.swift; sourceTree = "<group>"; };
 		479331272A759EF700952447 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		47A31A062A80A07800ED1A4B /* Exchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exchange.swift; sourceTree = "<group>"; };
 		47A31A082A80A10B00ED1A4B /* ExchangeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTest.swift; sourceTree = "<group>"; };
@@ -167,6 +171,7 @@
 				47B6A4D52A946BBA001DA33F /* TabBarControlleur.swift */,
 				47F09CA82A853F8C00E52B5E /* Exchange */,
 				47B6A4D72A94797E001DA33F /* Translate */,
+				478524432A9F015F003DE666 /* Weather */,
 				477221D72A73FA750023CA57 /* View */,
 				479331262A759ED600952447 /* Common */,
 				477221DA2A73FAE20023CA57 /* Ressources */,
@@ -177,6 +182,7 @@
 		477221BC2A73F7240023CA57 /* baluchonTests */ = {
 			isa = PBXGroup;
 			children = (
+				478524422A9F0007003DE666 /* meteo */,
 				47CAB08D2A95BF8E00B34B38 /* translate */,
 				47F313B92A930FA90028C38A /* common */,
 				47F313B82A930F930028C38A /* exchange */,
@@ -224,6 +230,38 @@
 				477221B12A73F7230023CA57 /* LaunchScreen.storyboard */,
 			);
 			path = Ressources;
+			sourceTree = "<group>";
+		};
+		478524422A9F0007003DE666 /* meteo */ = {
+			isa = PBXGroup;
+			children = (
+				478524402A9EFFFC003DE666 /* weatherJSON.json */,
+			);
+			path = meteo;
+			sourceTree = "<group>";
+		};
+		478524432A9F015F003DE666 /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+				478524452A9F01BD003DE666 /* Controller */,
+				478524442A9F01B5003DE666 /* Model */,
+			);
+			path = Weather;
+			sourceTree = "<group>";
+		};
+		478524442A9F01B5003DE666 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				478524462A9F01D5003DE666 /* WeatherRepository.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		478524452A9F01BD003DE666 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		479331262A759ED600952447 /* Common */ = {
@@ -428,6 +466,7 @@
 				47C744D12A91BE39002757DE /* errorJSON.json in Resources */,
 				47CAB08F2A95BFDB00B34B38 /* TranslateJSON.json in Resources */,
 				471B64E12A8CC98F00FFDEEA /* RatesJSON.json in Resources */,
+				478524412A9EFFFC003DE666 /* weatherJSON.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +507,7 @@
 			files = (
 				47B6A4D62A946BBA001DA33F /* TabBarControlleur.swift in Sources */,
 				479331282A759EF700952447 /* UIColor+.swift in Sources */,
+				478524472A9F01D5003DE666 /* WeatherRepository.swift in Sources */,
 				47B6A4DA2A9479B6001DA33F /* TranslateRepository.swift in Sources */,
 				470C233F2A7A02540044A393 /* ExchangeController.swift in Sources */,
 				47D05BEB2A9C5F5B00551C81 /* GoogleLanguage.swift in Sources */,
