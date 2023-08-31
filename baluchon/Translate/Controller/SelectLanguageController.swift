@@ -48,17 +48,7 @@ extension SelectLanguageController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: segueIdentifier, sender: language[indexPath.row])
+        NotificationCenter.default.post(name: .language, object: language[indexPath.row])
         dismiss(animated: true)
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == segueIdentifier {
-            if let newController = segue.destination as? TranslateController {
-                if let language = sender as? String {
-                    newController.outputLanguage.setTitle(language, for: .normal)
-                }
-            }
-        }
     }
 }

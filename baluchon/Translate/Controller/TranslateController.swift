@@ -23,6 +23,8 @@ class TranslateController: UIViewController {
     let switchBtn = UIButton()
 
     var typingTimer: Timer?
+    
+    let languageIndicator = "   ˅"
 
     // MARK: - lifeCycle
     override func viewDidLoad() {
@@ -70,7 +72,7 @@ class TranslateController: UIViewController {
             $0.setTitleColor(.darkGray, for: .normal)
             $0.setTitle("", for: .normal)
         }
-        outputLanguage.setTitle("Anglais", for: .normal)
+        setOutputLanguageName(with: "Anglais")
         outputLanguage.addTarget(self, action: #selector(showSelectLanguageControlleur), for: .touchUpInside)
 
         // MARK: - Setup Texte
@@ -173,21 +175,39 @@ class TranslateController: UIViewController {
     }
 
     private func switchLanguage() {
-        let oldInput = inputLanguage.titleLabel?.text ?? " "
-        let oldOutput = outputLanguage.titleLabel?.text ?? " "
+        let oldInput = inputLanguage.titleLabel?.text ?? "Anglais"
+        let oldOutput = getLabelLanguage(of: outputLanguage.titleLabel?.text)
 
-        outputLanguage.setTitle(oldInput, for: .normal)
+        setOutputLanguageName(with: oldInput)
         inputLanguage.setTitle(oldOutput, for: .normal)
+    }
+
+    private func getLabelLanguage(of text: String?) -> String {
+        guard let text = text else { return "" }
+        return text.replacingOccurrences(of: languageIndicator, with: "")
     }
 
     // MARK: - select Language
     @objc func showSelectLanguageControlleur() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changeOutputLanguage(_:)), name: NSNotification.Name("language"), object: nil)
+
         let myViewController = SelectLanguageController()
         present(myViewController, animated: true, completion: nil)
     }
-    
-    func changeOutputLanguage(_ language: String) {
-        outputLanguage.setTitle(language, for: .normal)
+
+    @objc func changeOutputLanguage(_ notification: Notification) {
+        guard let language = notification.object as? String else { return }
+        setOutputLanguageName(with: language)
+        showTranslate()
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .language, object: nil)
+    }
+
+    private func setOutputLanguageName( with language: String) {
+        let title = language + languageIndicator
+        outputLanguage.setTitle(title, for: .normal)
     }
 }
 // MARK: - TextView
@@ -258,7 +278,7 @@ extension TranslateController: UITextViewDelegate {
         guard let text = self.inputText.text,
                 text != placeholderTextInput else {return}
 
-        if outputLanguage.titleLabel?.text == "" { outputLanguage.setTitle("Anglais", for: .normal)}
+        if outputLanguage.titleLabel?.text == "" { setOutputLanguageName(with: "Anglais")}
 
         repository.getTraduction(of: self.inputText.text, language: outputLanguage.titleLabel!.text!) { result in
             switch result {
