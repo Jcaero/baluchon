@@ -23,8 +23,8 @@ class TranslateRepository {
         DispatchQueue.main.async {
             self.httpClient.fetch(url: url) { (response: Result<API.JSONDataType.TranslationResponse, HttpError>) in
                 switch response {
-                case .success(let rate):
-                    completionHandler(.success(rate))
+                case .success(let translate):
+                    completionHandler(.success(translate))
                 case .failure(let error):
                     completionHandler(.failure(error))
                 }

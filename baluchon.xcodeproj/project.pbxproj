@@ -37,6 +37,7 @@
 		47CAB08F2A95BFDB00B34B38 /* TranslateJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 47CAB08E2A95BFDB00B34B38 /* TranslateJSON.json */; };
 		47CAB0912A95C53D00B34B38 /* TranslateRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CAB0902A95C53D00B34B38 /* TranslateRepositoryTest.swift */; };
 		47D05BEB2A9C5F5B00551C81 /* GoogleLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D05BEA2A9C5F5B00551C81 /* GoogleLanguage.swift */; };
+		47D325002AA19B81005FB70F /* WeatherRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D324FF2AA19B81005FB70F /* WeatherRepositoryTest.swift */; };
 		47D4A1D22AA0500F009B9BE8 /* NotificationName+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D4A1D12AA0500F009B9BE8 /* NotificationName+.swift */; };
 		47D6BFBB2A8DCE8500B4CA82 /* APITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D6BFBA2A8DCE8500B4CA82 /* APITest.swift */; };
 		47DB13EB2A81FD5D00B4C0C0 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB13EA2A81FD5D00B4C0C0 /* API.swift */; };
@@ -99,6 +100,7 @@
 		47CAB08E2A95BFDB00B34B38 /* TranslateJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TranslateJSON.json; sourceTree = "<group>"; };
 		47CAB0902A95C53D00B34B38 /* TranslateRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateRepositoryTest.swift; sourceTree = "<group>"; };
 		47D05BEA2A9C5F5B00551C81 /* GoogleLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLanguage.swift; sourceTree = "<group>"; };
+		47D324FF2AA19B81005FB70F /* WeatherRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRepositoryTest.swift; sourceTree = "<group>"; };
 		47D4A1D12AA0500F009B9BE8 /* NotificationName+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+.swift"; sourceTree = "<group>"; };
 		47D6BFBA2A8DCE8500B4CA82 /* APITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITest.swift; sourceTree = "<group>"; };
 		47DB13E32A81F0DA00B4C0C0 /* baluchon.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = baluchon.xctestplan; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				478524402A9EFFFC003DE666 /* weatherJSON.json */,
+				47D324FF2AA19B81005FB70F /* WeatherRepositoryTest.swift */,
 			);
 			path = meteo;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 				470A46812A907FC900B22D74 /* ExchangeRepositoryTest.swift in Sources */,
 				470A467D2A906F9400B22D74 /* MockURLProtocol.swift in Sources */,
 				47D6BFBB2A8DCE8500B4CA82 /* APITest.swift in Sources */,
+				47D325002AA19B81005FB70F /* WeatherRepositoryTest.swift in Sources */,
 				47A31A092A80A10B00ED1A4B /* ExchangeTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

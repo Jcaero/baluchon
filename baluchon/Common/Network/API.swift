@@ -42,11 +42,11 @@ enum API {
                 var componments = URLComponents()
                 componments.scheme = "https"
                 componments.host = "api.openweathermap.org"
-                componments.path = "data/2.5/forecast"
+                componments.path = "/data/2.5/forecast"
                 let queryItems = [
                     URLQueryItem(name: "appid", value: APIKey.openwheathermap.key),
                     URLQueryItem(name: "lat", value: addQueryItems["lat"]),
-                    URLQueryItem(name: "long", value: addQueryItems["long"]),
+                    URLQueryItem(name: "lon", value: addQueryItems["lon"]),
                     URLQueryItem(name: "lang", value: "fr"),
                     URLQueryItem(name: "units", value: "metric"),
                     URLQueryItem(name: "cnt", value: "3")
@@ -74,13 +74,11 @@ enum API {
             let data: DataClass
         }
 
-
-
         // MARK: - Meteo
         struct WeatherResponse: Codable, Equatable {
             let cod: String
-            let message, cnt: Int
-            let list: [List]
+//            let message, cnt: Int
+ //           let list: [List]
             let city: City
         }
     }
@@ -149,4 +147,3 @@ struct Wind: Codable, Equatable {
     let deg: Int
     let gust: Double
 }
-
