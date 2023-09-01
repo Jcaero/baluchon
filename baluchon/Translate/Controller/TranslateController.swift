@@ -18,13 +18,10 @@ class TranslateController: UIViewController {
     // MARK: - Language
     let inputLanguage = UIButton()
     let outputLanguage = UIButton()
-    let changeOutputLanguage = UIButton()
 
     let switchBtn = UIButton()
 
     var typingTimer: Timer?
-    
-    let languageIndicator = "   ˅"
 
     // MARK: - lifeCycle
     override func viewDidLoad() {
@@ -47,9 +44,9 @@ class TranslateController: UIViewController {
         [inputText, wrappedOutputText, inputLanguage, outputLanguage].forEach {
             $0.layer.cornerRadius = 25
             $0.layer.masksToBounds = false
-
-            setupShadowOf($0, radius: 1, opacity: 0.5)
         }
+        setupShadowOf(inputText, radius: 1, opacity: 0.5)
+        setupShadowOf(outputLanguage, radius: 1, opacity: 0.5)
     }
 
     private func setupShadowOf(_ view: UIView, radius: CGFloat, opacity: Float ) {
@@ -66,14 +63,17 @@ class TranslateController: UIViewController {
         switchBtn.setImage(UIImage(systemName: "arrow.left.arrow.right", withConfiguration: configurationImage), for: .normal)
         switchBtn.tintColor = .navy
 
-        // MARK: - Setup Language label
+        // MARK: - Setup Language Button
         [inputLanguage, outputLanguage].forEach {
             $0.backgroundColor = .whiteSmoke
             $0.setTitleColor(.darkGray, for: .normal)
             $0.setTitle("", for: .normal)
+            $0.titleLabel?.textAlignment = .center
         }
-        setOutputLanguageName(with: "Anglais")
+
+        outputLanguage.setTitle("Anglais", for: .normal)
         outputLanguage.addTarget(self, action: #selector(showSelectLanguageControlleur), for: .touchUpInside)
+        outputLanguage.addTarget(self, action: #selector(holdDown), for: .touchDown)
 
         // MARK: - Setup Texte
         [outputText].forEach {
@@ -84,11 +84,11 @@ class TranslateController: UIViewController {
             $0.adjustsFontSizeToFitWidth = true
             $0.text = ""
         }
-
         wrappedOutputText.backgroundColor = .whiteSmoke
 
         inputText.textAlignment = .center
         inputText.backgroundColor = .whiteSmoke
+        inputText.tintColor = .lightGray
     }
 
     // MARK: - SetupLayout
@@ -176,38 +176,35 @@ class TranslateController: UIViewController {
 
     private func switchLanguage() {
         let oldInput = inputLanguage.titleLabel?.text ?? "Anglais"
-        let oldOutput = getLabelLanguage(of: outputLanguage.titleLabel?.text)
+        let oldOutput = outputLanguage.titleLabel?.text ?? ""
 
-        setOutputLanguageName(with: oldInput)
         inputLanguage.setTitle(oldOutput, for: .normal)
-    }
-
-    private func getLabelLanguage(of text: String?) -> String {
-        guard let text = text else { return "" }
-        return text.replacingOccurrences(of: languageIndicator, with: "")
+        outputLanguage.setTitle(oldInput, for: .normal)
     }
 
     // MARK: - select Language
     @objc func showSelectLanguageControlleur() {
+        outputLanguage.layer.shadowOpacity = 0.5
+        outputLanguage.transform = .identity
         NotificationCenter.default.addObserver(self, selector: #selector(changeOutputLanguage(_:)), name: NSNotification.Name("language"), object: nil)
 
         let myViewController = SelectLanguageController()
         present(myViewController, animated: true, completion: nil)
     }
 
+    @objc func holdDown() {
+        outputLanguage.layer.shadowOpacity = 0
+        outputLanguage.transform = CGAffineTransform(scaleX: 0.97, y: 0.97)
+    }
+
     @objc func changeOutputLanguage(_ notification: Notification) {
         guard let language = notification.object as? String else { return }
-        setOutputLanguageName(with: language)
+        outputLanguage.setTitle(language, for: .normal)
         showTranslate()
     }
 
     deinit {
         NotificationCenter.default.removeObserver(self, name: .language, object: nil)
-    }
-
-    private func setOutputLanguageName( with language: String) {
-        let title = language + languageIndicator
-        outputLanguage.setTitle(title, for: .normal)
     }
 }
 // MARK: - TextView
@@ -228,19 +225,23 @@ extension TranslateController: UITextViewDelegate {
     }
 
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if inputText.textColor == UIColor.lightGray {
+        switchBtn.isEnabled = false
+        if inputText.text == placeholderTextInput {
             inputText.text = nil
             inputText.textColor = UIColor.black
             inputText.textAlignment = .left
         }
+        inputText.layer.shadowOpacity = 0
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
+        switchBtn.isEnabled = true
         if inputText.text.isEmpty {
             inputText.text = "Inserer le texte à Traduire"
             inputText.textColor = UIColor.lightGray
             inputText.textAlignment = .center
         }
+        inputText.layer.shadowOpacity = 0.5
     }
 
     func textViewDidChange(_ textView: UITextView) {
@@ -277,8 +278,6 @@ extension TranslateController: UITextViewDelegate {
 
         guard let text = self.inputText.text,
                 text != placeholderTextInput else {return}
-
-        if outputLanguage.titleLabel?.text == "" { setOutputLanguageName(with: "Anglais")}
 
         repository.getTraduction(of: self.inputText.text, language: outputLanguage.titleLabel!.text!) { result in
             switch result {
