@@ -3,7 +3,7 @@
 //  baluchon
 //
 //  Created by pierrick viret on 08/08/2023.
-//
+// swiftlint:disable identifier_name
 
 import Foundation
 
@@ -77,8 +77,8 @@ enum API {
         // MARK: - Meteo
         struct WeatherResponse: Codable, Equatable {
             let cod: String
-//            let message, cnt: Int
- //           let list: [List]
+            let message, cnt: Int
+            let list: [List]
             let city: City
         }
     }
@@ -95,11 +95,10 @@ struct Translation: Codable, Equatable {
 
 // MARK: - Weather
 struct City: Codable, Equatable {
-    let id: Int
     let name: String
     let coord: Coord
     let country: String
-    let population, timezone, sunrise, sunset: Int
+    let sunrise, sunset: Int?
 }
 
 struct Coord: Codable, Equatable {
@@ -107,39 +106,21 @@ struct Coord: Codable, Equatable {
 }
 
 struct List: Codable, Equatable {
-    let dt: Int
     let main: Main
     let weather: [Weather]
-    let clouds: Clouds
     let wind: Wind
     let visibility: Int
-    let pop: Double
-    let sys: Sys
-    let dtTxt: String
-    let rain: Rain?
-}
-
-struct Clouds: Codable, Equatable {
-    let all: Int
+    let dt_txt: String
 }
 
 struct Main: Codable, Equatable {
-    let temp, feelsLike, tempMin, tempMax: Double
-    let pressure, seaLevel, grndLevel, humidity: Int
-    let tempKf: Double
-}
-
-struct Rain: Codable, Equatable {
-    let the3H: Double
-}
-
-struct Sys: Codable, Equatable {
-    let pod: String
+    let temp, feels_like, temp_min, temp_max: Double
+    let pressure, humidity: Int
 }
 
 struct Weather: Codable, Equatable {
     let id: Int
-    let main, weatherDescription, icon: String
+    let main, description, icon: String
 }
 
 struct Wind: Codable, Equatable {

@@ -31,12 +31,9 @@ final class WeatherRepositoryTest: TestCase {
 
     func test_RepositoryGetWeather_Succes() throws {
         let coord = Coord(lat: 45.8992348, lon: 6.1288847)
-        let annecy = City(id: 3037543,
-                          name: "Annecy",
+        let annecy = City(name: "Annecy",
                           coord: coord,
                           country: "FR",
-                          population: 49232,
-                          timezone: 7200,
                           sunrise: 1693371206,
                           sunset: 1693419571)
 
@@ -57,12 +54,12 @@ final class WeatherRepositoryTest: TestCase {
             switch response {
             case .success(let weather):
                 XCTAssertEqual(weather.city.name, "Annecy")
-//                XCTAssertEqual(weather.list[0].main.temp, 9.15)
+                XCTAssertEqual(weather.list[0].main.temp, 9.15)
                 expectation.fulfill()
             case .failure(let error):
                 XCTFail("pas ici, \(error.description)")
             }
         }
-        wait(for: [expectation], timeout: 5)
+        wait(for: [expectation], timeout: 2)
     }
 }
