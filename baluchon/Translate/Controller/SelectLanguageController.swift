@@ -7,12 +7,26 @@
 
 import UIKit
 
-class SelectLanguageController: UIViewController {
+protocol SelectLanguageDelegate: AnyObject {
+    func changeLanguageOutput( with language: String)
+}
 
+class SelectLanguageController: UIViewController {
+    // MARK: - Delegate
+    private weak var delegate: SelectLanguageDelegate?
+
+    init(delegate: SelectLanguageDelegate?) {
+        self.delegate = delegate
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Properties
     var tableView: UITableView!
     let language = Array(languageNames.keys).sorted()
-
-    let segueIdentifier = "segueToTranslate"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +47,7 @@ class SelectLanguageController: UIViewController {
     }
 }
 
+// MARK: - Extension TableView
 extension SelectLanguageController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,7 +63,7 @@ extension SelectLanguageController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        NotificationCenter.default.post(name: .language, object: language[indexPath.row])
+        self.delegate?.changeLanguageOutput(with: language[indexPath.row])
         dismiss(animated: true)
     }
 }

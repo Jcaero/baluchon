@@ -7,8 +7,8 @@
 
 import UIKit
 
-class TranslateController: UIViewController {
-    // MARK: - Properties
+class TranslateController: UIViewController, SelectLanguageDelegate {
+    // MARK: - view
 
     let inputText = UITextView()
     let outputText = UILabel()
@@ -21,7 +21,7 @@ class TranslateController: UIViewController {
 
     let switchBtn = UIButton()
 
-    var typingTimer: Timer?
+    private var typingTimer: Timer?
 
     // MARK: - lifeCycle
     override func viewDidLoad() {
@@ -186,9 +186,8 @@ class TranslateController: UIViewController {
     @objc func showSelectLanguageControlleur() {
         outputLanguage.layer.shadowOpacity = 0.5
         outputLanguage.transform = .identity
-        NotificationCenter.default.addObserver(self, selector: #selector(changeOutputLanguage(_:)), name: NSNotification.Name("language"), object: nil)
 
-        let myViewController = SelectLanguageController()
+        let myViewController = SelectLanguageController(delegate: self)
         present(myViewController, animated: true, completion: nil)
     }
 
@@ -197,14 +196,9 @@ class TranslateController: UIViewController {
         outputLanguage.transform = CGAffineTransform(scaleX: 0.97, y: 0.97)
     }
 
-    @objc func changeOutputLanguage(_ notification: Notification) {
-        guard let language = notification.object as? String else { return }
+    func changeLanguageOutput( with language: String) {
         outputLanguage.setTitle(language, for: .normal)
         showTranslate()
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: .language, object: nil)
     }
 }
 // MARK: - TextView
