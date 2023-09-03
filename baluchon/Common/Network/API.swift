@@ -12,6 +12,7 @@ enum API {
         case exchange
         case translate([String: String])
         case weather([String: String])
+        case geocoding([String: String])
 
         var url: URL {
             switch self {
@@ -53,6 +54,19 @@ enum API {
                 ]
                 componments.queryItems = queryItems
                 return componments.url!
+
+            case .geocoding(let addQueryItems):
+                var componments = URLComponents()
+                componments.scheme = "https"
+                componments.host = "api.openweathermap.org"
+                componments.path = "/geo/1.0/direct"
+                let queryItems = [
+                    URLQueryItem(name: "appid", value: APIKey.openwheathermap.key),
+                    URLQueryItem(name: "q", value: addQueryItems["q"]),
+                    URLQueryItem(name: "limit", value: "5")
+                ]
+                componments.queryItems = queryItems
+                return componments.url!
             }
         }
     }
@@ -80,6 +94,13 @@ enum API {
             let message, cnt: Int
             let list: [List]
             let city: City
+        }
+
+        // MARK: - Geocoding
+        struct GeocodingResponse: Codable, Equatable {
+            let name: String
+            let lat, lon: Double
+            let country: String
         }
     }
 }

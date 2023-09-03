@@ -1,0 +1,39 @@
+
+[
+    {
+        "name": "Annecy",
+        "local_names": {
+            "ar": "آنسي",
+            "fr": "Annecy",
+            "el": "Ανεσύ",
+            "eo": "Anecio",
+            "ru": "Анси"
+        },
+        "lat": 45.8992348,
+        "lon": 6.1288847,
+        "country": "FR",
+        "state": "Auvergne-Rhône-Alpes"
+    },
+    {
+        "name": "Annecy",
+        "local_names": {
+            "fr": "Annecy",
+            "ar": "آنسي"
+        },
+        "lat": 45.8782687,
+        "lon": 6.170009338578226,
+        "country": "FR",
+        "state": "Auvergne-Rhône-Alpes"
+    },
+    {
+        "name": "Annecy",
+        "local_names": {
+            "fr": "Annecy",
+            "ar": "آنسي"
+        },
+        "lat": 45.88975045,
+        "lon": 6.135465100225999,
+        "country": "FR",
+        "state": "Auvergne-Rhône-Alpes"
+    }
+]

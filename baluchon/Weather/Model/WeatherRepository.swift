@@ -15,9 +15,9 @@ class WeatherRepository {
         self.httpClient = httpClient
     }
 
-    func getWheather(of city: City, completionHandler: @escaping (Result<API.JSONDataType.WeatherResponse, HttpError>) -> Void) {
+    func getWheather(of coord: Coord, completionHandler: @escaping (Result<API.JSONDataType.WeatherResponse, HttpError>) -> Void) {
 
-        let url = getTranslateURL(of: city.coord)
+        let url = getWeatherURL(of: coord)
 
         DispatchQueue.main.async {
             self.httpClient.fetch(url: url) { (response: Result<API.JSONDataType.WeatherResponse, HttpError>) in
@@ -31,13 +31,13 @@ class WeatherRepository {
         }
     }
 
-    private func getTranslateURL(of coord: Coord) -> URL {
+    private func getWeatherURL(of coord: Coord) -> URL {
         let latitude = String(coord.lat)
         let longitude = String(coord.lon)
 
         let queryItems: [String: String] = [ "lat": latitude, "lon": longitude]
 
-        let url = API.EndPoint.translate(queryItems).url
+        let url = API.EndPoint.weather(queryItems).url
 
         return url
     }

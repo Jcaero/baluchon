@@ -16,19 +16,16 @@ class TabBar: UITabBarController {
 
     func setupVCs() {
 
-            let firstViewController = ExchangeController()
-
-            let secondViewController = TranslateController()
-
-            let thirdViewController = UIViewController()
-        thirdViewController.view.backgroundColor = .systemGray3
+            let exchangeController = ExchangeController()
+            let translateController = TranslateController()
+            let weatherViewController = WeatherViewController()
 
             // define title and items
-            firstViewController.tabBarItem = UITabBarItem(title: "Convertisseur", image: UIImage(systemName: "dollarsign.circle")!, tag: 0)
-            secondViewController.tabBarItem = UITabBarItem(title: "Traduction", image: UIImage(named: "translate"), tag: 1)
-            thirdViewController.tabBarItem = UITabBarItem(title: "Météo", image: UIImage(systemName: "thermometer.sun")!, tag: 2)
+            exchangeController.tabBarItem = UITabBarItem(title: "Convertisseur", image: UIImage(systemName: "dollarsign.circle")!, tag: 0)
+            translateController.tabBarItem = UITabBarItem(title: "Traduction", image: UIImage(named: "translate"), tag: 1)
+            weatherViewController.tabBarItem = UITabBarItem(title: "Météo", image: UIImage(systemName: "thermometer.sun")!, tag: 2)
 
-           viewControllers = [firstViewController, secondViewController, thirdViewController]
+           viewControllers = [exchangeController, translateController, weatherViewController]
 
       }
 

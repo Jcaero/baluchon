@@ -127,13 +127,13 @@ class ExchangeController: UIViewController {
         ])
     }
 
-    private func setupStackView(_ stackView: UIStackView, axis: NSLayoutConstraint.Axis) {
-        stackView.axis = axis
-        stackView.spacing = 16
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-    }
+//    private func setupStackView(_ stackView: UIStackView, axis: NSLayoutConstraint.Axis) {
+//        stackView.axis = axis
+//        stackView.spacing = 16
+//        stackView.alignment = .fill
+//        stackView.distribution = .fillEqually
+//        stackView.translatesAutoresizingMaskIntoConstraints = false
+//    }
 
     private func addButtonInStackView(_ stackView: UIStackView, array: [String]) {
         for buttonName in array {

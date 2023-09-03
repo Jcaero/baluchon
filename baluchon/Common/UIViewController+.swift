@@ -14,4 +14,12 @@ extension UIViewController {
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         return self.present(alertVC, animated: true, completion: nil)
     }
+
+    func setupStackView(_ stackView: UIStackView, axis: NSLayoutConstraint.Axis) {
+        stackView.axis = axis
+        stackView.spacing = 16
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+    }
 }
