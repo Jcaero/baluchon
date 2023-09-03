@@ -13,6 +13,7 @@
 		470A467F2A9072B800B22D74 /* HTTPClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470A467E2A9072B800B22D74 /* HTTPClientTest.swift */; };
 		470A46812A907FC900B22D74 /* ExchangeRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470A46802A907FC900B22D74 /* ExchangeRepositoryTest.swift */; };
 		470A46832A90855400B22D74 /* TestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470A46822A90855400B22D74 /* TestCase.swift */; };
+		470AC1CA2AA526F4000AD45D /* WeatherPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AC1C92AA526F4000AD45D /* WeatherPageViewController.swift */; };
 		470C233F2A7A02540044A393 /* ExchangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C233E2A7A02540044A393 /* ExchangeController.swift */; };
 		470C23462A7A11900044A393 /* baluchonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C23452A7A11900044A393 /* baluchonUITests.swift */; };
 		47132B812AA2EB0400761709 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47132B802AA2EB0400761709 /* WeatherViewController.swift */; };
@@ -73,6 +74,7 @@
 		470A467E2A9072B800B22D74 /* HTTPClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientTest.swift; sourceTree = "<group>"; };
 		470A46802A907FC900B22D74 /* ExchangeRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRepositoryTest.swift; sourceTree = "<group>"; };
 		470A46822A90855400B22D74 /* TestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCase.swift; sourceTree = "<group>"; };
+		470AC1C92AA526F4000AD45D /* WeatherPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherPageViewController.swift; sourceTree = "<group>"; };
 		470C233E2A7A02540044A393 /* ExchangeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeController.swift; sourceTree = "<group>"; };
 		470C23442A7A107A0044A393 /* baluchon.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = baluchon.xctestplan; sourceTree = "<group>"; };
 		470C23452A7A11900044A393 /* baluchonUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baluchonUITests.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				47132B802AA2EB0400761709 /* WeatherViewController.swift */,
+				470AC1C92AA526F4000AD45D /* WeatherPageViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				477221A92A73F7230023CA57 /* SceneDelegate.swift in Sources */,
 				47B6A4D42A9467F2001DA33F /* OverLayoutCase.swift in Sources */,
 				47DB13EB2A81FD5D00B4C0C0 /* API.swift in Sources */,
+				470AC1CA2AA526F4000AD45D /* WeatherPageViewController.swift in Sources */,
 				470A467B2A906CDC00B22D74 /* HTTPClient.swift in Sources */,
 				471B64DF2A8CC4A600FFDEEA /* ExchangeRepository.swift in Sources */,
 				47F09CAA2A853FEF00E52B5E /* APIKey.swift in Sources */,

@@ -24,7 +24,19 @@ class WeatherViewController: UIViewController {
     let weatherIcon = UIImageView()
     let weatherTemperature = UILabel()
 
-    var initCity: City = City(name: "Annecy", coord: Coord(lat: 45.8992, lon: 6.1289), country: "FR", sunrise: nil, sunset: nil)
+    var page: Pages
+
+    var initCity: City!
+
+    init(with page: Pages) {
+        self.page = page
+        initCity = page.city
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     // MARK: - lifeCycle
     override func viewDidLoad() {
@@ -34,8 +46,10 @@ class WeatherViewController: UIViewController {
 
         setupMaps()
 
-        setupCityLayout()
-        setupCity()
+        if page.city.name != "New York" {
+            setupCityLayout()
+            setupCity()
+        }
 
         setupWeatherInformation()
         setupWeatherInformationLayout()
@@ -95,7 +109,7 @@ class WeatherViewController: UIViewController {
 
         view.addSubview(weatherAera)
         NSLayoutConstraint.activate([
-            weatherAera.topAnchor.constraint(equalTo: searchCity.bottomAnchor),
+            weatherAera.topAnchor.constraint(equalTo: maps.bottomAnchor, constant: 50),
             weatherAera.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             weatherAera.leftAnchor.constraint(equalTo: view.leftAnchor),
             weatherAera.rightAnchor.constraint(equalTo: view.rightAnchor)
@@ -166,8 +180,13 @@ class WeatherViewController: UIViewController {
 
     // MARK: - Search button
     @objc func tappedSearchCity() {
-        guard let city = inputCity.text else { return }
         dismissKeyboard()
+
+        guard let city = inputCity.text, city.lowercased() != "new york" else {
+            self.showSimpleAlerte(with: "Erreur", message: "Ville déjà existante")
+            return
+        }
+
         let repository = GeocodingRepository()
 
         repository.getCoordinate(of: city) { result in
@@ -210,13 +229,25 @@ class WeatherViewController: UIViewController {
             switch response {
             case .success(let weather):
                 var icon = weather.list[0].weather[0].icon
-                let nameIcon = String(icon.prefix(2))
+                let nameIcon = self.formatImageIconName(with: icon)
                 self.weatherIcon.image = UIImage(named: nameIcon)
+
                 let temperature = weather.list[0].main.temp
                 self.weatherTemperature.text = self.prepareTemperatureText(with: temperature)
             case .failure(let error):
                 self.showSimpleAlerte(with: error.title, message: error.description)
             }
+        }
+    }
+
+    // return imageName of icon
+    private func formatImageIconName( with name: String) -> String {
+        let icon = String(name.prefix(2))
+        switch icon {
+        case "03", "50", "09", "04":
+            return icon
+        default:
+            return name
         }
     }
 }

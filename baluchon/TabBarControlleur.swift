@@ -18,7 +18,7 @@ class TabBar: UITabBarController {
 
             let exchangeController = ExchangeController()
             let translateController = TranslateController()
-            let weatherViewController = WeatherViewController()
+            let weatherViewController = WeatherPageViewController()
 
             // define title and items
             exchangeController.tabBarItem = UITabBarItem(title: "Convertisseur", image: UIImage(systemName: "dollarsign.circle")!, tag: 0)
