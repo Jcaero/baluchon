@@ -18,7 +18,8 @@ class WeatherViewController: UIViewController {
     // MARK: - WeatherValue
     let weatherAera = UIView()
 
-    let stackViewWeatherName = UIStackView()
+    let stackViewWeather = UIStackView()
+    
     let weatherCityName = UILabel()
     let weatherCountryName = UILabel()
     let weatherIcon = UIImageView()
@@ -45,6 +46,7 @@ class WeatherViewController: UIViewController {
         view.backgroundColor = .white
 
         setupMaps()
+        setupMapsLayout()
 
         if page.city.name != "New York" {
             setupCityLayout()
@@ -57,7 +59,6 @@ class WeatherViewController: UIViewController {
         setupGestureRecogniser()
 
         updateWeather(with: initCity.coord)
-        print("\(view.frame.height)")
     }
 
     // MARK: - Setup Maps
@@ -66,8 +67,10 @@ class WeatherViewController: UIViewController {
         maps.isUserInteractionEnabled = false
         let initialLocation = CLLocation(latitude: initCity.coord.lat, longitude: initCity.coord.lon)
         maps.centerToLocation(initialLocation)
-        maps.translatesAutoresizingMaskIntoConstraints = false
+    }
 
+    private func setupMapsLayout() {
+        maps.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(maps)
         NSLayoutConstraint.activate([
             maps.topAnchor.constraint(equalTo: view.topAnchor),
@@ -81,8 +84,8 @@ class WeatherViewController: UIViewController {
     private func setupWeatherInformation() {
         weatherAera.backgroundColor = .white
 
-        setupStackView(stackViewWeatherName, axis: .vertical)
-        stackViewWeatherName.distribution = .fillProportionally
+        setupStackView(stackViewWeather, axis: .vertical)
+        stackViewWeather.distribution = .fillProportionally
 
         weatherCityName.textColor = .black
         weatherCityName.textAlignment = .center
@@ -104,42 +107,48 @@ class WeatherViewController: UIViewController {
     }
 
     private func setupWeatherInformationLayout() {
-        [weatherAera, weatherCityName, weatherCountryName, weatherTemperature, weatherIcon].forEach {
+        [weatherAera, weatherCityName, weatherCountryName, weatherTemperature, weatherIcon, stackViewWeather].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-
-        view.addSubview(weatherAera)
+        weatherIcon.heightAnchor.constraint(equalTo: weatherIcon.widthAnchor).isActive = true
+        
+        weatherAera.addSubview(weatherCityName)
+        weatherAera.addSubview(weatherCountryName)
         NSLayoutConstraint.activate([
-            weatherAera.topAnchor.constraint(equalTo: maps.bottomAnchor, constant: 50),
-            weatherAera.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            weatherAera.leftAnchor.constraint(equalTo: view.leftAnchor),
-            weatherAera.rightAnchor.constraint(equalTo: view.rightAnchor)
+            weatherAera.heightAnchor.constraint(equalToConstant: 100),
+            weatherCityName.centerXAnchor.constraint(equalTo: weatherAera.centerXAnchor),
+            weatherCountryName.centerXAnchor.constraint(equalTo: weatherAera.centerXAnchor),
+            weatherCountryName.topAnchor.constraint(equalTo: weatherCityName.bottomAnchor, constant: 5)
         ])
 
-        weatherAera.addSubview(weatherIcon)
-        NSLayoutConstraint.activate([
-            weatherIcon.centerXAnchor.constraint(equalTo: weatherAera.centerXAnchor),
-            weatherIcon.centerYAnchor.constraint(equalTo: weatherAera.centerYAnchor),
-            weatherIcon.widthAnchor.constraint(equalTo: weatherAera.widthAnchor, multiplier: 0.4),
-            weatherIcon.heightAnchor.constraint(equalTo: weatherIcon.widthAnchor)
-        ])
+        stackViewWeather.addArrangedSubview(weatherAera)
+        stackViewWeather.addArrangedSubview(weatherIcon)
+        stackViewWeather.addArrangedSubview(weatherTemperature)
 
-        weatherAera.addSubview(stackViewWeatherName)
-        stackViewWeatherName.addArrangedSubview(weatherCityName)
-        stackViewWeatherName.addArrangedSubview(weatherCountryName)
+        view.addSubview(stackViewWeather)
         NSLayoutConstraint.activate([
-            stackViewWeatherName.topAnchor.constraint(equalTo: weatherAera.topAnchor),
-            stackViewWeatherName.leftAnchor.constraint(equalTo: weatherAera.leftAnchor),
-            stackViewWeatherName.rightAnchor.constraint(equalTo: weatherAera.rightAnchor),
-            stackViewWeatherName.bottomAnchor.constraint(equalTo: weatherIcon.topAnchor)
+            stackViewWeather.topAnchor.constraint(equalTo: maps.bottomAnchor, constant: 50),
+            stackViewWeather.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            stackViewWeather.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+        
+//        weatherAera.addSubview(weatherCityName)
+//        NSLayoutConstraint.activate([
+//            weatherCityName.centerXAnchor.constraint(equalTo: weatherAera.centerXAnchor),
+//            weatherCityName.topAnchor.constraint(equalTo: weatherAera.topAnchor, constant: 20)
+//        ])
 
-        view.addSubview(weatherTemperature)
-        NSLayoutConstraint.activate([
-            weatherTemperature.topAnchor.constraint(equalTo: weatherIcon.bottomAnchor, constant: 30),
-            weatherTemperature.leftAnchor.constraint(equalTo: weatherAera.leftAnchor),
-            weatherTemperature.rightAnchor.constraint(equalTo: weatherAera.rightAnchor)
-        ])
+
+//
+//        view.addSubview(weatherTemperature)
+//        NSLayoutConstraint.activate([
+//            weatherTemperature.bottomAnchor.constraint(equalTo: weatherAera.bottomAnchor, constant: -20),
+//            weatherTemperature.leftAnchor.constraint(equalTo: weatherAera.leftAnchor),
+//            weatherTemperature.rightAnchor.constraint(equalTo: weatherAera.rightAnchor)
+//        ])
+//
+//        weatherAera.addSubview(weatherIcon)
+ 
     }
 
     // MARK: - CitySearch
@@ -188,19 +197,20 @@ class WeatherViewController: UIViewController {
             self.showSimpleAlerte(with: "Erreur", message: "Ville déjà existante")
             return
         }
-
+        self.inputCity.text = ""
         let repository = GeocodingRepository()
 
         repository.getCoordinate(of: city) { result in
             switch result {
             case .success(let response):
-                self.weatherCityName.text = response[0].name
-                self.weatherCountryName.text = response[0].country
+                guard let city = response.first else { return }
+                self.weatherCityName.text = city.name
+                self.weatherCountryName.text = city.country
 
-                let initialLocation = CLLocation(latitude: response[0].lat, longitude: response[0].lon)
+                let initialLocation = CLLocation(latitude: city.lat, longitude: city.lon)
                 self.maps.centerToLocation(initialLocation)
 
-                self.updateWeather(with: Coord(lat: response[0].lat, lon: response[0].lon))
+                self.updateWeather(with: Coord(lat: city.lat, lon: city.lon))
             case .failure(let error):
                 self.showSimpleAlerte(with: error.title, message: error.description)
             }
