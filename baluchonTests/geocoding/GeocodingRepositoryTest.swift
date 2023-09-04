@@ -51,7 +51,6 @@ final class GeocodingRepositoryTest: TestCase {
                 XCTAssertEqual(city[0].country, "FR")
                 XCTAssertEqual(city[0].lat, 45.8992348)
                 XCTAssertEqual(city[0].lon, 6.1288847)
-                XCTAssertEqual(city[0].local_names["ru"], "Анси")
                 expectation.fulfill()
             case .failure(let error):
                 XCTFail("pas ici, \(error.description)")

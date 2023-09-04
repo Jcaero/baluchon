@@ -57,6 +57,7 @@ class WeatherViewController: UIViewController {
         setupGestureRecogniser()
 
         updateWeather(with: initCity.coord)
+        print("\(view.frame.height)")
     }
 
     // MARK: - Setup Maps
@@ -72,7 +73,7 @@ class WeatherViewController: UIViewController {
             maps.topAnchor.constraint(equalTo: view.topAnchor),
             maps.leftAnchor.constraint(equalTo: view.leftAnchor),
             maps.rightAnchor.constraint(equalTo: view.rightAnchor),
-            maps.heightAnchor.constraint(equalToConstant: 200)
+            maps.heightAnchor.constraint(equalToConstant: view.frame.height/4.2)
         ])
     }
 
@@ -119,7 +120,7 @@ class WeatherViewController: UIViewController {
         NSLayoutConstraint.activate([
             weatherIcon.centerXAnchor.constraint(equalTo: weatherAera.centerXAnchor),
             weatherIcon.centerYAnchor.constraint(equalTo: weatherAera.centerYAnchor),
-            weatherIcon.widthAnchor.constraint(equalTo: weatherAera.widthAnchor, multiplier: 0.5),
+            weatherIcon.widthAnchor.constraint(equalTo: weatherAera.widthAnchor, multiplier: 0.4),
             weatherIcon.heightAnchor.constraint(equalTo: weatherIcon.widthAnchor)
         ])
 
@@ -127,10 +128,10 @@ class WeatherViewController: UIViewController {
         stackViewWeatherName.addArrangedSubview(weatherCityName)
         stackViewWeatherName.addArrangedSubview(weatherCountryName)
         NSLayoutConstraint.activate([
-            stackViewWeatherName.topAnchor.constraint(equalTo: weatherAera.topAnchor, constant: 20),
+            stackViewWeatherName.topAnchor.constraint(equalTo: weatherAera.topAnchor),
             stackViewWeatherName.leftAnchor.constraint(equalTo: weatherAera.leftAnchor),
             stackViewWeatherName.rightAnchor.constraint(equalTo: weatherAera.rightAnchor),
-            stackViewWeatherName.bottomAnchor.constraint(equalTo: weatherIcon.topAnchor, constant: -20)
+            stackViewWeatherName.bottomAnchor.constraint(equalTo: weatherIcon.topAnchor)
         ])
 
         view.addSubview(weatherTemperature)
@@ -181,6 +182,7 @@ class WeatherViewController: UIViewController {
     // MARK: - Search button
     @objc func tappedSearchCity() {
         dismissKeyboard()
+        guard inputCity.text?.isEmpty == false else {return}
 
         guard let city = inputCity.text, city.lowercased() != "new york" else {
             self.showSimpleAlerte(with: "Erreur", message: "Ville déjà existante")
@@ -228,7 +230,7 @@ class WeatherViewController: UIViewController {
         repository.getWheather(of: coord) { response in
             switch response {
             case .success(let weather):
-                var icon = weather.list[0].weather[0].icon
+                let icon = weather.list[0].weather[0].icon
                 let nameIcon = self.formatImageIconName(with: icon)
                 self.weatherIcon.image = UIImage(named: nameIcon)
 

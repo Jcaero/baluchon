@@ -50,7 +50,7 @@ class WeatherPageViewController: UIViewController {
         self.pageController?.dataSource = self
         self.pageController?.delegate = self
         self.pageController?.view.backgroundColor = .clear
-        self.pageController?.view.frame = CGRect(x: 0,y: 0,width: self.view.frame.width,height: self.view.frame.height)
+        self.pageController?.view.frame = CGRect(x: 0,y: 0, width: self.view.frame.width,height: self.view.frame.height)
         self.addChild(self.pageController!)
         self.view.addSubview(self.pageController!.view)
 
@@ -63,7 +63,7 @@ class WeatherPageViewController: UIViewController {
 }
 
 extension WeatherPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-    
+
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
 
         guard let currentVC = viewController as? WeatherViewController else {
@@ -78,9 +78,9 @@ extension WeatherPageViewController: UIPageViewControllerDataSource, UIPageViewC
 
         index -= 1
 
-        let vc: WeatherViewController = WeatherViewController(with: pages[index])
+        let viewController: WeatherViewController = WeatherViewController(with: pages[index])
 
-        return vc
+        return viewController
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
