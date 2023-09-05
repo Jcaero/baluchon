@@ -16,14 +16,15 @@ class WeatherViewController: UIViewController {
     let searchCity = UIButton()
 
     // MARK: - WeatherValue
-    let weatherAera = UIView()
-
     let stackViewWeather = UIStackView()
 
-    let weatherCityName = UILabel()
-    let weatherCountryName = UILabel()
+    let nameAera = UIView()
+    let cityName = UILabel()
+    let countryName = UILabel()
+
     let weatherIcon = UIImageView()
-    let weatherTemperature = UILabel()
+
+    let temperatureLbl = UILabel()
 
     var page: Pages
     var initCity: City!
@@ -56,7 +57,7 @@ class WeatherViewController: UIViewController {
         }
         setupWeatherCollectionView()
         setupWeatherCollectionViewLayout()
-        
+
         setupWeatherInformation()
         setupWeatherInformationLayout()
 
@@ -86,53 +87,46 @@ class WeatherViewController: UIViewController {
 
     // MARK: - Weather information
     private func setupWeatherInformation() {
-        weatherAera.backgroundColor = .white
+        nameAera.backgroundColor = .white
 
         setupStackView(stackViewWeather, axis: .vertical)
         stackViewWeather.distribution = .fillProportionally
 
-        weatherCityName.textColor = .black
-        weatherCityName.textAlignment = .center
-        weatherCityName.font = UIFont.boldSystemFont(ofSize: 50)
-        weatherCityName.adjustsFontSizeToFitWidth = true
-        weatherCityName.text = initCity.name
+        cityName.setup(with: .black, alignment: .center, font: UIFont.boldSystemFont(ofSize: 50))
+        cityName.text = initCity.name
 
-        weatherCountryName.textColor = .black
-        weatherCountryName.textAlignment = .center
-        weatherCountryName.font = UIFont.systemFont(ofSize: 20)
-        weatherCountryName.text = initCity.country
-
-        weatherTemperature.textColor = .black
-        weatherTemperature.textAlignment = .center
-        weatherTemperature.font = UIFont.boldSystemFont(ofSize: 45)
-        weatherTemperature.text = prepareTemperatureText(with: 11.0)
+        countryName.setup(with: .black, alignment: .center, font: UIFont.systemFont(ofSize: 20))
+        countryName.text = initCity.country
 
         weatherIcon.image = UIImage(named: "01")
+
+        temperatureLbl.setup(with: .black, alignment: .center, font: UIFont.boldSystemFont(ofSize: 45))
+        temperatureLbl.text = prepareTemperatureText(with: 11.0)
     }
 
     private func setupWeatherInformationLayout() {
-        [weatherAera, weatherCityName, weatherCountryName, weatherTemperature, weatherIcon, stackViewWeather].forEach {
+        [nameAera, cityName, countryName, temperatureLbl, weatherIcon, stackViewWeather].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         weatherIcon.heightAnchor.constraint(equalTo: weatherIcon.widthAnchor).isActive = true
 
-        weatherAera.addSubview(weatherCityName)
-        weatherAera.addSubview(weatherCountryName)
+        nameAera.addSubview(cityName)
+        nameAera.addSubview(countryName)
         NSLayoutConstraint.activate([
-            weatherAera.heightAnchor.constraint(equalToConstant: 100),
-            weatherCityName.centerXAnchor.constraint(equalTo: weatherAera.centerXAnchor),
-            weatherCountryName.centerXAnchor.constraint(equalTo: weatherAera.centerXAnchor),
-            weatherCountryName.topAnchor.constraint(equalTo: weatherCityName.bottomAnchor, constant: 5)
+            nameAera.heightAnchor.constraint(equalToConstant: 100),
+            cityName.centerXAnchor.constraint(equalTo: nameAera.centerXAnchor),
+            countryName.centerXAnchor.constraint(equalTo: nameAera.centerXAnchor),
+            countryName.topAnchor.constraint(equalTo: cityName.bottomAnchor, constant: 5)
         ])
 
-        stackViewWeather.addArrangedSubview(weatherAera)
+        stackViewWeather.addArrangedSubview(nameAera)
         stackViewWeather.addArrangedSubview(weatherIcon)
-        stackViewWeather.addArrangedSubview(weatherTemperature)
+        stackViewWeather.addArrangedSubview(temperatureLbl)
 
         view.addSubview(stackViewWeather)
         NSLayoutConstraint.activate([
             stackViewWeather.topAnchor.constraint(equalTo: maps.bottomAnchor, constant: 55),
-            stackViewWeather.bottomAnchor.constraint(equalTo: weatherCollectionView.topAnchor, constant: -5),
+            stackViewWeather.bottomAnchor.constraint(equalTo: weatherCollectionView.topAnchor, constant: -10),
             stackViewWeather.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
@@ -190,8 +184,8 @@ class WeatherViewController: UIViewController {
             switch result {
             case .success(let response):
                 guard let city = response.first else { return }
-                self.weatherCityName.text = city.local_names?["fr"] ?? city.name
-                self.weatherCountryName.text = city.country
+                self.cityName.text = city.local_names?["fr"] ?? city.name
+                self.countryName.text = city.country
 
                 let initialLocation = CLLocation(latitude: city.lat, longitude: city.lon)
                 self.maps.centerToLocation(initialLocation)
@@ -231,9 +225,10 @@ class WeatherViewController: UIViewController {
                 self.weatherIcon.image = UIImage(named: nameIcon)
 
                 let temperature = weather.list[0].main.temp
-                self.weatherTemperature.text = self.prepareTemperatureText(with: temperature)
+                self.temperatureLbl.text = self.prepareTemperatureText(with: temperature)
 
                 self.fillWeatherCollectionView(with: weather)
+
             case .failure(let error):
                 self.showSimpleAlerte(with: error.title, message: error.description)
             }
@@ -278,7 +273,7 @@ extension WeatherViewController: UICollectionViewDelegateFlowLayout, UICollectio
 
         weatherCollectionView.delegate = self
         weatherCollectionView.dataSource = self
-        
+
         weatherCollectionView.backgroundColor = .white
 
         weatherCollectionView.register(WeatherCell.self, forCellWithReuseIdentifier: "WeatherCell")
