@@ -39,6 +39,7 @@ class WeatherCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        contentView.backgroundColor = .white
         hour.translatesAutoresizingMaskIntoConstraints = false
         icon.translatesAutoresizingMaskIntoConstraints = false
 

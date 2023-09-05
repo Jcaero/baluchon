@@ -101,6 +101,7 @@ enum API {
             let name: String
             let lat, lon: Double
             let country: String
+            let local_names: [String: String]?
         }
     }
 }

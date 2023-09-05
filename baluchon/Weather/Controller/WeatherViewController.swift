@@ -54,11 +54,11 @@ class WeatherViewController: UIViewController {
             setupCityLayout()
             setupCity()
         }
-
-        setupWeatherInformation()
-        setupWeatherInformationLayout()
         setupWeatherCollectionView()
         setupWeatherCollectionViewLayout()
+        
+        setupWeatherInformation()
+        setupWeatherInformationLayout()
 
         setupGestureRecogniser()
 
@@ -104,7 +104,7 @@ class WeatherViewController: UIViewController {
 
         weatherTemperature.textColor = .black
         weatherTemperature.textAlignment = .center
-        weatherTemperature.font = UIFont.boldSystemFont(ofSize: 50)
+        weatherTemperature.font = UIFont.boldSystemFont(ofSize: 45)
         weatherTemperature.text = prepareTemperatureText(with: 11.0)
 
         weatherIcon.image = UIImage(named: "01")
@@ -132,7 +132,7 @@ class WeatherViewController: UIViewController {
         view.addSubview(stackViewWeather)
         NSLayoutConstraint.activate([
             stackViewWeather.topAnchor.constraint(equalTo: maps.bottomAnchor, constant: 55),
-            stackViewWeather.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60),
+            stackViewWeather.bottomAnchor.constraint(equalTo: weatherCollectionView.topAnchor, constant: -5),
             stackViewWeather.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
@@ -190,7 +190,7 @@ class WeatherViewController: UIViewController {
             switch result {
             case .success(let response):
                 guard let city = response.first else { return }
-                self.weatherCityName.text = city.name
+                self.weatherCityName.text = city.local_names?["fr"] ?? city.name
                 self.weatherCountryName.text = city.country
 
                 let initialLocation = CLLocation(latitude: city.lat, longitude: city.lon)
@@ -278,6 +278,9 @@ extension WeatherViewController: UICollectionViewDelegateFlowLayout, UICollectio
 
         weatherCollectionView.delegate = self
         weatherCollectionView.dataSource = self
+        
+        weatherCollectionView.backgroundColor = .white
+
         weatherCollectionView.register(WeatherCell.self, forCellWithReuseIdentifier: "WeatherCell")
 
     }
@@ -286,10 +289,10 @@ extension WeatherViewController: UICollectionViewDelegateFlowLayout, UICollectio
         weatherCollectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(weatherCollectionView)
         NSLayoutConstraint.activate([
-            weatherCollectionView.topAnchor.constraint(equalTo: stackViewWeather.bottomAnchor),
+            weatherCollectionView.heightAnchor.constraint(equalToConstant: 50),
             weatherCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
             weatherCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            weatherCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            weatherCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -5)
         ])
     }
 
