@@ -50,7 +50,7 @@ enum API {
                     URLQueryItem(name: "lon", value: addQueryItems["lon"]),
                     URLQueryItem(name: "lang", value: "fr"),
                     URLQueryItem(name: "units", value: "metric"),
-                    URLQueryItem(name: "cnt", value: "3")
+                    URLQueryItem(name: "cnt", value: "10")
                 ]
                 componments.queryItems = queryItems
                 return componments.url!

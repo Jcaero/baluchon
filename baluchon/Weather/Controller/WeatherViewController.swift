@@ -19,15 +19,17 @@ class WeatherViewController: UIViewController {
     let weatherAera = UIView()
 
     let stackViewWeather = UIStackView()
-    
+
     let weatherCityName = UILabel()
     let weatherCountryName = UILabel()
     let weatherIcon = UIImageView()
     let weatherTemperature = UILabel()
 
     var page: Pages
-
     var initCity: City!
+
+    var weatherCollectionView: UICollectionView!
+    var weatherCollectionViewData: [CellData] = [CellData(hour: "09", iconName: "01d")]
 
     init(with page: Pages) {
         self.page = page
@@ -55,6 +57,8 @@ class WeatherViewController: UIViewController {
 
         setupWeatherInformation()
         setupWeatherInformationLayout()
+        setupWeatherCollectionView()
+        setupWeatherCollectionViewLayout()
 
         setupGestureRecogniser()
 
@@ -111,7 +115,7 @@ class WeatherViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         weatherIcon.heightAnchor.constraint(equalTo: weatherIcon.widthAnchor).isActive = true
-        
+
         weatherAera.addSubview(weatherCityName)
         weatherAera.addSubview(weatherCountryName)
         NSLayoutConstraint.activate([
@@ -127,28 +131,10 @@ class WeatherViewController: UIViewController {
 
         view.addSubview(stackViewWeather)
         NSLayoutConstraint.activate([
-            stackViewWeather.topAnchor.constraint(equalTo: maps.bottomAnchor, constant: 50),
-            stackViewWeather.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            stackViewWeather.topAnchor.constraint(equalTo: maps.bottomAnchor, constant: 55),
+            stackViewWeather.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60),
             stackViewWeather.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
-        
-//        weatherAera.addSubview(weatherCityName)
-//        NSLayoutConstraint.activate([
-//            weatherCityName.centerXAnchor.constraint(equalTo: weatherAera.centerXAnchor),
-//            weatherCityName.topAnchor.constraint(equalTo: weatherAera.topAnchor, constant: 20)
-//        ])
-
-
-//
-//        view.addSubview(weatherTemperature)
-//        NSLayoutConstraint.activate([
-//            weatherTemperature.bottomAnchor.constraint(equalTo: weatherAera.bottomAnchor, constant: -20),
-//            weatherTemperature.leftAnchor.constraint(equalTo: weatherAera.leftAnchor),
-//            weatherTemperature.rightAnchor.constraint(equalTo: weatherAera.rightAnchor)
-//        ])
-//
-//        weatherAera.addSubview(weatherIcon)
- 
     }
 
     // MARK: - CitySearch
@@ -246,6 +232,8 @@ class WeatherViewController: UIViewController {
 
                 let temperature = weather.list[0].main.temp
                 self.weatherTemperature.text = self.prepareTemperatureText(with: temperature)
+
+                self.fillWeatherCollectionView(with: weather)
             case .failure(let error):
                 self.showSimpleAlerte(with: error.title, message: error.description)
             }
@@ -278,5 +266,60 @@ extension MKMapView {
 extension WeatherViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         inputCity.resignFirstResponder()
+    }
+}
+
+// MARK: - Extension CollectionView
+extension WeatherViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    private func setupWeatherCollectionView() {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        weatherCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+
+        weatherCollectionView.delegate = self
+        weatherCollectionView.dataSource = self
+        weatherCollectionView.register(WeatherCell.self, forCellWithReuseIdentifier: "WeatherCell")
+
+    }
+
+    private func setupWeatherCollectionViewLayout() {
+        weatherCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(weatherCollectionView)
+        NSLayoutConstraint.activate([
+            weatherCollectionView.topAnchor.constraint(equalTo: stackViewWeather.bottomAnchor),
+            weatherCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            weatherCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            weatherCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 50, height: 50)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return weatherCollectionViewData.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WeatherCell", for: indexPath) as? WeatherCell {
+            cell.data = self.weatherCollectionViewData[indexPath.item]
+            return cell
+        }
+        return UICollectionViewCell()
+    }
+
+    func fillWeatherCollectionView(with weather: API.JSONDataType.WeatherResponse) {
+        weatherCollectionViewData = []
+        weather.list.forEach { data in
+            let icon = formatImageIconName(with: data.weather[0].icon)
+
+            let index12 = data.dt_txt.index(data.dt_txt.startIndex, offsetBy: 11)
+            let index13 = data.dt_txt.index(data.dt_txt.startIndex, offsetBy: 12)
+            let hour = String(data.dt_txt[index12...index13])
+
+            weatherCollectionViewData.append(CellData(hour: hour, iconName: icon))
+        }
+        weatherCollectionView.reloadData()
     }
 }

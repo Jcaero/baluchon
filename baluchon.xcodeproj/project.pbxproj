@@ -23,6 +23,7 @@
 		4719B5AD2A97068900638F4B /* TranslateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719B5AC2A97068900638F4B /* TranslateController.swift */; };
 		471B64DF2A8CC4A600FFDEEA /* ExchangeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471B64DE2A8CC4A600FFDEEA /* ExchangeRepository.swift */; };
 		471B64E12A8CC98F00FFDEEA /* RatesJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 471B64E02A8CC98F00FFDEEA /* RatesJSON.json */; };
+		472812202AA661F3000830A1 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728121F2AA661F3000830A1 /* WeatherCell.swift */; };
 		4768BF152A7ED69D005190DC /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4768BF142A7ED69D005190DC /* UIButton+.swift */; };
 		477221A72A73F7230023CA57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477221A62A73F7230023CA57 /* AppDelegate.swift */; };
 		477221A92A73F7230023CA57 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477221A82A73F7230023CA57 /* SceneDelegate.swift */; };
@@ -84,6 +85,7 @@
 		4719B5AC2A97068900638F4B /* TranslateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateController.swift; sourceTree = "<group>"; };
 		471B64DE2A8CC4A600FFDEEA /* ExchangeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRepository.swift; sourceTree = "<group>"; };
 		471B64E02A8CC98F00FFDEEA /* RatesJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RatesJSON.json; sourceTree = "<group>"; };
+		4728121F2AA661F3000830A1 /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
 		4764D9202AA609AD00D94257 /* baluchon.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = baluchon.xctestplan; path = ../baluchon.xctestplan; sourceTree = "<group>"; };
 		4768BF142A7ED69D005190DC /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		477221A32A73F7230023CA57 /* baluchon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = baluchon.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -282,6 +284,7 @@
 			children = (
 				47132B802AA2EB0400761709 /* WeatherViewController.swift */,
 				470AC1C92AA526F4000AD45D /* WeatherPageViewController.swift */,
+				4728121F2AA661F3000830A1 /* WeatherCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				470A467B2A906CDC00B22D74 /* HTTPClient.swift in Sources */,
 				471B64DF2A8CC4A600FFDEEA /* ExchangeRepository.swift in Sources */,
 				47F09CAA2A853FEF00E52B5E /* APIKey.swift in Sources */,
+				472812202AA661F3000830A1 /* WeatherCell.swift in Sources */,
 				470773AE2A873E0100601B5D /* OverLayerPopUP.swift in Sources */,
 				47F3CB052A7B594D000545A6 /* UIViewController+.swift in Sources */,
 				47132B812AA2EB0400761709 /* WeatherViewController.swift in Sources */,
