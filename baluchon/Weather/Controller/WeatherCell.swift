@@ -31,10 +31,10 @@ class WeatherCell: UICollectionViewCell {
     }()
 
     var icon: UIImageView = {
-       let iv = UIImageView()
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.contentMode = .scaleAspectFill
-        return iv
+       let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        return imageView
     }()
 
     override init(frame: CGRect) {

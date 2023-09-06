@@ -97,9 +97,9 @@ extension WeatherPageViewController: UIPageViewControllerDataSource, UIPageViewC
 
         index += 1
 
-        let vc: WeatherViewController = WeatherViewController(with: pages[index])
+        let viewController: WeatherViewController = WeatherViewController(with: pages[index])
 
-        return vc
+        return viewController
     }
 
     func presentationCount(for pageViewController: UIPageViewController) -> Int {

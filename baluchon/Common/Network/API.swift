@@ -3,7 +3,6 @@
 //  baluchon
 //
 //  Created by pierrick viret on 08/08/2023.
-// swiftlint:disable identifier_name
 
 import Foundation
 
@@ -136,8 +135,7 @@ struct List: Codable, Equatable {
 }
 
 struct Main: Codable, Equatable {
-    let temp, feels_like, temp_min, temp_max: Double
-    let pressure, humidity: Int
+    let temp: Double
 }
 
 struct Weather: Codable, Equatable {
