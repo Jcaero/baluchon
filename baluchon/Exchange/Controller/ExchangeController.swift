@@ -360,15 +360,13 @@ class ExchangeController: UIViewController {
 
                 switch response {
                 case .success(let data):
-                    #warning("pourquoi on force ici")
-                    guard let date = self.convertInDate(date: data.date),
-                          let rates = data.rates as? [String: Float] else {
+                    guard let date = self.convertInDate(date: data.date) else {
                         self.showAlert(title: "erreur", description: "Probleme de donnée, rechager le taux de change")
                         self.canUseButton = true
                         return
                     }
                     self.dateUpdateRate = date
-                    self.exchange.setupRates(with: rates)
+                    self.exchange.setupRates(with: data.rates)
                     self.canUseButton = true
 
                     updateDisplay.text = "Information: Taux Actualisé"
