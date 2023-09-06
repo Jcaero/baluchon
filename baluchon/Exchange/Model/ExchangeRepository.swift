@@ -4,7 +4,6 @@
 //
 //  Created by pierrick viret on 16/08/2023.
 //
-
 import Foundation
 
 class ExchangeRepository {

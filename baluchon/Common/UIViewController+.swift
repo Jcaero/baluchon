@@ -22,4 +22,11 @@ extension UIViewController {
         stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
     }
+
+    func setupShadowOf(_ view: UIView, radius: CGFloat, opacity: Float ) {
+        view.layer.shadowOffset = CGSize(width: 0, height: 3)
+        view.layer.shadowColor = UIColor.lightGray.cgColor
+        view.layer.shadowOpacity = opacity
+        view.layer.shadowRadius = radius
+    }
 }

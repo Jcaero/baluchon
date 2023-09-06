@@ -30,8 +30,6 @@ class ExchangeController: UIViewController {
         case switched
     }
 
-    let warningLimitation = UILabel()
-
     let localCurrencyLbl = UILabel()
     let convertedCurrencyLbl = UILabel()
 
@@ -44,6 +42,8 @@ class ExchangeController: UIViewController {
     var dateUpdateRate: Date?
     let updateDisplay = UILabel()
 
+    let warningLimitation = UILabel()
+
     // MARK: - lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +51,7 @@ class ExchangeController: UIViewController {
 
         view.backgroundColor = .white
 
-        setupButtons()
+        setupPadButtons()
         setupButtonLayout()
 
         setupDisplay()
@@ -82,20 +82,12 @@ class ExchangeController: UIViewController {
         case .switched:
             exchange.setCurrencyISOCode(local: convertedButtonLabel, converted: localButtonLabel)
         }
-        #warning("a enlever en prod")
-        // checkRates()
-    }
-
-    private func setupShadowOf(_ view: UIView, radius: CGFloat, opacity: Float ) {
-        view.layer.shadowOffset = CGSize(width: 0, height: 3)
-        view.layer.shadowColor = UIColor.lightGray.cgColor
-        view.layer.shadowOpacity = opacity
-        view.layer.shadowRadius = radius
+        #warning("enlever en prod")
+        //checkRates()
     }
 
     // MARK: - ButtonPad
-    private func setupButtons() {
-        // pad Button
+    private func setupPadButtons() {
         buttonsName.forEach { name in
             let button = UIButton()
             button.setupExchangeNumberButton(name)
@@ -126,14 +118,6 @@ class ExchangeController: UIViewController {
             stackViewMain.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.90)
         ])
     }
-
-//    private func setupStackView(_ stackView: UIStackView, axis: NSLayoutConstraint.Axis) {
-//        stackView.axis = axis
-//        stackView.spacing = 16
-//        stackView.alignment = .fill
-//        stackView.distribution = .fillEqually
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//    }
 
     private func addButtonInStackView(_ stackView: UIStackView, array: [String]) {
         for buttonName in array {
@@ -253,10 +237,9 @@ class ExchangeController: UIViewController {
     }
 
     private func setupWarningLimitation() {
-        warningLimitation.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        warningLimitation.textColor = .red
+        warningLimitation.setup(with: .red, alignment: .center, font: UIFont.systemFont(ofSize: 15, weight: .regular))
+
         displayArea.addSubview(warningLimitation)
-        warningLimitation.textAlignment = .center
         warningLimitation.isHidden = true
         warningLimitation.translatesAutoresizingMaskIntoConstraints = false
 
@@ -268,10 +251,9 @@ class ExchangeController: UIViewController {
     }
 
     private func setupUpdateDisplay() {
-        updateDisplay.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        updateDisplay.textColor = .lawn
+        updateDisplay.setup(with: .lawn, alignment: .center, font: UIFont.systemFont(ofSize: 15, weight: .regular))
+
         displayArea.addSubview(updateDisplay)
-        updateDisplay.textAlignment = .center
         updateDisplay.isHidden = true
         updateDisplay.translatesAutoresizingMaskIntoConstraints = false
 
@@ -297,6 +279,7 @@ class ExchangeController: UIViewController {
             let originTop = localCurrencyView.frame.origin.y
             let originBottom = convertedCurrencyView.frame.origin.y
             let translationY = originBottom - originTop
+
             transformLocal = CGAffineTransform(translationX: 0, y: translationY)
             transformConverted = CGAffineTransform(translationX: 0, y: -translationY)
 
@@ -316,11 +299,11 @@ class ExchangeController: UIViewController {
                        usingSpringWithDamping: 0.5,
                        initialSpringVelocity: 0.5,
                        animations: {
-                                    self.localCurrencyView.transform = transformLocal
-                                    self.convertedCurrencyView.transform = transformConverted
-                                    },
+            self.localCurrencyView.transform = transformLocal
+            self.convertedCurrencyView.transform = transformConverted
+        },
                        completion: { [weak self] _ in
-                                    self?.canUseButton = true
+            self?.canUseButton = true
         })
     }
 
@@ -332,9 +315,9 @@ class ExchangeController: UIViewController {
 
     // MARK: - Rates
     private func checkRates () {
-        guard let yesterday = getYesterday() else {return}
-
-        guard dateUpdateRate == nil || dateUpdateRate! <= yesterday else {return}
+        guard let yesterday = getYesterday(),
+              dateUpdateRate == nil || dateUpdateRate! <= yesterday
+        else { return }
 
         downloadRates()
     }
@@ -343,6 +326,7 @@ class ExchangeController: UIViewController {
         let dateString = date
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
+
         if let newDate = dateFormatter.date(from: dateString) {
             return newDate
         } else {
@@ -353,33 +337,34 @@ class ExchangeController: UIViewController {
     private func downloadRates() {
         canUseButton = false
         let repository = ExchangeRepository()
+
         repository.getRates { [weak self] response in
-                guard let self = self else {return}
+            guard let self = self else {return}
 
-                switch response {
-                case .success(let data):
-                    guard let date = self.convertInDate(date: data.date) else {
-                        self.showAlert(title: "erreur", description: "Probleme de donnée, rechager le taux de change")
-                        self.canUseButton = true
-                        return
-                    }
-                    self.dateUpdateRate = date
-                    self.exchange.setupRates(with: data.rates)
+            switch response {
+            case .success(let data):
+                guard let date = self.convertInDate(date: data.date) else {
+                    self.showAlert(title: "erreur", description: "Probleme de donnée, rechager le taux de change")
                     self.canUseButton = true
-
-                    updateDisplay.text = "Information: Taux Actualisé"
-                    updateDisplay.isHidden = false
-
-                    // call after 3s to hidde
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 7) { [weak self] in
-                        self?.updateDisplay.isHidden = true
-                    }
-
-                case .failure(let error):
-                    self.showAlert(title: error.title, description: error.description)
-                    self.canUseButton = true
+                    return
                 }
+                self.dateUpdateRate = date
+                self.exchange.setupRates(with: data.rates)
+                self.canUseButton = true
+
+                updateDisplay.text = "Information: Taux Actualisé"
+                updateDisplay.isHidden = false
+
+                // call after 3s to hidde
+                DispatchQueue.main.asyncAfter(deadline: .now() + 7) { [weak self] in
+                    self?.updateDisplay.isHidden = true
+                }
+
+            case .failure(let error):
+                self.showAlert(title: error.title, description: error.description)
+                self.canUseButton = true
             }
+        }
     }
 
     func getYesterday() -> Date? {
@@ -393,10 +378,6 @@ class ExchangeController: UIViewController {
 
 extension ExchangeController: ExchangeDelegate {
     func updateDisplay(_ expression: String, converted: String) {
-//        if expression == "666" {
-//            let overLayer = OverLayerPopUP("Oops !", description: "Test de Julien")
-//            overLayer.appear(sender: self)
-//        }
         switch displayPosition {
         case .origin:
             localCurrencyLbl.text = expression
@@ -416,7 +397,7 @@ extension ExchangeController: ExchangeDelegate {
             // call after 5s to hidde
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
                 self?.warningLimitation.isHidden = true
-                   }
+            }
         } else {
             showSimpleAlerte(with: title, message: description)
         }

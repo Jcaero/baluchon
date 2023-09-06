@@ -11,9 +11,10 @@ class TranslateController: UIViewController, SelectLanguageDelegate {
     // MARK: - view
 
     let inputText = UITextView()
+    let placeholderTextInput = "Inserer le texte à Traduire"
+
     let outputText = UILabel()
     let wrappedOutputText = UIView()
-    let placeholderTextInput = "Inserer le texte à Traduire"
 
     // MARK: - Language
     let inputLanguage = UIButton()
@@ -34,6 +35,7 @@ class TranslateController: UIViewController, SelectLanguageDelegate {
 
         setupSwitchButton()
         setupTextView()
+        
         setupGestureRecogniser()
     }
 
@@ -49,15 +51,9 @@ class TranslateController: UIViewController, SelectLanguageDelegate {
         setupShadowOf(outputLanguage, radius: 1, opacity: 0.5)
     }
 
-    private func setupShadowOf(_ view: UIView, radius: CGFloat, opacity: Float ) {
-        view.layer.shadowOffset = CGSize(width: 0, height: 3)
-        view.layer.shadowColor = UIColor.lightGray.cgColor
-        view.layer.shadowOpacity = opacity
-        view.layer.shadowRadius = radius
-    }
-
     // MARK: - Setup Views
     private func setupViews() {
+
         // MARK: - Setup SwitchText
         let configurationImage = UIImage.SymbolConfiguration(pointSize: 30, weight: .ultraLight)
         switchBtn.setImage(UIImage(systemName: "arrow.left.arrow.right", withConfiguration: configurationImage), for: .normal)
@@ -86,9 +82,6 @@ class TranslateController: UIViewController, SelectLanguageDelegate {
         }
         wrappedOutputText.backgroundColor = .whiteSmoke
 
-        inputText.textAlignment = .center
-        inputText.backgroundColor = .whiteSmoke
-        inputText.tintColor = .lightGray
     }
 
     // MARK: - SetupLayout
@@ -157,7 +150,7 @@ class TranslateController: UIViewController, SelectLanguageDelegate {
     @objc func switchTraduction() {
         UIView.animate(withDuration: 0.5, animations: {
             self.switchBtn.transform = self.switchBtn.transform.rotated(by: .pi)
-                })
+        })
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
             self.switchLanguage()
@@ -206,10 +199,15 @@ extension TranslateController: UITextViewDelegate {
 
     private func setupTextView() {
         inputText.delegate = self
-        inputText.text = placeholderTextInput
-        inputText.textColor = UIColor.lightGray
-        inputText.textAlignment = .center
         inputText.adjustsFontForContentSizeCategory = true
+
+        inputText.backgroundColor = .whiteSmoke
+        inputText.tintColor = .lightGray
+        inputText.textColor = .lightGray
+
+        inputText.text = placeholderTextInput
+        inputText.textAlignment = .center
+
         // screen under iphone 7
         if UIScreen.main.bounds.size.height < 800 {
             inputText.font = UIFont.systemFont(ofSize: 30)
@@ -222,7 +220,7 @@ extension TranslateController: UITextViewDelegate {
         switchBtn.isEnabled = false
         if inputText.text == placeholderTextInput {
             inputText.text = nil
-            inputText.textColor = UIColor.black
+            inputText.textColor = .black
             inputText.textAlignment = .left
         }
         inputText.layer.shadowOpacity = 0
@@ -232,7 +230,7 @@ extension TranslateController: UITextViewDelegate {
         switchBtn.isEnabled = true
         if inputText.text.isEmpty {
             inputText.text = "Inserer le texte à Traduire"
-            inputText.textColor = UIColor.lightGray
+            inputText.textColor = .lightGray
             inputText.textAlignment = .center
         }
         inputText.layer.shadowOpacity = 0.5
@@ -242,27 +240,27 @@ extension TranslateController: UITextViewDelegate {
         typingTimer?.invalidate()
 
         typingTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
-                    self.showTranslate()
-                }
+            self.showTranslate()
+        }
     }
 
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-            if text == "\n" {
-                showTranslate()
-                self.inputText.resignFirstResponder()
-                return false
-            }
+        if text == "\n" {
+            showTranslate()
+            self.inputText.resignFirstResponder()
+            return false
+        }
 
-            let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
-            let numberOfChars = newText.count
-            if numberOfChars > 80 {
-                return false
-            }
+        let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+        let numberOfChars = newText.count
+        if numberOfChars > 80 {
+            return false
+        }
 
-            if text == " " {
-                showTranslate()
-            }
-            return true
+        if text == " " {
+            showTranslate()
+        }
+        return true
     }
 
     private func showTranslate() {
@@ -271,20 +269,17 @@ extension TranslateController: UITextViewDelegate {
         let repository = TranslateRepository()
 
         guard let text = self.inputText.text,
-                text != placeholderTextInput else {return}
+              text != placeholderTextInput else {return}
 
         repository.getTraduction(of: self.inputText.text, language: outputLanguage.titleLabel!.text!) { result in
             switch result {
             case .success(let response):
                 var text = response.data.translations[0].translatedText
-                if let decodedText = text.removingPercentEncoding {
-                    text = decodedText
-                }
-                self.outputText.text = response.data.translations[0].translatedText
+
+                self.outputText.text = text.removingPercentEncoding ?? text
 
                 let input = response.data.translations[0].detectedSourceLanguage
-                let title = GoogleLanguage.language(input).complete
-                self.inputLanguage.setTitle(title, for: .normal)
+                self.inputLanguage.setTitle(GoogleLanguage.language(input).complete, for: .normal)
 
             case .failure(let error):
                 self.showSimpleAlerte(with: error.title, message: error.description)
