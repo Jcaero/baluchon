@@ -68,8 +68,8 @@ class Exchange {
 
         // check number after point
         if hasPoint {
-            guard indexOfPoint! < 3  else {
-                delegate?.showAlert(title: "Limitation", description: "Deux nombres après la virgule Maximum")
+            guard let index = indexOfPoint, index < 3  else {
+                delegate?.showAlert(title: "Limitation", description: "Deux nombres après la virgule maximum")
                 return
             }
         }
@@ -182,7 +182,8 @@ class Exchange {
     }
 
     // MARK: - Switch information
-    func switchHasBeenTapped() {
+    func switchHasBeenTapped(with localCode: String, convertedCode: String) {
+        setCurrencyISOCode(local: localCode, converted: convertedCode)
         expression = converted
         updateDisplay()
     }

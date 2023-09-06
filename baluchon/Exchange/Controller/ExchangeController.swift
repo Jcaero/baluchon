@@ -300,7 +300,7 @@ class ExchangeController: UIViewController {
             transformLocal = CGAffineTransform(translationX: 0, y: translationY)
             transformConverted = CGAffineTransform(translationX: 0, y: -translationY)
 
-            exchange.setCurrencyISOCode(local: convertedButtonLabel, converted: localButtonLabel)
+            exchange.switchHasBeenTapped(with: convertedButtonLabel, convertedCode: localButtonLabel)
             displayPosition = .switched
 
         case .switched:
@@ -308,7 +308,7 @@ class ExchangeController: UIViewController {
             transformConverted = .identity
 
             displayPosition = .origin
-            exchange.setCurrencyISOCode(local: localButtonLabel, converted: convertedButtonLabel)
+            exchange.switchHasBeenTapped(with: localButtonLabel, convertedCode: convertedButtonLabel)
         }
 
         UIView.animate(withDuration: 0.7,
@@ -322,8 +322,6 @@ class ExchangeController: UIViewController {
                        completion: { [weak self] _ in
                                     self?.canUseButton = true
         })
-
-        exchange.switchHasBeenTapped()
     }
 
     private func setupGestureRecogniser() {

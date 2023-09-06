@@ -15,12 +15,10 @@ class TabBar: UITabBarController {
     }
 
     func setupVCs() {
-
             let exchangeController = ExchangeController()
             let translateController = TranslateController()
             let weatherViewController = WeatherPageViewController()
 
-            // define title and items
             exchangeController.tabBarItem = UITabBarItem(title: "Convertisseur", image: UIImage(systemName: "dollarsign.circle")!, tag: 0)
             translateController.tabBarItem = UITabBarItem(title: "Traduction", image: UIImage(named: "translate"), tag: 1)
             weatherViewController.tabBarItem = UITabBarItem(title: "Météo", image: UIImage(systemName: "thermometer.sun")!, tag: 2)

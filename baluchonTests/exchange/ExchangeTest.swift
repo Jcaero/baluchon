@@ -128,7 +128,26 @@ final class ExchangeTest: XCTestCase {
 
         XCTAssertEqual(displayLocal, "5.22")
         XCTAssertEqual(alerteTitle, "Limitation")
-        XCTAssertEqual(alerteDescription, "Deux nombres après la virgule Maximum")
+        XCTAssertEqual(alerteDescription, "Deux nombres après la virgule maximum")
+    }
+
+    func testExpressionHaveTenNumber_WhenPointHasBeenTapped_ResultNotChangeAndShowAlerte() {
+        exchange.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
+        exchange.numberHasBeenTapped("5")
+
+        exchange.pointHasBeenTapped()
+
+        XCTAssertEqual(displayLocal, "5555555555")
+        XCTAssertEqual(alerteTitle, "Limitation")
+        XCTAssertEqual(alerteDescription, "vous ne pouvez pas dépaser 10 chiffres")
     }
 
     // MARK: - TEST clearExpression()
@@ -139,6 +158,15 @@ final class ExchangeTest: XCTestCase {
         exchange.clearExpression("AC")
 
         XCTAssertEqual(displayLocal, "0")
+    }
+
+    func testExpressionIsFive_WhenClearExpressionC_ResultIsZero() {
+        exchange.numberHasBeenTapped("5")
+
+        exchange.clearExpression("C")
+
+        XCTAssertEqual(displayLocal, "0")
+        XCTAssertEqual(clearButton, "AC")
     }
 
     func testExpressionIsFiftyTwo_WhenClearExpressionC_ResultIsFive() {
@@ -162,7 +190,7 @@ final class ExchangeTest: XCTestCase {
 
     // MARK: - TEST converted
 
-    func testExpressionIsZero_WhenTapEight_ConvertedIsForty() {
+    func testExpressionIsZeroAndRateIsFive_WhenTapEight_ConvertedIsForty() {
         exchange.numberHasBeenTapped("8")
 
         XCTAssertEqual(displayLocal, "8")
@@ -174,10 +202,10 @@ final class ExchangeTest: XCTestCase {
     func testExpressionIs5AndConvertedIs25_WhenSwitchTapped_ExpressionIs25AndConvertedIs5() {
         exchange.numberHasBeenTapped("5")
 
-        exchange.switchHasBeenTapped()
+        exchange.switchHasBeenTapped(with: "Test", convertedCode: "EUR")
 
         XCTAssertEqual(displayLocal, "25")
-        XCTAssertEqual(displayConverted, "125")
+        XCTAssertEqual(displayConverted, "5")
     }
 
     // MARK: - Test CalCulateConverted
@@ -206,21 +234,22 @@ final class ExchangeTest: XCTestCase {
         XCTAssertNil(alerteTitle)
     }
 
-    func testWhenSetNotAvailableRate_AlerteIsNil() {
+    func testWhenSetNotAvailableRate_ShowAlerte() {
         exchange.setCurrencyISOCode(local: "AAA", converted: "USD")
 
         XCTAssertEqual(alerteDescription, "monnaie non disponible")
     }
 
-    func testWhenUpdateRates_RatesUpdated() {
+    func testUpdateWithNewRates_WhenSetNewRate_RateIsAvailable() {
         let newRates: [String: Float] = ["USD": 2.0, "BBB": 3.0]
         exchange.setupRates(with: newRates)
+        
         exchange.setCurrencyISOCode(local: "USD", converted: "BBB")
 
         XCTAssertNil(alerteTitle)
     }
 
-    func testWhenUpdateRates_CHFNotExist() {
+    func testUpdateWithNewRates_WhenSetWithUnknowRate_RateIsNotAvailableAndShowAlerte() {
         let newRates: [String: Float] = ["USD": 2.0, "BBB": 3.0]
         exchange.setupRates(with: newRates)
         exchange.setCurrencyISOCode(local: "USD", converted: "CHF")
