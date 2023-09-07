@@ -94,15 +94,15 @@ class WeatherViewController: UIViewController {
         setupStackView(stackViewWeather, axis: .vertical)
         stackViewWeather.distribution = .fillProportionally
 
-        cityName.setup(with: .black, alignment: .center, font: UIFont.boldSystemFont(ofSize: 50))
+        cityName.setup(with: .darkGray, alignment: .center, font: UIFont.boldSystemFont(ofSize: 50))
         cityName.text = initCity.name
 
-        countryName.setup(with: .black, alignment: .center, font: UIFont.systemFont(ofSize: 20))
+        countryName.setup(with: .darkGray, alignment: .center, font: UIFont.systemFont(ofSize: 20))
         countryName.text = initCity.country
 
         weatherIcon.image = UIImage(named: "01")
 
-        temperatureLbl.setup(with: .black, alignment: .center, font: UIFont.boldSystemFont(ofSize: 45))
+        temperatureLbl.setup(with: .darkGray, alignment: .center, font: UIFont.boldSystemFont(ofSize: 45))
         temperatureLbl.text = prepareTemperatureText(with: 11.0)
     }
 

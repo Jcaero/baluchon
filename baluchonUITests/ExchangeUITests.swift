@@ -49,4 +49,12 @@ private extension XCUIApplication {
          XCTAssertTrue(app.staticTexts["5."].exists)
          XCTAssertTrue(app.alerts["Erreur"].exists)
      }
+
+     func testFiveOnDisplay_WhenTapFive_ThenDisplayIsZeroTheScreen() {
+         app.fiveButton.tap()
+         
+         app.CButton.tap()
+         
+         XCTAssertTrue(app.staticTexts["0"].exists)
+     }
  }

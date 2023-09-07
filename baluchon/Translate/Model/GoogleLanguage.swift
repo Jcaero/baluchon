@@ -28,6 +28,8 @@ enum GoogleLanguage {
     }
 }
 
+let languageNames = Dictionary(uniqueKeysWithValues: languageCodes.map({($1, $0)}))
+
 let languageCodes: [String: String] = [
         "af": "Afrikaan",
         "sq": "Albanais",
@@ -162,4 +164,3 @@ let languageCodes: [String: String] = [
         "zu": "Zoulou"
     ]
 
-let languageNames = Dictionary(uniqueKeysWithValues: languageCodes.map({($1, $0)}))
