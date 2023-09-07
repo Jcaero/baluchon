@@ -7,6 +7,7 @@
 import Foundation
 
 enum API {
+    // MARK: - ENDPOINT
     enum EndPoint {
         case exchange
         case translate([String: String])
@@ -70,24 +71,22 @@ enum API {
         }
     }
 
+    // MARK: - JSONDataType
     enum JSONDataType {
         struct TestJSON: Codable, Equatable {
             var testText: String
             var testAuthor: String
         }
 
-        // MARK: - Rate
         struct ExchangeRate: Codable, Equatable {
             var date: String
             var rates: [String: Float]
         }
 
-        // MARK: - Translation
         struct TranslationResponse: Codable, Equatable {
             let data: DataClass
         }
 
-        // MARK: - Meteo
         struct WeatherResponse: Codable, Equatable {
             let cod: String
             let message, cnt: Int
@@ -95,7 +94,6 @@ enum API {
             let city: City
         }
 
-        // MARK: - Geocoding
         struct GeocodingResponse: Codable, Equatable {
             let name: String
             let lat, lon: Double

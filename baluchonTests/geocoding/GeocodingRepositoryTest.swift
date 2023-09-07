@@ -23,11 +23,11 @@ final class GeocodingRepositoryTest: TestCase {
     }
 
     override func tearDown() {
-            repository = nil
-            urlSession = nil
-
-            super.tearDown()
-        }
+        repository = nil
+        urlSession = nil
+        
+        super.tearDown()
+    }
 
     func test_RepositoryGetWeather_Succes() throws {
 

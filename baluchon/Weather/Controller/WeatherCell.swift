@@ -58,7 +58,6 @@ class WeatherCell: UICollectionViewCell {
             icon.heightAnchor.constraint(equalTo: icon.widthAnchor),
             icon.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
-
     }
 
     required init?(coder: NSCoder) {

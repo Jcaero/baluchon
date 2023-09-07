@@ -26,11 +26,12 @@ class WeatherViewController: UIViewController {
 
     let temperatureLbl = UILabel()
 
-    var page: Pages
-    var initCity: City!
-
     var weatherCollectionView: UICollectionView!
     var weatherCollectionViewData: [CellData] = [CellData(hour: "09", iconName: "01d")]
+
+    // MARK: - init
+    var page: Pages
+    var initCity: City!
 
     init(with page: Pages) {
         self.page = page
@@ -70,6 +71,7 @@ class WeatherViewController: UIViewController {
     private func setupMaps() {
         maps.mapType = .hybrid
         maps.isUserInteractionEnabled = false
+
         let initialLocation = CLLocation(latitude: initCity.coord.lat, longitude: initCity.coord.lon)
         maps.centerToLocation(initialLocation)
     }
@@ -215,7 +217,7 @@ class WeatherViewController: UIViewController {
 
     // MARK: - getWeather
     private func updateWeather(with coord: Coord) {
-     let repository = WeatherRepository()
+        let repository = WeatherRepository()
 
         repository.getWheather(of: coord) { response in
             switch response {
@@ -266,6 +268,7 @@ extension WeatherViewController: UITextFieldDelegate {
 
 // MARK: - Extension CollectionView
 extension WeatherViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+
     private func setupWeatherCollectionView() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -277,7 +280,6 @@ extension WeatherViewController: UICollectionViewDelegateFlowLayout, UICollectio
         weatherCollectionView.backgroundColor = .white
 
         weatherCollectionView.register(WeatherCell.self, forCellWithReuseIdentifier: "WeatherCell")
-
     }
 
     private func setupWeatherCollectionViewLayout() {
@@ -307,7 +309,7 @@ extension WeatherViewController: UICollectionViewDelegateFlowLayout, UICollectio
         return UICollectionViewCell()
     }
 
-    func fillWeatherCollectionView(with weather: API.JSONDataType.WeatherResponse) {
+    private func fillWeatherCollectionView(with weather: API.JSONDataType.WeatherResponse) {
         weatherCollectionViewData = []
         weather.list.forEach { data in
             let icon = formatImageIconName(with: data.weather[0].icon)

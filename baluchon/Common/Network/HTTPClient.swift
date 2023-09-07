@@ -32,10 +32,8 @@ class HttpClient: HttpClientProtocol {
                     completion(.failure(HttpError.errorDecodingData))
                     return
                 }
-
                 completion(.success(object))
             }
         }).resume()
-
     }
 }

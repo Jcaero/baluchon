@@ -41,24 +41,26 @@ class WeatherPageViewController: UIViewController {
 
         self.view.backgroundColor = .lightGray
 
-        self.setupPageController()
+        setupPageController()
     }
 
     private func setupPageController() {
+        pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
 
-        self.pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-        self.pageController?.dataSource = self
-        self.pageController?.delegate = self
-        self.pageController?.view.backgroundColor = .clear
-        self.pageController?.view.frame = CGRect(x: 0,y: 0, width: self.view.frame.width,height: self.view.frame.height)
+        pageController?.dataSource = self
+        pageController?.delegate = self
+
+        pageController?.view.backgroundColor = .clear
+        pageController?.view.frame = CGRect(x: 0,y: 0, width: self.view.frame.width,height: self.view.frame.height)
+
         self.addChild(self.pageController!)
-        self.view.addSubview(self.pageController!.view)
+        view.addSubview(self.pageController!.view)
 
         let initialVC = WeatherViewController(with: pages[0])
 
-        self.pageController?.setViewControllers([initialVC], direction: .forward, animated: true, completion: nil)
+        pageController?.setViewControllers([initialVC], direction: .forward, animated: true, completion: nil)
 
-        self.pageController?.didMove(toParent: self)
+        pageController?.didMove(toParent: self)
     }
 }
 
@@ -71,15 +73,12 @@ extension WeatherPageViewController: UIPageViewControllerDataSource, UIPageViewC
         }
 
         var index = currentVC.page.index
-
         if index == 0 {
             return nil
         }
-
         index -= 1
 
         let viewController: WeatherViewController = WeatherViewController(with: pages[index])
-
         return viewController
     }
 
@@ -90,15 +89,12 @@ extension WeatherPageViewController: UIPageViewControllerDataSource, UIPageViewC
         }
 
         var index = currentVC.page.index
-
         if index >= self.pages.count - 1 {
             return nil
         }
-
         index += 1
 
         let viewController: WeatherViewController = WeatherViewController(with: pages[index])
-
         return viewController
     }
 

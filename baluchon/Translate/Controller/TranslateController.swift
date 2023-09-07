@@ -35,7 +35,7 @@ class TranslateController: UIViewController, SelectLanguageDelegate {
 
         setupSwitchButton()
         setupTextView()
-        
+
         setupGestureRecogniser()
     }
 
@@ -274,7 +274,7 @@ extension TranslateController: UITextViewDelegate {
         repository.getTraduction(of: self.inputText.text, language: outputLanguage.titleLabel!.text!) { result in
             switch result {
             case .success(let response):
-                var text = response.data.translations[0].translatedText
+                let text = response.data.translations[0].translatedText
 
                 self.outputText.text = text.removingPercentEncoding ?? text
 
