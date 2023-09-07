@@ -163,4 +163,3 @@ let languageCodes: [String: String] = [
         "yo": "Yoruba",
         "zu": "Zoulou"
     ]
-

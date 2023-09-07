@@ -62,4 +62,37 @@ final class WeatherRepositoryTest: TestCase {
         }
         wait(for: [expectation], timeout: 2)
     }
+
+    func test_RepositoryGetWeather_WhenDataNotGood_Failure() throws {
+        let coord = Coord(lat: 45.8992348, lon: 6.1288847)
+        let annecy = City(name: "Annecy",
+                          coord: coord,
+                          country: "FR",
+                          sunrise: 1693371206,
+                          sunset: 1693419571)
+
+        let response = HTTPURLResponse(url: API.EndPoint.weather(["lat": String(coord.lat), "lon": String(coord.lon)]).url,
+                                       statusCode: 401,
+                                       httpVersion: nil,
+                                       headerFields: nil)!
+
+        let mockData = self.getData(fromJson: "weatherErrorJSON")!
+
+        MockURLProtocol.requestHandler = { _ in
+            return (response, mockData)
+        }
+
+        let expectation = XCTestExpectation(description: "response")
+
+        repository.getWheather(of: annecy.coord)  { response in
+            switch response {
+            case .success:
+                XCTFail("pas ici")
+            case .failure(let error):
+                XCTAssertNotNil(error)
+                expectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 2)
+    }
 }

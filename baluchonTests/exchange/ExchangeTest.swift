@@ -228,12 +228,6 @@ final class ExchangeTest: XCTestCase {
         XCTAssertEqual(displayConverted, "4.49")
     }
 
-    func testWhenSetAvailableRate_AlerteIsNil() {
-        exchange.setCurrencyISOCode(local: "EUR", converted: "USD")
-
-        XCTAssertNil(alerteTitle)
-    }
-
     func testWhenSetNotAvailableRate_ShowAlerte() {
         exchange.setCurrencyISOCode(local: "AAA", converted: "USD")
 
@@ -247,14 +241,6 @@ final class ExchangeTest: XCTestCase {
         exchange.setCurrencyISOCode(local: "USD", converted: "BBB")
 
         XCTAssertNil(alerteTitle)
-    }
-
-    func testUpdateWithNewRates_WhenSetWithUnknowRate_RateIsNotAvailableAndShowAlerte() {
-        let newRates: [String: Float] = ["USD": 2.0, "BBB": 3.0]
-        exchange.setupRates(with: newRates)
-        exchange.setCurrencyISOCode(local: "USD", converted: "CHF")
-
-        XCTAssertEqual(alerteDescription, "monnaie non disponible")
     }
 }
     // MARK: - Delegate

@@ -14,7 +14,7 @@ private extension XCUIApplication {
     var PointButton: XCUIElement {self.buttons["."]}
 }
 
- final class BaluchonUITests: XCTestCase {
+ final class ExchangeUITests: XCTestCase {
      let app = XCUIApplication()
 
      override func setUp() {

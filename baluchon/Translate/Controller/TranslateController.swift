@@ -145,6 +145,7 @@ class TranslateController: UIViewController, SelectLanguageDelegate {
     // MARK: - Switch
     private func setupSwitchButton() {
         switchBtn.addTarget(self, action: #selector(switchTraduction), for: .touchUpInside)
+        switchBtn.accessibilityIdentifier = "switch"
     }
 
     @objc func switchTraduction() {
