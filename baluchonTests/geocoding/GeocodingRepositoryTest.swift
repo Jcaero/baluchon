@@ -29,7 +29,7 @@ final class GeocodingRepositoryTest: TestCase {
         super.tearDown()
     }
 
-    func test_RepositoryGetWeather_Succes() throws {
+    func test_RepositoryGetCoordinate_Succes() throws {
 
         let response = HTTPURLResponse(url: API.EndPoint.geocoding(["q": "annecy"]).url,
                                        statusCode: 200,
@@ -55,6 +55,33 @@ final class GeocodingRepositoryTest: TestCase {
                 expectation.fulfill()
             case .failure(let error):
                 XCTFail("pas ici, \(error.description)")
+            }
+        }
+        wait(for: [expectation], timeout: 2)
+    }
+
+    func test_RepositoryGetCoordinate_WhenDataNotGood_Failure() throws {
+
+        let response = HTTPURLResponse(url: API.EndPoint.geocoding(["q": "annecy"]).url,
+                                       statusCode: 404,
+                                       httpVersion: nil,
+                                       headerFields: nil)!
+
+        let mockData = self.getData(fromJson: "geocodingErrorJSON")!
+
+        MockURLProtocol.requestHandler = { _ in
+            return (response, mockData)
+        }
+
+        let expectation = XCTestExpectation(description: "response")
+
+        repository.getCoordinate(of: "annecy") { response in
+            switch response {
+            case .success:
+                XCTFail("pas ici")
+            case .failure(let error):
+                XCTAssertNotNil(error)
+                expectation.fulfill()
             }
         }
         wait(for: [expectation], timeout: 2)

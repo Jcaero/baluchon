@@ -14,7 +14,7 @@
 		470A46832A90855400B22D74 /* TestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470A46822A90855400B22D74 /* TestCase.swift */; };
 		470AC1CA2AA526F4000AD45D /* WeatherPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AC1C92AA526F4000AD45D /* WeatherPageViewController.swift */; };
 		470C233F2A7A02540044A393 /* ExchangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C233E2A7A02540044A393 /* ExchangeController.swift */; };
-		470C23462A7A11900044A393 /* baluchonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C23452A7A11900044A393 /* baluchonUITests.swift */; };
+		470C23462A7A11900044A393 /* ExchangeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470C23452A7A11900044A393 /* ExchangeUITests.swift */; };
 		47132B812AA2EB0400761709 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47132B802AA2EB0400761709 /* WeatherViewController.swift */; };
 		47132B832AA2F7D100761709 /* GeocodingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47132B822AA2F7D100761709 /* GeocodingRepository.swift */; };
 		47132B862AA2F8A800761709 /* geocodingJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 47132B852AA2F8A800761709 /* geocodingJSON.json */; };
@@ -24,6 +24,7 @@
 		471B64E12A8CC98F00FFDEEA /* RatesJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 471B64E02A8CC98F00FFDEEA /* RatesJSON.json */; };
 		472812202AA661F3000830A1 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728121F2AA661F3000830A1 /* WeatherCell.swift */; };
 		4728706E2AA97ECC0013DA68 /* APIKeyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728706D2AA97ECC0013DA68 /* APIKeyTest.swift */; };
+		472870702AA9890C0013DA68 /* geocodingErrorJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 4728706F2AA9890C0013DA68 /* geocodingErrorJSON.json */; };
 		4768BF152A7ED69D005190DC /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4768BF142A7ED69D005190DC /* UIButton+.swift */; };
 		476E8FEE2AA77B940099F0DE /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476E8FED2AA77B940099F0DE /* UILabel+.swift */; };
 		477221A72A73F7230023CA57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477221A62A73F7230023CA57 /* AppDelegate.swift */; };
@@ -76,7 +77,7 @@
 		470A46822A90855400B22D74 /* TestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCase.swift; sourceTree = "<group>"; };
 		470AC1C92AA526F4000AD45D /* WeatherPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherPageViewController.swift; sourceTree = "<group>"; };
 		470C233E2A7A02540044A393 /* ExchangeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeController.swift; sourceTree = "<group>"; };
-		470C23452A7A11900044A393 /* baluchonUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baluchonUITests.swift; sourceTree = "<group>"; };
+		470C23452A7A11900044A393 /* ExchangeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeUITests.swift; sourceTree = "<group>"; };
 		47132B802AA2EB0400761709 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		47132B822AA2F7D100761709 /* GeocodingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingRepository.swift; sourceTree = "<group>"; };
 		47132B852AA2F8A800761709 /* geocodingJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = geocodingJSON.json; sourceTree = "<group>"; };
@@ -86,6 +87,7 @@
 		471B64E02A8CC98F00FFDEEA /* RatesJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RatesJSON.json; sourceTree = "<group>"; };
 		4728121F2AA661F3000830A1 /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
 		4728706D2AA97ECC0013DA68 /* APIKeyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeyTest.swift; sourceTree = "<group>"; };
+		4728706F2AA9890C0013DA68 /* geocodingErrorJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = geocodingErrorJSON.json; sourceTree = "<group>"; };
 		4764D9202AA609AD00D94257 /* baluchon.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = baluchon.xctestplan; path = ../baluchon.xctestplan; sourceTree = "<group>"; };
 		4768BF142A7ED69D005190DC /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		476E8FED2AA77B940099F0DE /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			children = (
 				47132B872AA2FB3400761709 /* GeocodingRepositoryTest.swift */,
 				47132B852AA2F8A800761709 /* geocodingJSON.json */,
+				4728706F2AA9890C0013DA68 /* geocodingErrorJSON.json */,
 			);
 			path = geocoding;
 			sourceTree = "<group>";
@@ -212,7 +215,7 @@
 		477221C62A73F7240023CA57 /* baluchonUITests */ = {
 			isa = PBXGroup;
 			children = (
-				470C23452A7A11900044A393 /* baluchonUITests.swift */,
+				470C23452A7A11900044A393 /* ExchangeUITests.swift */,
 			);
 			path = baluchonUITests;
 			sourceTree = "<group>";
@@ -481,6 +484,7 @@
 			files = (
 				47C1B5F12AA90809000DB58C /* TranslateErrorJSON.json in Resources */,
 				477FE1432A82CB6C005C3481 /* testJSON.json in Resources */,
+				472870702AA9890C0013DA68 /* geocodingErrorJSON.json in Resources */,
 				47132B862AA2F8A800761709 /* geocodingJSON.json in Resources */,
 				47C744D12A91BE39002757DE /* errorJSON.json in Resources */,
 				47CAB08F2A95BFDB00B34B38 /* TranslateJSON.json in Resources */,
@@ -570,7 +574,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				470C23462A7A11900044A393 /* baluchonUITests.swift in Sources */,
+				470C23462A7A11900044A393 /* ExchangeUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

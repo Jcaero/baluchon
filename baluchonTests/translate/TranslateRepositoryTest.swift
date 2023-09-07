@@ -26,7 +26,7 @@ final class TranslateRepositoryTest: TestCase {
             urlSession = nil
 
             super.tearDown()
-        }
+    }
 
     func test_RepositoryGetTraduction_Succes() throws {
         let query = "je teste l'API"
