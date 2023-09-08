@@ -63,6 +63,12 @@ final class TraductionUITests: XCTestCase {
         XCTAssertEqual(app.textView.value as! String, "Good morning")
     }
 
-    
+    func testAppsIsInTraductionPages_WhenTapInOutputText_ThenShowSelectLanguage() {
+        app.tabBarTraduction.tap()
+        
+        app.outputButton.tap()
+        
+        XCTAssertTrue(app.staticTexts["Azéri"].exists)
+    }
 
 }

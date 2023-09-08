@@ -96,6 +96,7 @@ class WeatherViewController: UIViewController {
 
         cityName.setup(with: .darkGray, alignment: .center, font: UIFont.boldSystemFont(ofSize: 50))
         cityName.text = initCity.name
+        cityName.accessibilityIdentifier = "cityName"
 
         countryName.setup(with: .darkGray, alignment: .center, font: UIFont.systemFont(ofSize: 20))
         countryName.text = initCity.country
@@ -162,6 +163,7 @@ class WeatherViewController: UIViewController {
         inputCity.tintColor = .lightGray
         inputCity.placeholder = "Entrez une ville"
         inputCity.isUserInteractionEnabled = true
+        inputCity.accessibilityIdentifier = "inputTextField"
 
         searchCity.backgroundColor = .lightGray
         searchCity.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
@@ -259,10 +261,12 @@ extension MKMapView {
         setRegion(coordinateRegion, animated: true)
         }
     }
-
+// MARK: - Extension TextField
 extension WeatherViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         inputCity.resignFirstResponder()
+        tappedSearchCity()
+        return true
     }
 }
 
