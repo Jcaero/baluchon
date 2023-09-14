@@ -82,8 +82,7 @@ class ExchangeController: UIViewController {
         case .switched:
             exchange.setCurrencyISOCode(local: convertedButtonLabel, converted: localButtonLabel)
         }
-        #warning("enlever en prod")
-        //checkRates()
+        checkRates()
     }
 
     // MARK: - ButtonPad
