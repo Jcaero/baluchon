@@ -29,3 +29,5 @@ enum APIKey {
     }
 }
 ```
+
+Lire la notice en PDF
