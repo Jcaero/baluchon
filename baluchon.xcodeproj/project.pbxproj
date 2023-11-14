@@ -43,6 +43,7 @@
 		47B6A4DA2A9479B6001DA33F /* TranslateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B6A4D92A9479B6001DA33F /* TranslateRepository.swift */; };
 		47BA60FC2AAA544F00715D28 /* weatherErrorJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 47BA60FB2AAA544F00715D28 /* weatherErrorJSON.json */; };
 		47BA60FE2AAA559200715D28 /* TraductionUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BA60FD2AAA559200715D28 /* TraductionUITest.swift */; };
+		47C1ACBA2ABDA7000049E043 /* AccessibilityTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C1ACB92ABDA7000049E043 /* AccessibilityTest.swift */; };
 		47C1B5F12AA90809000DB58C /* TranslateErrorJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 47C1B5F02AA90809000DB58C /* TranslateErrorJSON.json */; };
 		47C744D12A91BE39002757DE /* errorJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 47C744D02A91BE39002757DE /* errorJSON.json */; };
 		47CAB08F2A95BFDB00B34B38 /* TranslateJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 47CAB08E2A95BFDB00B34B38 /* TranslateJSON.json */; };
@@ -114,6 +115,7 @@
 		47B6A4D92A9479B6001DA33F /* TranslateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateRepository.swift; sourceTree = "<group>"; };
 		47BA60FB2AAA544F00715D28 /* weatherErrorJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = weatherErrorJSON.json; sourceTree = "<group>"; };
 		47BA60FD2AAA559200715D28 /* TraductionUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraductionUITest.swift; sourceTree = "<group>"; };
+		47C1ACB92ABDA7000049E043 /* AccessibilityTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityTest.swift; sourceTree = "<group>"; };
 		47C1B5F02AA90809000DB58C /* TranslateErrorJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TranslateErrorJSON.json; sourceTree = "<group>"; };
 		47C744D02A91BE39002757DE /* errorJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = errorJSON.json; sourceTree = "<group>"; };
 		47CAB08E2A95BFDB00B34B38 /* TranslateJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TranslateJSON.json; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				470C23452A7A11900044A393 /* ExchangeUITests.swift */,
 				47BA60FD2AAA559200715D28 /* TraductionUITest.swift */,
 				478DF9072AAB22D800343359 /* WeatherUITest.swift */,
+				47C1ACB92ABDA7000049E043 /* AccessibilityTest.swift */,
 			);
 			path = baluchonUITests;
 			sourceTree = "<group>";
@@ -586,6 +589,7 @@
 			files = (
 				470C23462A7A11900044A393 /* ExchangeUITests.swift in Sources */,
 				478DF9082AAB22D800343359 /* WeatherUITest.swift in Sources */,
+				47C1ACBA2ABDA7000049E043 /* AccessibilityTest.swift in Sources */,
 				47BA60FE2AAA559200715D28 /* TraductionUITest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
